@@ -1,2 +1,0 @@
-# DutchAuction
-DutchAuction
