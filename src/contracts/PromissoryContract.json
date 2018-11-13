@@ -1,0 +1,167 @@
+{
+  "contractName": "PromissoryContract",
+  "abi": [
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "claim",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.23;\n\n/// @title Abstract promissory contract - with function made available to using contract.\n\ncontract PromissoryContract {\n\t\n\tfunction claim() payable external;\n}",
+  "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/Interfaces/PromissoryContract.sol",
+  "ast": {
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/Interfaces/PromissoryContract.sol",
+    "exportedSymbols": {
+      "PromissoryContract": [
+        1789
+      ]
+    },
+    "id": 1790,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1785,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:4"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Abstract promissory contract - with function made available to using contract.",
+        "fullyImplemented": false,
+        "id": 1789,
+        "linearizedBaseContracts": [
+          1789
+        ],
+        "name": "PromissoryContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1788,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "claim",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1786,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "164:2:4"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 1787,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "183:0:4"
+            },
+            "scope": 1789,
+            "src": "150:34:4",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1790,
+        "src": "117:69:4"
+      }
+    ],
+    "src": "0:186:4"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/Interfaces/PromissoryContract.sol",
+    "exportedSymbols": {
+      "PromissoryContract": [
+        1789
+      ]
+    },
+    "id": 1790,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1785,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:4"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": "@title Abstract promissory contract - with function made available to using contract.",
+        "fullyImplemented": false,
+        "id": 1789,
+        "linearizedBaseContracts": [
+          1789
+        ],
+        "name": "PromissoryContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "body": null,
+            "documentation": null,
+            "id": 1788,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "claim",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 1786,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "164:2:4"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 1787,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "183:0:4"
+            },
+            "scope": 1789,
+            "src": "150:34:4",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "external"
+          }
+        ],
+        "scope": 1790,
+        "src": "117:69:4"
+      }
+    ],
+    "src": "0:186:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-10-16T17:27:58.713Z"
+}

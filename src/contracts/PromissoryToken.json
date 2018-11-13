@@ -1,0 +1,329 @@
+{
+  "contractName": "PromissoryToken",
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "lastPrice",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x6080604052348015600f57600080fd5b50609e8061001e6000396000f300608060405260043610603e5763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663053f14da81146043575b600080fd5b348015604e57600080fd5b5060556067565b60408051918252519081900360200190f35b66a56bac75133c00815600a165627a7a72305820ef50b76b043595999078d21feed4be503abeaff275dae4c1a8ec0df1582024f00029",
+  "deployedBytecode": "0x608060405260043610603e5763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663053f14da81146043575b600080fd5b348015604e57600080fd5b5060556067565b60408051918252519081900360200190f35b66a56bac75133c00815600a165627a7a72305820ef50b76b043595999078d21feed4be503abeaff275dae4c1a8ec0df1582024f00029",
+  "sourceMap": "26:113:7:-;;;111:26;8:9:-1;5:2;;;30:1;27;20:12;5:2;111:26:7;26:113;;;;;;",
+  "deployedSourceMap": "26:113:7:-;;;;;;;;;;;;;;;;;;;;;;;56:50;;8:9:-1;5:2;;;30:1;27;20:12;5:2;56:50:7;;;;;;;;;;;;;;;;;;;;;89:17;56:50;:::o",
+  "source": "pragma solidity ^0.4.23;\n\ncontract PromissoryToken  {\n\n\tuint constant public lastPrice = 46561759600000000;\n\t\n\tconstructor() public {\n\n\t}\n}\n",
+  "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/PromissoryToken.sol",
+  "ast": {
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/PromissoryToken.sol",
+    "exportedSymbols": {
+      "PromissoryToken": [
+        3521
+      ]
+    },
+    "id": 3522,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3513,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:7"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3521,
+        "linearizedBaseContracts": [
+          3521
+        ],
+        "name": "PromissoryToken",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": true,
+            "id": 3516,
+            "name": "lastPrice",
+            "nodeType": "VariableDeclaration",
+            "scope": 3521,
+            "src": "56:50:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 3514,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "56:4:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "3436353631373539363030303030303030",
+              "id": 3515,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "89:17:7",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_46561759600000000_by_1",
+                "typeString": "int_const 46561759600000000"
+              },
+              "value": "46561759600000000"
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 3519,
+              "nodeType": "Block",
+              "src": "132:5:7",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 3520,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3517,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "122:2:7"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3518,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "132:0:7"
+            },
+            "scope": 3521,
+            "src": "111:26:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3522,
+        "src": "26:113:7"
+      }
+    ],
+    "src": "0:140:7"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/PromissoryToken.sol",
+    "exportedSymbols": {
+      "PromissoryToken": [
+        3521
+      ]
+    },
+    "id": 3522,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3513,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:7"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3521,
+        "linearizedBaseContracts": [
+          3521
+        ],
+        "name": "PromissoryToken",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": true,
+            "id": 3516,
+            "name": "lastPrice",
+            "nodeType": "VariableDeclaration",
+            "scope": 3521,
+            "src": "56:50:7",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 3514,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "56:4:7",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "hexValue": "3436353631373539363030303030303030",
+              "id": 3515,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "number",
+              "lValueRequested": false,
+              "nodeType": "Literal",
+              "src": "89:17:7",
+              "subdenomination": null,
+              "typeDescriptions": {
+                "typeIdentifier": "t_rational_46561759600000000_by_1",
+                "typeString": "int_const 46561759600000000"
+              },
+              "value": "46561759600000000"
+            },
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 3519,
+              "nodeType": "Block",
+              "src": "132:5:7",
+              "statements": []
+            },
+            "documentation": null,
+            "id": 3520,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3517,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "122:2:7"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3518,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "132:0:7"
+            },
+            "scope": 3521,
+            "src": "111:26:7",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3522,
+        "src": "26:113:7"
+      }
+    ],
+    "src": "0:140:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {
+    "1541607728669": {
+      "events": {},
+      "links": {},
+      "address": "0xf8ba7a47f047b92ede3b567e2a311800d8049485",
+      "transactionHash": "0xc46c548040fd5c160674d46ef5c0ca476459d5a1f3c56d6feb259bbd0a0a5d6a"
+    },
+    "1541612337366": {
+      "events": {},
+      "links": {},
+      "address": "0xc3ef1b5915b202a41728722876ad8b9d511df92b",
+      "transactionHash": "0xcf1dadd9ff301b93a5532a3716a10d851af30b7a3d34e29648e2074c2c334c9b"
+    },
+    "1541620567477": {
+      "events": {},
+      "links": {},
+      "address": "0xbf5e15af2821c8c61ace706b847c08aea05fed26",
+      "transactionHash": "0x22d2bb18254f55cdeb2e0019b38ad375885e4ba3a5c66a915fa3ad1738146fdd"
+    },
+    "1541673383125": {
+      "events": {},
+      "links": {},
+      "address": "0x659fe281dc2df0d8db99919402a9e86ebbee6892",
+      "transactionHash": "0x43ab8fc537f1b64eb2fb5d4223cb95bc03f532c108042681163a5fdf5e4426e5"
+    },
+    "1541683558979": {
+      "events": {},
+      "links": {},
+      "address": "0x6e3dff1c64aeda32cdff85f5211be65e2e86e032",
+      "transactionHash": "0x8b8ca4ec7d51823b2322c676a46cbe53b6d8cb6c37f91cbdf069c1d2bcba0b76"
+    },
+    "1541705336433": {
+      "events": {},
+      "links": {},
+      "address": "0x46852463d0cadf059b609ec275e22b16f55cf8ba",
+      "transactionHash": "0x05a0d8330cfee7a41dfaf3e783619cd43a447be7abce4766bb1d8df032a95db3"
+    },
+    "1541706466033": {
+      "events": {},
+      "links": {},
+      "address": "0x4e27dbff55958dcb9a414f378845d4e38991484c",
+      "transactionHash": "0x8b8ca4ec7d51823b2322c676a46cbe53b6d8cb6c37f91cbdf069c1d2bcba0b76"
+    },
+    "1541856761612": {
+      "events": {},
+      "links": {},
+      "address": "0x73d929fdb86eefd2c5a62536be1106d7a6c990dc",
+      "transactionHash": "0x8b8ca4ec7d51823b2322c676a46cbe53b6d8cb6c37f91cbdf069c1d2bcba0b76"
+    },
+    "1541877506779": {
+      "events": {},
+      "links": {},
+      "address": "0x73d929fdb86eefd2c5a62536be1106d7a6c990dc",
+      "transactionHash": "0x8b8ca4ec7d51823b2322c676a46cbe53b6d8cb6c37f91cbdf069c1d2bcba0b76"
+    }
+  },
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-11-10T19:19:51.742Z"
+}

@@ -1,0 +1,719 @@
+{
+  "contractName": "PromissoryTokenWrapper",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "name": "_addr",
+          "type": "address"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "getLastPrice",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x608060405234801561001057600080fd5b506040516020806101a2833981016040525160008054600160a060020a03909216600160a060020a0319909216919091179055610150806100526000396000f3006080604052600436106100405763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663d8cf24fd8114610045575b600080fd5b34801561005157600080fd5b5061005a61006c565b60408051918252519081900360200190f35b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663053f14da6040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b1580156100f357600080fd5b505af1158015610107573d6000803e3d6000fd5b505050506040513d602081101561011d57600080fd5b50519050905600a165627a7a72305820047914d3569dd33b86ec97f7d4ada55ffde6653b203f2c3659fe999982dec6440029",
+  "deployedBytecode": "0x6080604052600436106100405763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663d8cf24fd8114610045575b600080fd5b34801561005157600080fd5b5061005a61006c565b60408051918252519081900360200190f35b60008060009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1663053f14da6040518163ffffffff167c0100000000000000000000000000000000000000000000000000000000028152600401602060405180830381600087803b1580156100f357600080fd5b505af1158015610107573d6000803e3d6000fd5b505050506040513d602081101561011d57600080fd5b50519050905600a165627a7a72305820047914d3569dd33b86ec97f7d4ada55ffde6653b203f2c3659fe999982dec6440029",
+  "sourceMap": "109:219:9:-;;;170:73;8:9:-1;5:2;;;30:1;27;20:12;5:2;170:73:9;;;;;;;;;;;;;210:4;:29;;-1:-1:-1;;;;;210:29:9;;;-1:-1:-1;;;;;;210:29:9;;;;;;;;;109:219;;;;;;",
+  "deployedSourceMap": "109:219:9:-;;;;;;;;;;;;;;;;;;;;;;;246:79;;8:9:-1;5:2;;;30:1;27;20:12;5:2;246:79:9;;;;;;;;;;;;;;;;;;;;;285:7;305:4;;;;;;;;;;;:14;;;:16;;;;;;;;;;;;;;;;;;;;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;305:16:9;;;;8:9:-1;5:2;;;45:16;42:1;39;24:38;77:16;74:1;67:27;5:2;305:16:9;;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;305:16:9;;-1:-1:-1;246:79:9;:::o",
+  "source": "pragma solidity ^0.4.23;\n\n//import \"./PromissoryToken.sol\";\n\nimport \"./Interfaces/PromissoryContract.sol\";\n\n\ncontract PromissoryTokenWrapper  {\n\n\tPromissoryToken wrap;\n\n\tconstructor(address _addr  ) public {\n\t\twrap = PromissoryToken(_addr);\n\t}\n\n\tfunction getLastPrice() public returns(uint256) {\n\t\treturn wrap.lastPrice();\n\t}\n\n}\n",
+  "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/PrimissoryTokenWrapper.sol",
+  "ast": {
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/PrimissoryTokenWrapper.sol",
+    "exportedSymbols": {
+      "PromissoryTokenWrapper": [
+        3593
+      ]
+    },
+    "id": 3594,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3567,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:9"
+      },
+      {
+        "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/Interfaces/PromissoryContract.sol",
+        "file": "./Interfaces/PromissoryContract.sol",
+        "id": 3568,
+        "nodeType": "ImportDirective",
+        "scope": 3594,
+        "sourceUnit": 3509,
+        "src": "61:45:9",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3593,
+        "linearizedBaseContracts": [
+          3593
+        ],
+        "name": "PromissoryTokenWrapper",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 3570,
+            "name": "wrap",
+            "nodeType": "VariableDeclaration",
+            "scope": 3593,
+            "src": "146:20:9",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+              "typeString": "contract PromissoryToken"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 3569,
+              "name": "PromissoryToken",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3508,
+              "src": "146:15:9",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+                "typeString": "contract PromissoryToken"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 3581,
+              "nodeType": "Block",
+              "src": "206:37:9",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 3579,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 3575,
+                      "name": "wrap",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3570,
+                      "src": "210:4:9",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+                        "typeString": "contract PromissoryToken"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 3577,
+                          "name": "_addr",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 3572,
+                          "src": "233:5:9",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 3576,
+                        "name": "PromissoryToken",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3508,
+                        "src": "217:15:9",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_PromissoryToken_$3508_$",
+                          "typeString": "type(contract PromissoryToken)"
+                        }
+                      },
+                      "id": 3578,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "217:22:9",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+                        "typeString": "contract PromissoryToken"
+                      }
+                    },
+                    "src": "210:29:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+                      "typeString": "contract PromissoryToken"
+                    }
+                  },
+                  "id": 3580,
+                  "nodeType": "ExpressionStatement",
+                  "src": "210:29:9"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 3582,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3573,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3572,
+                  "name": "_addr",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3582,
+                  "src": "182:13:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 3571,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "182:7:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "181:17:9"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3574,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "206:0:9"
+            },
+            "scope": 3593,
+            "src": "170:73:9",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 3591,
+              "nodeType": "Block",
+              "src": "294:31:9",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 3587,
+                        "name": "wrap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3570,
+                        "src": "305:4:9",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+                          "typeString": "contract PromissoryToken"
+                        }
+                      },
+                      "id": 3588,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "lastPrice",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3507,
+                      "src": "305:14:9",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$__$returns$_t_uint256_$",
+                        "typeString": "function () external returns (uint256)"
+                      }
+                    },
+                    "id": 3589,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "305:16:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 3586,
+                  "id": 3590,
+                  "nodeType": "Return",
+                  "src": "298:23:9"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 3592,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "getLastPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3583,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "267:2:9"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3586,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3585,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3592,
+                  "src": "285:7:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3584,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "285:7:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "284:9:9"
+            },
+            "scope": 3593,
+            "src": "246:79:9",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3594,
+        "src": "109:219:9"
+      }
+    ],
+    "src": "0:329:9"
+  },
+  "legacyAST": {
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/PrimissoryTokenWrapper.sol",
+    "exportedSymbols": {
+      "PromissoryTokenWrapper": [
+        3593
+      ]
+    },
+    "id": 3594,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 3567,
+        "literals": [
+          "solidity",
+          "^",
+          "0.4",
+          ".23"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:24:9"
+      },
+      {
+        "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/Interfaces/PromissoryContract.sol",
+        "file": "./Interfaces/PromissoryContract.sol",
+        "id": 3568,
+        "nodeType": "ImportDirective",
+        "scope": 3594,
+        "sourceUnit": 3509,
+        "src": "61:45:9",
+        "symbolAliases": [],
+        "unitAlias": ""
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 3593,
+        "linearizedBaseContracts": [
+          3593
+        ],
+        "name": "PromissoryTokenWrapper",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "id": 3570,
+            "name": "wrap",
+            "nodeType": "VariableDeclaration",
+            "scope": 3593,
+            "src": "146:20:9",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+              "typeString": "contract PromissoryToken"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 3569,
+              "name": "PromissoryToken",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 3508,
+              "src": "146:15:9",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+                "typeString": "contract PromissoryToken"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 3581,
+              "nodeType": "Block",
+              "src": "206:37:9",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 3579,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 3575,
+                      "name": "wrap",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 3570,
+                      "src": "210:4:9",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+                        "typeString": "contract PromissoryToken"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 3577,
+                          "name": "_addr",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 3572,
+                          "src": "233:5:9",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 3576,
+                        "name": "PromissoryToken",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3508,
+                        "src": "217:15:9",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_PromissoryToken_$3508_$",
+                          "typeString": "type(contract PromissoryToken)"
+                        }
+                      },
+                      "id": 3578,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "217:22:9",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+                        "typeString": "contract PromissoryToken"
+                      }
+                    },
+                    "src": "210:29:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+                      "typeString": "contract PromissoryToken"
+                    }
+                  },
+                  "id": 3580,
+                  "nodeType": "ExpressionStatement",
+                  "src": "210:29:9"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 3582,
+            "implemented": true,
+            "isConstructor": true,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3573,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3572,
+                  "name": "_addr",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3582,
+                  "src": "182:13:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 3571,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "182:7:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "181:17:9"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3574,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "206:0:9"
+            },
+            "scope": 3593,
+            "src": "170:73:9",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 3591,
+              "nodeType": "Block",
+              "src": "294:31:9",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [],
+                    "expression": {
+                      "argumentTypes": [],
+                      "expression": {
+                        "argumentTypes": null,
+                        "id": 3587,
+                        "name": "wrap",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 3570,
+                        "src": "305:4:9",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_contract$_PromissoryToken_$3508",
+                          "typeString": "contract PromissoryToken"
+                        }
+                      },
+                      "id": 3588,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "memberName": "lastPrice",
+                      "nodeType": "MemberAccess",
+                      "referencedDeclaration": 3507,
+                      "src": "305:14:9",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_nonpayable$__$returns$_t_uint256_$",
+                        "typeString": "function () external returns (uint256)"
+                      }
+                    },
+                    "id": 3589,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "305:16:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "functionReturnParameters": 3586,
+                  "id": 3590,
+                  "nodeType": "Return",
+                  "src": "298:23:9"
+                }
+              ]
+            },
+            "documentation": null,
+            "id": 3592,
+            "implemented": true,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "getLastPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3583,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "267:2:9"
+            },
+            "payable": false,
+            "returnParameters": {
+              "id": 3586,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3585,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3592,
+                  "src": "285:7:9",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3584,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "285:7:9",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "284:9:9"
+            },
+            "scope": 3593,
+            "src": "246:79:9",
+            "stateMutability": "nonpayable",
+            "superFunction": null,
+            "visibility": "public"
+          }
+        ],
+        "scope": 3594,
+        "src": "109:219:9"
+      }
+    ],
+    "src": "0:329:9"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "2.0.1",
+  "updatedAt": "2018-11-05T14:07:26.236Z"
+}
