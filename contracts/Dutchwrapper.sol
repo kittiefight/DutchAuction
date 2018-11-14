@@ -405,15 +405,14 @@ contract Dutchwrapper is DutchAuction {
     }
 
 
-    // function getTokenforSocial (bytes4 _hash) public view returns (bool res)  {
-    // }
+    function tokenAmountPerReferred(bytes4 _hash, uint _amount ) public view returns(uint tokenAmount) {
+        tokenAmount = TokenReferrals[_hash].tokenAmountPerReferred[_amount];
+    }
     
-
     function getCurrentBiddersCount () public view returns(uint biddersCount)  {
         biddersCount = CurrentBidders.length;
     }
     
-
     // helper functions  return msg.senders
     function calculatPersonalHash() public view returns (bytes4 _hash) {
         _hash = bytes4(keccak256(abi.encodePacked(msg.sender)));
