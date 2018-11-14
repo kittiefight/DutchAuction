@@ -396,7 +396,6 @@ contract Dutchwrapper is DutchAuction {
     function transferUnsoldTokens(uint _unsoldTokens, address _addr)
         public
         isOwner
-        atStage(Stages.TradingStarted)
 
      {
 
