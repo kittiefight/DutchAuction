@@ -17,17 +17,16 @@ const CURRENT_DATE = (new Date()).toString();
 console.log('APP HOST IS ::: ', HOST, 'Token address :', TOKEN_CONTRACT_ADDRESS, 'Auction address :', AUCTION_CONTRACT_ADDRESS);
 
 
-function getWeb3Provider() {
-    if (HOST) {
-        return new Web3.providers.HttpProvider(HOST);
-    } else if (window.web3) {
-        return window.web3.currentProvider;
-    } else {
-        return new Web3.providers.HttpProvider(HOST);
-    }
-}
+// function getWeb3Provider() {
+//     if (HOST) {
+//         return new Web3.providers.HttpProvider(HOST);
+//     } else if (window.web3) {
+//         return window.web3.currentProvider;
+//     } else {
+//         return new Web3.providers.HttpProvider(HOST);
+//     }
+// }
 
-const web3 = new Web3(getWeb3Provider());
 
 
 const auctionTypes = {
@@ -42,6 +41,7 @@ class AppProvider extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            isWeb3Browser : true,
             auctionStartDate: null,
             auctionEndDate: null,
             networkLaunchDay : null,
@@ -78,7 +78,7 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            auctionStartDateClock : Date.parse('2018-11-14T14:00:00Z'),
+            auctionStartDateClock : Date.parse('2018-11-16T02:00:00Z'),
             //auctionStartDateClock : Date.parse('2018-11-07T14:00:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
@@ -95,34 +95,31 @@ class AppProvider extends Component {
     }
 
     async componentDidMount() {
-
         window.addEventListener('load', async () => {
             if (window.ethereum) {
                 window.web3 = new Web3(window.ethereum);
-                try {
-                    // Request account access if needed
-                    //await window.ethereum.enable();
-                    //await this.setState({ statesLoaded: true });
-                    await this.setState({ web3: web3 });
-                    this.getAuctionData(window.web3);
-                } catch (error) {
-                    console.log('Error', error);
-                }
+                // await window.ethereum.enable();  // Request account access if needed
+                await this.setState({ web3: window.web3 });
+                this.getAuctionData(window.web3);
+                //console.log('Error', error);
             }
             // Legacy dapp browsers...
             else if (window.web3) {
-                window.web3 = new Web3(web3.currentProvider);
-                //await this.setState({ statesLoaded: true });
-                await this.setState({ web3: web3 });
+                console.log('Window Web3 ?  ', window.web3 );
+                window.web3 = new Web3( new Web3.providers.HttpProvider(HOST) );
+                await this.setState({ web3 : window.web3 });
                 this.getAuctionData(window.web3);
             }
             else {
-                console.log('Non-Ethereum browser detected. You should consider trying MetaMask!');
+                console.log("%cNon-Ethereum browser detected. You should consider trying MetaMask!", "color: red; background-color: yellow; font-size: large");
+                await this.setState({ isWeb3Browser : false });
+                const web3 = new Web3(new Web3.providers.HttpProvider(HOST));
+                await this.setState({ web3 : web3 });
+                this.getAuctionData(web3);
             }
         });
 
         this.calculateAuctionStartTime();
-
     }
 
     
@@ -131,7 +128,6 @@ class AppProvider extends Component {
         const waitingPeriod = await this.state.auctionContract.methods.WAITING_PERIOD().call();
         const startBlock = await this.state.auctionContract.methods.startBlock().call();
         const startBlockData = await this.state.web3.eth.getBlock(startBlock);
-        //const auctionEndDate = await this.state.auctionContract.methods.endTime().call();
         const auctionStartDate = new Date(startBlockData.timestamp * 1000);
         //await this.setState({auctionEndDate });
         await this.setState({ auctionStartTime: formatDate(auctionStartDate) });
@@ -166,7 +162,7 @@ class AppProvider extends Component {
         const auctionStage = await auctionContract.methods.stage().call();
         const myAccounts = await web3.eth.getAccounts();
 
-        const ktyTokenPriceUSD = this.state.web3.utils.fromWei(currentPrice, 'ether') * ethereumLastPrice;
+        const ktyTokenPriceUSD = web3.utils.fromWei(currentPrice, 'ether') * ethereumLastPrice;
         this.setState({ ktyTokenPriceUSD });
         
         const currentBidders = await auctionContract.methods.getCurrentBiddersCount().call();
@@ -174,7 +170,7 @@ class AppProvider extends Component {
 
 
         if (myAccounts.length !== 0) {
-            const myBalance = await this.state.web3.eth.getBalance(myAccounts[0]);
+            const myBalance = await web3.eth.getBalance(myAccounts[0]);
             await this.setState({ myBalance: this.state.web3.utils.fromWei(myBalance, 'ether') });
         }
         await this.setState({ currentDate: CURRENT_DATE })
@@ -222,8 +218,16 @@ class AppProvider extends Component {
 
         console.log('MAX_TOKENS_SOLD', maxTokenSold);
         console.log('Pricefactor :  ', priceFactor);
-        console.log('totalReceived :  ', totalReceived);
-        console.log("dutcAuction will end in  : ", auctionWillEnd + ' Blocks ');
+        console.log('Ceiling : ', await auctionContract.methods.ceiling().call());
+        console.log('TotalReceived :  ', totalReceived);
+        console.log('Auction Stage : ',  auctionStage);
+        console.log("Auction will end in  : ", auctionWillEnd + ' Blocks ');
+
+        console.log('==== Calculate Auction End days');
+        // Avg Blocks Per day == 250 
+        // auctionWillEnd / 250 / hours per day/ 30
+        const approximateAuctionDuration = (((auctionWillEnd/250)/24)/30); 
+        console.log('approximateAuctionDuration Month : ', approximateAuctionDuration );
 
 
         const waitingPeriod = await auctionContract.methods.WAITING_PERIOD().call();

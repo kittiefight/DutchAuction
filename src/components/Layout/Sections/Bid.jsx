@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import "./Bid.css";
 import 'react-notifications/lib/notifications.css';
+import BidConfirmModal from "./BidConfirmModal";
 
 
 const Styles = {
@@ -30,7 +31,8 @@ class Bid extends Component {
             referalcode : null,
             appProps : this.props.appProps,
             estimateTokensAmount : 0,
-            estimatedPromissoryTokens : 0
+            estimatedPromissoryTokens : 0,
+            BidConfirmModalOpen : false
         };
         this.BidClicked = this.BidClicked.bind(this);
     }
@@ -72,6 +74,8 @@ class Bid extends Component {
 
     BidClicked = async  (event) => {
         event.preventDefault();
+
+        console.log('Bid clicked !!! ');
         
         let web3 = window.web3;
         if (window.ethereum) {
@@ -117,6 +121,8 @@ class Bid extends Component {
         .on('transactionHash', (hash) => {
             console.log('thash:  ', hash)
             NotificationManager.info(`Transaction Submited: hash : ${hash}`);
+            this.setState({ BidConfirmModalOpen : true });
+            this.setState({ transactionConfirmations: 0  });
         })
         .on('receipt',(receipt) => {
             console.log('recipt :  ', receipt);
@@ -131,6 +137,7 @@ class Bid extends Component {
         .on('error', (error) => {
             console.log('error: ', error);
             NotificationManager.error('Error');
+            this.setState({ transactionConfirmations: 0  });
         });
     }
     
@@ -146,6 +153,8 @@ class Bid extends Component {
         .on('transactionHash', (hash) => {
             console.log('thash:  ', hash)
             NotificationManager.info(`Transaction Submited: hash : ${hash}`);
+            this.setState({ transactionConfirmations: 0  });
+            this.setState({ BidConfirmModalOpen : true });
         })
         .on('receipt',(receipt) => {
             console.log('recipt :  ', receipt);
@@ -160,6 +169,7 @@ class Bid extends Component {
         .on('error', (error) => {
             console.log('error: ', error);
             NotificationManager.error('Error');
+            this.setState({ transactionConfirmations: 0  });
         });
     }
     
@@ -178,6 +188,9 @@ class Bid extends Component {
             <div>
 
             <NotificationContainer/>
+            
+                {!this.state.BidConfirmModalOpen ?  <BidConfirmModal open={true} /> : null}
+
                 <section id="section4">
                     <div className="container">
                         <div className="row">

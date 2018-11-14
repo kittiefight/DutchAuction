@@ -35,7 +35,19 @@ class Layout extends Component {
         }
 
         return (
+
             <div className="Layout">
+
+                {/* <div className="fixed-top"> 
+                    <div className="container">
+                        <div className="row justify-content-center">
+                            <div className="col-6">
+                                No Metamask or web3 browser detected ...    
+                            </div>
+                        </div>
+                    </div>
+                </div>  */}
+
                 
                 <AppConsumer>
                     {(appProps) => ( <Popup appProps={appProps} />  )}

@@ -163,11 +163,17 @@ class Claim extends Component {
 
     async componentDidMount() {
 
-        try {
+       // try {
             const { auctionContract, tokenContract,  web3 } = this.props.appProps; 
             this.setState({auctionContract, tokenContract, web3 })
+            
+            console.log('Token contract : ', tokenContract);
+
 
             const tokenSymbol =  await tokenContract.methods.symbol().call();
+
+
+
             this.setState({ tokenSymbol : tokenSymbol });
 
             const { networkLaunchDay, startBlock } = this.props.appProps;
@@ -181,9 +187,9 @@ class Claim extends Component {
             this.setState({myAccount})
 
 
-        }catch(error){
-            console.log(error);
-        }
+        // }catch(error){
+        //     console.log(error);
+        // }
     }
 
     componentWillUnmount() {
