@@ -1,8 +1,12 @@
 
 module.exports = (deployer, network, accounts) => {
-    
+    // skip deploy for tests
+    if(network === 'test') {
+      return deployer;
+    }
+
     const Token = artifacts.require("KittiefightToken");
-    const DutchWrapper = artifacts.require("DutchWrapper");
+    const DutchWrapper = artifacts.require("Dutchwrapper");
     const PromissoryToken = artifacts.require("PromissoryToken");
 
     const _pWallet = accounts[9]; 
