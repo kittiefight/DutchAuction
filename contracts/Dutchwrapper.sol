@@ -10,6 +10,7 @@ contract Dutchwrapper is DutchAuction {
 
     uint public claimedTokenReferral = 0; // 800,000 : eigth hundred thousand limit
     uint public claimedSocial = 0; // 200,000 : two  hundred thousand limit
+    uint public totalEthEarnedByPartners = 0; // Partners earning
 
 
     // 1,000,000 :  1 million: total MAX_TOKEN_REFERRAL + MAX_TOKEN_SOCIAL
@@ -249,6 +250,8 @@ contract Dutchwrapper is DutchAuction {
             MarketingPartners[_hash].totalContribution += amount;
             MarketingPartners[_hash].individualContribution.push(amount);
             MarketingPartners[_hash].EthEarned += referalPercentage(amount, MarketingPartners[_hash].percentage);
+
+            totalEthEarnedByPartners += referalPercentage(amount, MarketingPartners[_hash].percentage);
 
             if(claimedTokenReferral < MAX_TOKEN_REFERRAL){
             TokenReferrals[_hash].totalReferrals += ONE;
