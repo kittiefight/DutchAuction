@@ -75,24 +75,24 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x608060405260008054600160a060020a031916331790556103c2806100256000396000f3006080604052600436106100615763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166336f7ab5e81146100665780638da5cb5b146100f0578063b967a52e14610121578063f2fde38b1461017c575b600080fd5b34801561007257600080fd5b5061007b61019d565b6040805160208082528351818301528351919283929083019185019080838360005b838110156100b557818101518382015260200161009d565b50505050905090810190601f1680156100e25780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100fc57600080fd5b5061010561022a565b60408051600160a060020a039092168252519081900360200190f35b34801561012d57600080fd5b506040805160206004803580820135601f810184900484028501840190955284845261017a9436949293602493928401919081908401838280828437509497506102399650505050505050565b005b34801561018857600080fd5b5061017a600160a060020a0360043516610267565b60018054604080516020600284861615610100026000190190941693909304601f810184900484028201840190925281815292918301828280156102225780601f106101f757610100808354040283529160200191610222565b820191906000526020600020905b81548152906001019060200180831161020557829003601f168201915b505050505081565b600054600160a060020a031681565b600054600160a060020a0316331461025057600080fd5b80516102639060019060208401906102fb565b5050565b600054600160a060020a0316331461027e57600080fd5b600160a060020a038116151561029357600080fd5b60008054604051600160a060020a03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061033c57805160ff1916838001178555610369565b82800160010185558215610369579182015b8281111561036957825182559160200191906001019061034e565b50610375929150610379565b5090565b61039391905b80821115610375576000815560010161037f565b905600a165627a7a72305820896647b876168f11ac1dc282d261dd962e8e1f75385731ac5473ce47f5ae9d8f0029",
-  "deployedBytecode": "0x6080604052600436106100615763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166336f7ab5e81146100665780638da5cb5b146100f0578063b967a52e14610121578063f2fde38b1461017c575b600080fd5b34801561007257600080fd5b5061007b61019d565b6040805160208082528351818301528351919283929083019185019080838360005b838110156100b557818101518382015260200161009d565b50505050905090810190601f1680156100e25780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100fc57600080fd5b5061010561022a565b60408051600160a060020a039092168252519081900360200190f35b34801561012d57600080fd5b506040805160206004803580820135601f810184900484028501840190955284845261017a9436949293602493928401919081908401838280828437509497506102399650505050505050565b005b34801561018857600080fd5b5061017a600160a060020a0360043516610267565b60018054604080516020600284861615610100026000190190941693909304601f810184900484028201840190925281815292918301828280156102225780601f106101f757610100808354040283529160200191610222565b820191906000526020600020905b81548152906001019060200180831161020557829003601f168201915b505050505081565b600054600160a060020a031681565b600054600160a060020a0316331461025057600080fd5b80516102639060019060208401906102fb565b5050565b600054600160a060020a0316331461027e57600080fd5b600160a060020a038116151561029357600080fd5b60008054604051600160a060020a03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061033c57805160ff1916838001178555610369565b82800160010185558215610369579182015b8281111561036957825182559160200191906001019061034e565b50610375929150610379565b5090565b61039391905b80821115610375576000815560010161037f565b905600a165627a7a72305820896647b876168f11ac1dc282d261dd962e8e1f75385731ac5473ce47f5ae9d8f0029",
-  "sourceMap": "211:331:19:-;;;501:5:26;:18;;-1:-1:-1;;;;;;501:18:26;509:10;501:18;;;211:331:19;;;;;;",
-  "deployedSourceMap": "211:331:19:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;248:32;;8:9:-1;5:2;;;30:1;27;20:12;5:2;248:32:19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:100:-1;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;248:32:19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;238:20:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;238:20:26;;;;;;;;-1:-1:-1;;;;;238:20:26;;;;;;;;;;;;;;443:97:19;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;443:97:19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;443:97:19;;-1:-1:-1;443:97:19;;-1:-1:-1;;;;;;;443:97:19;;;832:169:26;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;832:169:26;-1:-1:-1;;;;;832:169:26;;;;;248:32:19;;;;;;;;;;;;;;;-1:-1:-1;;248:32:19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;238:20:26:-;;;-1:-1:-1;;;;;238:20:26;;:::o;443:97:19:-;653:5:26;;-1:-1:-1;;;;;653:5:26;639:10;:19;631:28;;;;;;510:25:19;;;;:18;;:25;;;;;:::i;:::-;;443:97;:::o;832:169:26:-;653:5;;-1:-1:-1;;;;;653:5:26;639:10;:19;631:28;;;;;;-1:-1:-1;;;;;908:22:26;;;;900:31;;;;;;958:5;;;937:37;;-1:-1:-1;;;;;937:37:26;;;;958:5;;;937:37;;;980:5;:16;;-1:-1:-1;;980:16:26;-1:-1:-1;;;;;980:16:26;;;;;;;;;;832:169::o;211:331:19:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;211:331:19;;;-1:-1:-1;211:331:19;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;:::o",
+  "bytecode": "0x608060405260008054600160a060020a031916331790556103c2806100256000396000f3006080604052600436106100615763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166336f7ab5e81146100665780638da5cb5b146100f0578063b967a52e14610121578063f2fde38b1461017c575b600080fd5b34801561007257600080fd5b5061007b61019d565b6040805160208082528351818301528351919283929083019185019080838360005b838110156100b557818101518382015260200161009d565b50505050905090810190601f1680156100e25780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100fc57600080fd5b5061010561022a565b60408051600160a060020a039092168252519081900360200190f35b34801561012d57600080fd5b506040805160206004803580820135601f810184900484028501840190955284845261017a9436949293602493928401919081908401838280828437509497506102399650505050505050565b005b34801561018857600080fd5b5061017a600160a060020a0360043516610267565b60018054604080516020600284861615610100026000190190941693909304601f810184900484028201840190925281815292918301828280156102225780601f106101f757610100808354040283529160200191610222565b820191906000526020600020905b81548152906001019060200180831161020557829003601f168201915b505050505081565b600054600160a060020a031681565b600054600160a060020a0316331461025057600080fd5b80516102639060019060208401906102fb565b5050565b600054600160a060020a0316331461027e57600080fd5b600160a060020a038116151561029357600080fd5b60008054604051600160a060020a03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061033c57805160ff1916838001178555610369565b82800160010185558215610369579182015b8281111561036957825182559160200191906001019061034e565b50610375929150610379565b5090565b61039391905b80821115610375576000815560010161037f565b905600a165627a7a723058208a12ab54cccdc7804de3c2d42ae5bae6ddb10065af9305d7dd8bc2963b2f44250029",
+  "deployedBytecode": "0x6080604052600436106100615763ffffffff7c010000000000000000000000000000000000000000000000000000000060003504166336f7ab5e81146100665780638da5cb5b146100f0578063b967a52e14610121578063f2fde38b1461017c575b600080fd5b34801561007257600080fd5b5061007b61019d565b6040805160208082528351818301528351919283929083019185019080838360005b838110156100b557818101518382015260200161009d565b50505050905090810190601f1680156100e25780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b3480156100fc57600080fd5b5061010561022a565b60408051600160a060020a039092168252519081900360200190f35b34801561012d57600080fd5b506040805160206004803580820135601f810184900484028501840190955284845261017a9436949293602493928401919081908401838280828437509497506102399650505050505050565b005b34801561018857600080fd5b5061017a600160a060020a0360043516610267565b60018054604080516020600284861615610100026000190190941693909304601f810184900484028201840190925281815292918301828280156102225780601f106101f757610100808354040283529160200191610222565b820191906000526020600020905b81548152906001019060200180831161020557829003601f168201915b505050505081565b600054600160a060020a031681565b600054600160a060020a0316331461025057600080fd5b80516102639060019060208401906102fb565b5050565b600054600160a060020a0316331461027e57600080fd5b600160a060020a038116151561029357600080fd5b60008054604051600160a060020a03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a36000805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a0392909216919091179055565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061033c57805160ff1916838001178555610369565b82800160010185558215610369579182015b8281111561036957825182559160200191906001019061034e565b50610375929150610379565b5090565b61039391905b80821115610375576000815560010161037f565b905600a165627a7a723058208a12ab54cccdc7804de3c2d42ae5bae6ddb10065af9305d7dd8bc2963b2f44250029",
+  "sourceMap": "211:331:22:-;;;501:5:29;:18;;-1:-1:-1;;;;;;501:18:29;509:10;501:18;;;211:331:22;;;;;;",
+  "deployedSourceMap": "211:331:22:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;248:32;;8:9:-1;5:2;;;30:1;27;20:12;5:2;248:32:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;8:100:-1;33:3;30:1;27:10;8:100;;;90:11;;;84:18;71:11;;;64:39;52:2;45:10;8:100;;;12:14;248:32:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;238:20:29;;8:9:-1;5:2;;;30:1;27;20:12;5:2;238:20:29;;;;;;;;-1:-1:-1;;;;;238:20:29;;;;;;;;;;;;;;443:97:22;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;443:97:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;443:97:22;;-1:-1:-1;443:97:22;;-1:-1:-1;;;;;;;443:97:22;;;832:169:29;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;832:169:29;-1:-1:-1;;;;;832:169:29;;;;;248:32:22;;;;;;;;;;;;;;;-1:-1:-1;;248:32:22;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;238:20:29:-;;;-1:-1:-1;;;;;238:20:29;;:::o;443:97:22:-;653:5:29;;-1:-1:-1;;;;;653:5:29;639:10;:19;631:28;;;;;;510:25:22;;;;:18;;:25;;;;;:::i;:::-;;443:97;:::o;832:169:29:-;653:5;;-1:-1:-1;;;;;653:5:29;639:10;:19;631:28;;;;;;-1:-1:-1;;;;;908:22:29;;;;900:31;;;;;;958:5;;;937:37;;-1:-1:-1;;;;;937:37:29;;;;958:5;;;937:37;;;980:5;:16;;-1:-1:-1;;980:16:29;-1:-1:-1;;;;;980:16:29;;;;;;;;;;832:169::o;211:331:22:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;211:331:22;;;-1:-1:-1;211:331:22;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;:::o",
   "source": "pragma solidity ^0.4.18;\n\nimport \"./Ownable.sol\";\n\n\n/**\n * @title Contactable token\n * @dev Basic version of a contactable contract, allowing the owner to provide a string with their\n * contact information.\n */\ncontract Contactable is Ownable {\n\n  string public contactInformation;\n\n  /**\n    * @dev Allows the owner to set a string with their contact information.\n    * @param info The contact information to attach to the contract.\n    */\n  function setContactInformation(string info) onlyOwner public {\n    contactInformation = info;\n  }\n}\n",
-  "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/openzeppelin-solidity/ownership/Contactable.sol",
+  "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/openzeppelin-solidity/ownership/Contactable.sol",
   "ast": {
-    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/openzeppelin-solidity/ownership/Contactable.sol",
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/openzeppelin-solidity/ownership/Contactable.sol",
     "exportedSymbols": {
       "Contactable": [
-        4095
+        8826
       ]
     },
-    "id": 4096,
+    "id": 8827,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4077,
+        "id": 8808,
         "literals": [
           "solidity",
           "^",
@@ -100,16 +100,16 @@
           ".18"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:19"
+        "src": "0:24:22"
       },
       {
-        "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/openzeppelin-solidity/ownership/Ownable.sol",
+        "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/openzeppelin-solidity/ownership/Ownable.sol",
         "file": "./Ownable.sol",
-        "id": 4078,
+        "id": 8809,
         "nodeType": "ImportDirective",
-        "scope": 4096,
-        "sourceUnit": 4519,
-        "src": "26:23:19",
+        "scope": 8827,
+        "sourceUnit": 9250,
+        "src": "26:23:22",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -119,42 +119,42 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 4079,
+              "id": 8810,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 4518,
-              "src": "235:7:19",
+              "referencedDeclaration": 9249,
+              "src": "235:7:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$4518",
+                "typeIdentifier": "t_contract$_Ownable_$9249",
                 "typeString": "contract Ownable"
               }
             },
-            "id": 4080,
+            "id": 8811,
             "nodeType": "InheritanceSpecifier",
-            "src": "235:7:19"
+            "src": "235:7:22"
           }
         ],
         "contractDependencies": [
-          4518
+          9249
         ],
         "contractKind": "contract",
         "documentation": "@title Contactable token\n@dev Basic version of a contactable contract, allowing the owner to provide a string with their\ncontact information.",
         "fullyImplemented": true,
-        "id": 4095,
+        "id": 8826,
         "linearizedBaseContracts": [
-          4095,
-          4518
+          8826,
+          9249
         ],
         "name": "Contactable",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 4082,
+            "id": 8813,
             "name": "contactInformation",
             "nodeType": "VariableDeclaration",
-            "scope": 4095,
-            "src": "248:32:19",
+            "scope": 8826,
+            "src": "248:32:22",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -162,10 +162,10 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 4081,
+              "id": 8812,
               "name": "string",
               "nodeType": "ElementaryTypeName",
-              "src": "248:6:19",
+              "src": "248:6:22",
               "typeDescriptions": {
                 "typeIdentifier": "t_string_storage_ptr",
                 "typeString": "string"
@@ -176,26 +176,26 @@
           },
           {
             "body": {
-              "id": 4093,
+              "id": 8824,
               "nodeType": "Block",
-              "src": "504:36:19",
+              "src": "504:36:22",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 4091,
+                    "id": 8822,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 4089,
+                      "id": 8820,
                       "name": "contactInformation",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 4082,
-                      "src": "510:18:19",
+                      "referencedDeclaration": 8813,
+                      "src": "510:18:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_storage",
                         "typeString": "string storage ref"
@@ -205,68 +205,68 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 4090,
+                      "id": 8821,
                       "name": "info",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 4084,
-                      "src": "531:4:19",
+                      "referencedDeclaration": 8815,
+                      "src": "531:4:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
                         "typeString": "string memory"
                       }
                     },
-                    "src": "510:25:19",
+                    "src": "510:25:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage",
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 4092,
+                  "id": 8823,
                   "nodeType": "ExpressionStatement",
-                  "src": "510:25:19"
+                  "src": "510:25:22"
                 }
               ]
             },
             "documentation": "@dev Allows the owner to set a string with their contact information.\n@param info The contact information to attach to the contract.",
-            "id": 4094,
+            "id": 8825,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 4087,
+                "id": 8818,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 4086,
+                  "id": 8817,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 4492,
-                  "src": "487:9:19",
+                  "referencedDeclaration": 9223,
+                  "src": "487:9:22",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
                     "typeString": "modifier ()"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "487:9:19"
+                "src": "487:9:22"
               }
             ],
             "name": "setContactInformation",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4085,
+              "id": 8816,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4084,
+                  "id": 8815,
                   "name": "info",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4094,
-                  "src": "474:11:19",
+                  "scope": 8825,
+                  "src": "474:11:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -274,10 +274,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 4083,
+                    "id": 8814,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "474:6:19",
+                    "src": "474:6:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -287,40 +287,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "473:13:19"
+              "src": "473:13:22"
             },
             "payable": false,
             "returnParameters": {
-              "id": 4088,
+              "id": 8819,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "504:0:19"
+              "src": "504:0:22"
             },
-            "scope": 4095,
-            "src": "443:97:19",
+            "scope": 8826,
+            "src": "443:97:22",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 4096,
-        "src": "211:331:19"
+        "scope": 8827,
+        "src": "211:331:22"
       }
     ],
-    "src": "0:543:19"
+    "src": "0:543:22"
   },
   "legacyAST": {
-    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/openzeppelin-solidity/ownership/Contactable.sol",
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/openzeppelin-solidity/ownership/Contactable.sol",
     "exportedSymbols": {
       "Contactable": [
-        4095
+        8826
       ]
     },
-    "id": 4096,
+    "id": 8827,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 4077,
+        "id": 8808,
         "literals": [
           "solidity",
           "^",
@@ -328,16 +328,16 @@
           ".18"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:19"
+        "src": "0:24:22"
       },
       {
-        "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/openzeppelin-solidity/ownership/Ownable.sol",
+        "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/openzeppelin-solidity/ownership/Ownable.sol",
         "file": "./Ownable.sol",
-        "id": 4078,
+        "id": 8809,
         "nodeType": "ImportDirective",
-        "scope": 4096,
-        "sourceUnit": 4519,
-        "src": "26:23:19",
+        "scope": 8827,
+        "sourceUnit": 9250,
+        "src": "26:23:22",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -347,42 +347,42 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 4079,
+              "id": 8810,
               "name": "Ownable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 4518,
-              "src": "235:7:19",
+              "referencedDeclaration": 9249,
+              "src": "235:7:22",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Ownable_$4518",
+                "typeIdentifier": "t_contract$_Ownable_$9249",
                 "typeString": "contract Ownable"
               }
             },
-            "id": 4080,
+            "id": 8811,
             "nodeType": "InheritanceSpecifier",
-            "src": "235:7:19"
+            "src": "235:7:22"
           }
         ],
         "contractDependencies": [
-          4518
+          9249
         ],
         "contractKind": "contract",
         "documentation": "@title Contactable token\n@dev Basic version of a contactable contract, allowing the owner to provide a string with their\ncontact information.",
         "fullyImplemented": true,
-        "id": 4095,
+        "id": 8826,
         "linearizedBaseContracts": [
-          4095,
-          4518
+          8826,
+          9249
         ],
         "name": "Contactable",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 4082,
+            "id": 8813,
             "name": "contactInformation",
             "nodeType": "VariableDeclaration",
-            "scope": 4095,
-            "src": "248:32:19",
+            "scope": 8826,
+            "src": "248:32:22",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -390,10 +390,10 @@
               "typeString": "string"
             },
             "typeName": {
-              "id": 4081,
+              "id": 8812,
               "name": "string",
               "nodeType": "ElementaryTypeName",
-              "src": "248:6:19",
+              "src": "248:6:22",
               "typeDescriptions": {
                 "typeIdentifier": "t_string_storage_ptr",
                 "typeString": "string"
@@ -404,26 +404,26 @@
           },
           {
             "body": {
-              "id": 4093,
+              "id": 8824,
               "nodeType": "Block",
-              "src": "504:36:19",
+              "src": "504:36:22",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 4091,
+                    "id": 8822,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 4089,
+                      "id": 8820,
                       "name": "contactInformation",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 4082,
-                      "src": "510:18:19",
+                      "referencedDeclaration": 8813,
+                      "src": "510:18:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_storage",
                         "typeString": "string storage ref"
@@ -433,68 +433,68 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 4090,
+                      "id": 8821,
                       "name": "info",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 4084,
-                      "src": "531:4:19",
+                      "referencedDeclaration": 8815,
+                      "src": "531:4:22",
                       "typeDescriptions": {
                         "typeIdentifier": "t_string_memory_ptr",
                         "typeString": "string memory"
                       }
                     },
-                    "src": "510:25:19",
+                    "src": "510:25:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage",
                       "typeString": "string storage ref"
                     }
                   },
-                  "id": 4092,
+                  "id": 8823,
                   "nodeType": "ExpressionStatement",
-                  "src": "510:25:19"
+                  "src": "510:25:22"
                 }
               ]
             },
             "documentation": "@dev Allows the owner to set a string with their contact information.\n@param info The contact information to attach to the contract.",
-            "id": 4094,
+            "id": 8825,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [
               {
                 "arguments": null,
-                "id": 4087,
+                "id": 8818,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 4086,
+                  "id": 8817,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 4492,
-                  "src": "487:9:19",
+                  "referencedDeclaration": 9223,
+                  "src": "487:9:22",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
                     "typeString": "modifier ()"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "487:9:19"
+                "src": "487:9:22"
               }
             ],
             "name": "setContactInformation",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 4085,
+              "id": 8816,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 4084,
+                  "id": 8815,
                   "name": "info",
                   "nodeType": "VariableDeclaration",
-                  "scope": 4094,
-                  "src": "474:11:19",
+                  "scope": 8825,
+                  "src": "474:11:22",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -502,10 +502,10 @@
                     "typeString": "string"
                   },
                   "typeName": {
-                    "id": 4083,
+                    "id": 8814,
                     "name": "string",
                     "nodeType": "ElementaryTypeName",
-                    "src": "474:6:19",
+                    "src": "474:6:22",
                     "typeDescriptions": {
                       "typeIdentifier": "t_string_storage_ptr",
                       "typeString": "string"
@@ -515,27 +515,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "473:13:19"
+              "src": "473:13:22"
             },
             "payable": false,
             "returnParameters": {
-              "id": 4088,
+              "id": 8819,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "504:0:19"
+              "src": "504:0:22"
             },
-            "scope": 4095,
-            "src": "443:97:19",
+            "scope": 8826,
+            "src": "443:97:22",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 4096,
-        "src": "211:331:19"
+        "scope": 8827,
+        "src": "211:331:22"
       }
     ],
-    "src": "0:543:19"
+    "src": "0:543:22"
   },
   "compiler": {
     "name": "solc",
@@ -543,5 +543,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-11-05T14:07:26.240Z"
+  "updatedAt": "2018-11-16T14:02:09.362Z"
 }
