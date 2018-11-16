@@ -55,7 +55,7 @@ contract KittiefightToken is ERC865Token, PausableToken, MintableToken {
     function setWhitelistedOnly(bool _isWhitelistOnly) onlyOwner public {
         if (isTransferWhitelistOnly != _isWhitelistOnly) {
             isTransferWhitelistOnly = _isWhitelistOnly;
-            TransferWhitelistOnly(_isWhitelistOnly);
+            emit TransferWhitelistOnly(_isWhitelistOnly);
         }
     }
 
@@ -65,7 +65,7 @@ contract KittiefightToken is ERC865Token, PausableToken, MintableToken {
     function whitelistUserForTransfers(address _user) onlyOwner public {
         require(!isUserAllowedToTransfer(_user));
         transfersWhitelist[_user] = true;
-        UserAllowedToTransfer(_user);
+        emit UserAllowedToTransfer(_user);
     }
 
     /**
