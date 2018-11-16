@@ -1,7 +1,7 @@
 pragma solidity ^0.4.24;
 
 import "../../openzeppelin-solidity/token/ERC20/PausableToken.sol";
-import "../../openzeppelin-solidity/token/ERC20/MintableToken.sol";
+import "../../openzeppelin-solidity/token/ERC20/CappedToken.sol";
 import "./ERC865Token.sol";
 
 /**
@@ -16,7 +16,7 @@ import "./ERC865Token.sol";
  *
  */
 
-contract KittiefightToken is ERC865Token, PausableToken, MintableToken {
+contract KittiefightToken is ERC865Token, PausableToken, CappedToken {
 
     /* Set the token name for display */
     string public constant symbol = "KTY";
@@ -39,6 +39,11 @@ contract KittiefightToken is ERC865Token, PausableToken, MintableToken {
     event UserAllowedToTransfer(address user);
 
     event TransferWhitelistOnly(bool flag);
+
+
+    constructor() CappedToken(amountOfTokenToMint) {
+        
+    }
 
     /**
      * @notice Is the address allowed to transfer
