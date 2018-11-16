@@ -189,7 +189,7 @@ class Bid extends Component {
 
             <NotificationContainer/>
             
-                {!this.state.BidConfirmModalOpen ?  <BidConfirmModal open={true} /> : null}
+                {this.state.BidConfirmModalOpen ?  <BidConfirmModal open={true} /> : null}
 
                 <section id="section4">
                     <div className="container">
