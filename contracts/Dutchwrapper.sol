@@ -112,14 +112,7 @@ contract Dutchwrapper is DutchAuction {
         require(stage == Stages.TradingStarted);
         _;
     }
-
-    // let only partner or owner check
-    modifier onlyMarketingPartners(bytes4 _hash) {
-        require((msg.sender == owner) || ((msg.sender == MarketingPartners[_hash].addr) && ( _hash == MarketingPartners[_hash].hash)));
-            // Only owner or partner is allowed to proceed
-        _;
-    }
-
+  
 
     // uint constant public MAX_TOKEN_REFERRAL = 800000 * 10**18; // 800,000 : eight hundred  thousand
     // uint constant public MAX_TOKEN_SOCIAL = 200000 * 10**18; // 200,000 : two hundred thousand
