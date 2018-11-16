@@ -318,15 +318,15 @@ contract Dutchwrapper is DutchAuction {
                 require(msg.sender != SocialCampaigns[_campaignHash].SocialLinkProfile[id].addr); //reject already rejistered
             }
 
-			require(SocialCampaigns[_campaignHash].SocialLinkProfile.length <= SocialCampaigns[_campaignHash].maxParticipators);// check token availability
+			require(SocialCampaigns[_campaignHash].SocialLinkProfile.length < SocialCampaigns[_campaignHash].maxParticipators);// check token availability
             SocialProfile memory tempProfile;
 			tempProfile.addr = msg.sender;
  			tempProfile.socialAction = _retweetOrdiscord; //store social action
 			tempProfile.tokensEarned = SocialCampaigns[_campaignHash].tokenAmountForEach;
 			tempProfile.approved = true;
 			tempProfile.username = _userName;
-			SocialCampaigns[_campaignHash].SocialLinkProfile.push(tempProfile);
 			SocialCampaigns[_campaignHash].index[msg.sender] = SocialCampaigns[_campaignHash].SocialLinkProfile.length;
+            SocialCampaigns[_campaignHash].SocialLinkProfile.push(tempProfile);
 			//SocialCampaigns[_campaignHash].disqualified[tempAddr] = false;
 
 
