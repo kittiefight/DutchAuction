@@ -4,16 +4,16 @@ const PromissoryToken = artifacts.require("PromissoryToken");
 
 const { should, EVMThrow, getParamFromTxEvent } = require('./helpers');
 
-let kittiefightToken;
-let dutchWrapper;
-let promissoryToken;
+let kittieFightToken = null;
+let dutchWrapper = null;
+let promissoryToken = null;
+const WEI = 10**18;
 const emptyHash = 0xeee00000;
-const ETHER = Math.pow(10, 18);
 
 const auctionStages = [ "AuctionDeployed", "AuctionSetUp", "AuctionStarted", "AuctionEnded", "TradingStarted" ];
 
 
-getAcutionData = async (dutchWrapper, kittiefightToken, accounts) => {
+getAcutionData = async (dutchWrapper, kittieFightToken, accounts) => {
 
     const auctionStage =  await dutchWrapper.stage.call();
     const pWallet = await dutchWrapper.pWallet.call();
@@ -54,55 +54,23 @@ getAcutionData = async (dutchWrapper, kittiefightToken, accounts) => {
 }
 
 
-contract('DutchWrapper',  accounts  => {
+contract.skip('DutchWrapper',  accounts  => {
+
+    const [owner, secondAccount, thirdAccount, referralAccount, referralAccount1, referralAccount2, seventhAccount, eighthAccount, pWalletAccount] = accounts;
 
     const sleep = ms => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    const [owner, secondAccount, thirdAccount, referralAccount, referralAccount1, referralAccount2, seventhAccount, eighthAccount, pWalletAccount] = accounts;
-    const _ceiling = 500 * ETHER; // 500 ETH
-    const _priceFactor = 7500  / 10; //
-
     before('Setup contract for each test', async () => {
-        kittiefightToken = await KittieFightToken.new({ from: owner });
-        assert.isNotNull(kittiefightToken.address, 'Failed to deploy KittiefightToken with address');
-
-        dutchWrapper = await DutchWrapper.new(pWalletAccount, _ceiling, _priceFactor, {
-          from: owner
-        });
-        assert.isNotNull(dutchWrapper.address, 'Failed to deploy Dutchwrapper with address');
-
-        promissoryToken = await PromissoryToken.new({ from: owner });
-        assert.isNotNull(promissoryToken.address, 'Failed to deploy PromissoryToken with address');
-
-
-        console.log('-------------------------------');
-        console.log('Token address: ', kittiefightToken.address);
-        console.log('Dutch Wrapper Address : ', dutchWrapper.address);
-        console.log('PromissaryToken Address : ', promissoryToken.address);
-        console.log('--------------------------------');
-
+        kittieFightToken = await KittieFightToken.deployed();
+        dutchWrapper = await DutchWrapper.deployed();
+        promissoryToken = await PromissoryToken.deployed();
         await dutchWrapper.setPromissoryTokenInstance(promissoryToken.address);
         accounts_num = accounts.length;
-
-            // console.log('PromissoryToken price : ', (await promissoryToken.lastPrice()).toNumber() );
-            //
-            // // Mint 100  Tokens
-            // await token.mint(dutchWrapper.address, 10000000 * 10 ** 18);
-            //
-            // // // Transfer 100  tokens to DutchAuction
-            // //await token.transfer(dutchWrapper.address, 5000000 * 10**18 );
-            // console.log('Dutch Wrapper Balance : ',  (await token.balanceOf(dutchWrapper.address)).toNumber() );
-            //
-            // //Setup  Auction
-            // await dutchWrapper.setup(token.address);
-            //
-            // //Start Auction
-            // await dutchWrapper.startAuction();
     })
 
-    describe.skip('setAdmin', function() {
+    describe('setAdmin', function() {
       it('should fail to setAdmin()', async function() {
         try {
           await dutchWrapper.setAdmin(accounts[2]).send({
@@ -179,7 +147,7 @@ contract('DutchWrapper',  accounts  => {
 
     });
 
-    it.skip('Referral Campaing with sign up ', async () => {
+    it('Referral Campaing with sign up ', async () => {
         const  _addr = thirdAccount;
         const _hash = await dutchWrapper.referralSignup.call({ from : _addr });
         await dutchWrapper.referralSignup({ from : _addr });
