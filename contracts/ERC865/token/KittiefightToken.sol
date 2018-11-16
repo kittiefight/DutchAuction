@@ -22,7 +22,7 @@ contract KittiefightToken is ERC865Token, PausableToken, MintableToken {
     string public constant symbol = "KTY";
 
     /* Set the token symbol for display */
-    string public constant name = "Kittiefight Token";
+    string public constant name = "Kittiefight";
 
     /* Set the number of decimals for display */
     uint8 public constant decimals = 18;
