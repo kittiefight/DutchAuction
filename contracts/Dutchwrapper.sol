@@ -215,6 +215,7 @@ contract Dutchwrapper is DutchAuction {
     // public self generated hash by token earning promoters
     function referralSignup() public ReferalCampaignLimit returns (bytes4 referalhash) {
         bytes4 tempHash = bytes4(keccak256(abi.encodePacked(msg.sender)));
+        require (tempHash != TokenReferrals[tempHash].hash); //check prevent overwriting
         TokenReferrals[tempHash].addr = msg.sender;
         TokenReferrals[tempHash].hash = tempHash;
         referalhash = tempHash;
