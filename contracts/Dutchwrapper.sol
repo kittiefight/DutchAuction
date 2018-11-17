@@ -112,14 +112,7 @@ contract Dutchwrapper is DutchAuction {
         require(stage == Stages.TradingStarted);
         _;
     }
-
-    // let only partner or owner check
-    modifier onlyMarketingPartners(bytes4 _hash) {
-        require((msg.sender == owner) || ((msg.sender == MarketingPartners[_hash].addr) && ( _hash == MarketingPartners[_hash].hash)));
-            // Only owner or partner is allowed to proceed
-        _;
-    }
-
+  
 
     // uint constant public MAX_TOKEN_REFERRAL = 800000 * 10**18; // 800,000 : eight hundred  thousand
     // uint constant public MAX_TOKEN_SOCIAL = 200000 * 10**18; // 200,000 : two hundred thousand
@@ -215,6 +208,7 @@ contract Dutchwrapper is DutchAuction {
     // public self generated hash by token earning promoters
     function referralSignup() public ReferalCampaignLimit returns (bytes4 referalhash) {
         bytes4 tempHash = bytes4(keccak256(abi.encodePacked(msg.sender)));
+        require (tempHash != TokenReferrals[tempHash].hash); //check prevent overwriting
         TokenReferrals[tempHash].addr = msg.sender;
         TokenReferrals[tempHash].hash = tempHash;
         referalhash = tempHash;
@@ -324,15 +318,15 @@ contract Dutchwrapper is DutchAuction {
                 require(msg.sender != SocialCampaigns[_campaignHash].SocialLinkProfile[id].addr); //reject already rejistered
             }
 
-			require(SocialCampaigns[_campaignHash].SocialLinkProfile.length <= SocialCampaigns[_campaignHash].maxParticipators);// check token availability
+			require(SocialCampaigns[_campaignHash].SocialLinkProfile.length < SocialCampaigns[_campaignHash].maxParticipators);// check token availability
             SocialProfile memory tempProfile;
 			tempProfile.addr = msg.sender;
  			tempProfile.socialAction = _retweetOrdiscord; //store social action
 			tempProfile.tokensEarned = SocialCampaigns[_campaignHash].tokenAmountForEach;
 			tempProfile.approved = true;
 			tempProfile.username = _userName;
-			SocialCampaigns[_campaignHash].SocialLinkProfile.push(tempProfile);
 			SocialCampaigns[_campaignHash].index[msg.sender] = SocialCampaigns[_campaignHash].SocialLinkProfile.length;
+            SocialCampaigns[_campaignHash].SocialLinkProfile.push(tempProfile);
 			//SocialCampaigns[_campaignHash].disqualified[tempAddr] = false;
 
 

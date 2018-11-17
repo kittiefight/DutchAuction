@@ -21,19 +21,19 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "pragma solidity ^0.4.23;\n\ninterface DutcAuction {\n\t function bid(address receiver) external;\n}",
-  "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/Interfaces/DutchAuction.sol",
+  "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/Interfaces/DutchAuction.sol",
   "ast": {
-    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/Interfaces/DutchAuction.sol",
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/Interfaces/DutchAuction.sol",
     "exportedSymbols": {
       "DutcAuction": [
-        1714
+        3728
       ]
     },
-    "id": 1715,
+    "id": 3729,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1708,
+        "id": 3722,
         "literals": [
           "solidity",
           "^",
@@ -41,7 +41,7 @@
           ".23"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:2"
+        "src": "0:24:6"
       },
       {
         "baseContracts": [],
@@ -49,9 +49,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1714,
+        "id": 3728,
         "linearizedBaseContracts": [
-          1714
+          3728
         ],
         "name": "DutcAuction",
         "nodeType": "ContractDefinition",
@@ -59,7 +59,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 1713,
+            "id": 3727,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -67,16 +67,16 @@
             "name": "bid",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1711,
+              "id": 3725,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1710,
+                  "id": 3724,
                   "name": "receiver",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1713,
-                  "src": "65:16:2",
+                  "scope": 3727,
+                  "src": "65:16:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -84,10 +84,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1709,
+                    "id": 3723,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "65:7:2",
+                    "src": "65:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -97,40 +97,40 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "64:18:2"
+              "src": "64:18:6"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1712,
+              "id": 3726,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "91:0:2"
+              "src": "91:0:6"
             },
-            "scope": 1714,
-            "src": "52:40:2",
+            "scope": 3728,
+            "src": "52:40:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1715,
-        "src": "26:68:2"
+        "scope": 3729,
+        "src": "26:68:6"
       }
     ],
-    "src": "0:94:2"
+    "src": "0:94:6"
   },
   "legacyAST": {
-    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/KittieSITE/contracts/Interfaces/DutchAuction.sol",
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/Interfaces/DutchAuction.sol",
     "exportedSymbols": {
       "DutcAuction": [
-        1714
+        3728
       ]
     },
-    "id": 1715,
+    "id": 3729,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1708,
+        "id": 3722,
         "literals": [
           "solidity",
           "^",
@@ -138,7 +138,7 @@
           ".23"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:2"
+        "src": "0:24:6"
       },
       {
         "baseContracts": [],
@@ -146,9 +146,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 1714,
+        "id": 3728,
         "linearizedBaseContracts": [
-          1714
+          3728
         ],
         "name": "DutcAuction",
         "nodeType": "ContractDefinition",
@@ -156,7 +156,7 @@
           {
             "body": null,
             "documentation": null,
-            "id": 1713,
+            "id": 3727,
             "implemented": false,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -164,16 +164,16 @@
             "name": "bid",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 1711,
+              "id": 3725,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 1710,
+                  "id": 3724,
                   "name": "receiver",
                   "nodeType": "VariableDeclaration",
-                  "scope": 1713,
-                  "src": "65:16:2",
+                  "scope": 3727,
+                  "src": "65:16:6",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -181,10 +181,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 1709,
+                    "id": 3723,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "65:7:2",
+                    "src": "65:7:6",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -194,27 +194,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "64:18:2"
+              "src": "64:18:6"
             },
             "payable": false,
             "returnParameters": {
-              "id": 1712,
+              "id": 3726,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "91:0:2"
+              "src": "91:0:6"
             },
-            "scope": 1714,
-            "src": "52:40:2",
+            "scope": 3728,
+            "src": "52:40:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 1715,
-        "src": "26:68:2"
+        "scope": 3729,
+        "src": "26:68:6"
       }
     ],
-    "src": "0:94:2"
+    "src": "0:94:6"
   },
   "compiler": {
     "name": "solc",
@@ -222,5 +222,5 @@
   },
   "networks": {},
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-10-16T17:27:58.712Z"
+  "updatedAt": "2018-11-16T14:02:09.332Z"
 }
