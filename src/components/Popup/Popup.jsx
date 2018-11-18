@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Modal from "react-responsive-modal";
-import AppConsumer from "../../context/AppConsumer";
-
 
 class Popup extends Component {
 
@@ -16,6 +14,13 @@ class Popup extends Component {
             timerInterval: null,
             ... this.props
         };
+
+        this.GoToDiscord = this.GoToDiscord.bind(this);
+
+    }
+
+    GoToDiscord = () => {
+        window.location.href = "https://discord.gg/rgQ5F3R";
     }
 
     componentDidMount = () => {
@@ -119,6 +124,18 @@ class Popup extends Component {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="row align-items-center">
+                                    <div className="col-sm-12 title">
+                                        <button className="discorbutton" onClick={this.GoToDiscord}>
+                                            Join us on discord while you wait
+                                        </button>
+
+                                        {/* <h2 className="discorbutton"> 
+                                            <a href="https://discord.gg/rgQ5F3R">Join us on discord while you wait </a> 
+                                        </h2> */}
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </header>
