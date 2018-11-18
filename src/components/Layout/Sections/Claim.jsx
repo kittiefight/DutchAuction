@@ -163,7 +163,7 @@ class Claim extends Component {
 
     async componentDidMount() {
 
-       // try {
+       try {
             const { auctionContract, tokenContract,  web3 } = this.props.appProps; 
             this.setState({auctionContract, tokenContract, web3 })
             
@@ -187,9 +187,9 @@ class Claim extends Component {
             this.setState({myAccount})
 
 
-        // }catch(error){
-        //     console.log(error);
-        // }
+        }catch(error){
+            console.log(error);
+        }
     }
 
     componentWillUnmount() {
