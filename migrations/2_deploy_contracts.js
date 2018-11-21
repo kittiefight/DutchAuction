@@ -6,7 +6,7 @@ module.exports = (deployer, network, accounts) => {
     const PromissoryToken = artifacts.require("PromissoryToken");
 
     const _pWallet = accounts[9]; 
-    const _ceiling = 500 * 10 ** 18; // 500 ETH 
+    const _ceiling = 20 * 10 ** 18; // 500 ETH 
     const _priceFactor = 7500  / 10; //  
     
 

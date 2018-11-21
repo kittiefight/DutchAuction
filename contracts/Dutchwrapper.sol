@@ -397,7 +397,9 @@ contract Dutchwrapper is DutchAuction {
      {
 
         uint soldTokens = totalReceived * 10**18 / finalPrice;
-        require (_unsoldTokens < (MAX_TOKENS_SOLD + claimedTokenReferral + claimedSocial) - soldTokens);
+        uint totalSold = (MAX_TOKENS_SOLD + claimedTokenReferral + claimedSocial)  - soldTokens;
+        
+        require (_unsoldTokens < totalSold );
         KittieFightToken.transfer(_addr, _unsoldTokens);
     }
 

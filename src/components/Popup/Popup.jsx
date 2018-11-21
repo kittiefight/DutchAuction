@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Modal from "react-responsive-modal";
-import './Popup.css'
+//import './Popup.css'
 
 class Popup extends Component {
 
