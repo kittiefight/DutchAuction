@@ -32,7 +32,8 @@ class Bid extends Component {
             appProps : this.props.appProps,
             estimateTokensAmount : 0,
             estimatedPromissoryTokens : 0,
-            BidConfirmModalOpen : false
+            BidConfirmModalOpen : false,
+            tx : null
         };
         this.BidClicked = this.BidClicked.bind(this);
     }
@@ -121,6 +122,7 @@ class Bid extends Component {
         .on('transactionHash', (hash) => {
             console.log('thash:  ', hash)
             NotificationManager.info(`Transaction Submited: hash : ${hash}`);
+            this.setState({ tx : hash });
             this.setState({ BidConfirmModalOpen : true });
             this.setState({ transactionConfirmations: 0  });
         })
@@ -152,6 +154,7 @@ class Bid extends Component {
         })
         .on('transactionHash', (hash) => {
             console.log('thash:  ', hash)
+            this.setState({ tx : hash });
             NotificationManager.info(`Transaction Submited: hash : ${hash}`);
             this.setState({ transactionConfirmations: 0  });
             this.setState({ BidConfirmModalOpen : true });
@@ -189,7 +192,7 @@ class Bid extends Component {
 
             <NotificationContainer/>
             
-                {this.state.BidConfirmModalOpen ?  <BidConfirmModal open={true} /> : null}
+                {this.state.BidConfirmModalOpen ?  <BidConfirmModal tx={this.state.tx} open={true} /> : null}
 
                 <section id="section4">
                     <div className="container">

@@ -76,7 +76,7 @@ class Claim extends Component {
 
         this.setState({ claimBonusTokensLoading : true });
 
-        auctionContract.methods.claimtokenBonus(this.state.campaignHash)
+        auctionContract.methods.claimtokenBonus(this.state.referralHash)
         .send({ 
             from: myAccount
         })
@@ -163,7 +163,7 @@ class Claim extends Component {
 
     async componentDidMount() {
 
-       // try {
+       try {
             const { auctionContract, tokenContract,  web3 } = this.props.appProps; 
             this.setState({auctionContract, tokenContract, web3 })
             
@@ -187,9 +187,9 @@ class Claim extends Component {
             this.setState({myAccount})
 
 
-        // }catch(error){
-        //     console.log(error);
-        // }
+        }catch(error){
+            console.log(error);
+        }
     }
 
     componentWillUnmount() {
@@ -209,7 +209,8 @@ class Claim extends Component {
             superDaoTokenBalanceRequestLoaded,
             claimBonusTokensLoading,
             tokenBalance,
-            tokenSymbol
+            tokenSymbol,
+            superDaoTokenBalance
 
         } = this.state;
 
@@ -326,7 +327,7 @@ class Claim extends Component {
                                     {  
                                      superDaoTokenBalanceRequestLoaded  &&    
                                         <div className="alert alert-info" role="alert">
-                                           Your Superdao balance is : <strong> {tokenBalance} &nbsp; SUP </strong>
+                                           Your Superdao balance is : <strong> {superDaoTokenBalance} &nbsp; SUP </strong>
                                         </div>
                                     }
 

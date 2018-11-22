@@ -78,7 +78,7 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            auctionStartDateClock : Date.parse('2018-11-16T02:00:00Z'),
+            auctionStartDateClock : Date.parse('2018-11-22T23:00:00Z'),
             //auctionStartDateClock : Date.parse('2018-11-07T14:00:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
@@ -102,6 +102,7 @@ class AppProvider extends Component {
                 await this.setState({ web3: window.web3 });
                 this.getAuctionData(window.web3);
                 //console.log('Error', error);
+                //await this.setState({ statesLoaded: true });
             }
             // Legacy dapp browsers...
             else if (window.web3) {
@@ -109,6 +110,7 @@ class AppProvider extends Component {
                 window.web3 = new Web3( new Web3.providers.HttpProvider(HOST) );
                 await this.setState({ web3 : window.web3 });
                 this.getAuctionData(window.web3);
+                //await this.setState({ statesLoaded: true });
             }
             else {
                 console.log("%cNon-Ethereum browser detected. You should consider trying MetaMask!", "color: red; background-color: yellow; font-size: large");
@@ -116,6 +118,7 @@ class AppProvider extends Component {
                 const web3 = new Web3(new Web3.providers.HttpProvider(HOST));
                 await this.setState({ web3 : web3 });
                 this.getAuctionData(web3);
+                //await this.setState({ statesLoaded: true });
             }
         });
 
