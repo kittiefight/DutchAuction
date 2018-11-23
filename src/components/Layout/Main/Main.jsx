@@ -7,16 +7,13 @@ import TestContainer from "../../../containers/Testcontainer";
 class Main extends Component {
     
     render() {
-
         return (
-            <div>
-                <Switch>
-                        <Route path="/" exact={true} component={MainContainer} />
-                        <Route path="/wallet" component={WalletContainer} />
-                        <Route path="/test" component={TestContainer} />
-                </Switch>
-                
-            </div>
+            
+            <Switch>
+                    <Route path="/" exact={true} component={MainContainer} />
+                    <Route path="/wallet" component={WalletContainer} />
+                    <Route path="/test" component={TestContainer} />
+            </Switch> 
         );
     }
 }

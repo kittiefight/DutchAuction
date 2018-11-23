@@ -78,7 +78,7 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            auctionStartDateClock : Date.parse('2018-11-22T23:00:00Z'),
+            auctionStartDateClock : Date.parse('2018-11-23T23:00:00Z'),
             //auctionStartDateClock : Date.parse('2018-11-07T14:00:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
@@ -128,6 +128,7 @@ class AppProvider extends Component {
     
 
     async calculateAuctionDates() {
+        
         const waitingPeriod = await this.state.auctionContract.methods.WAITING_PERIOD().call();
         const startBlock = await this.state.auctionContract.methods.startBlock().call();
         const startBlockData = await this.state.web3.eth.getBlock(startBlock);
@@ -138,6 +139,9 @@ class AppProvider extends Component {
     }
 
     async getAuctionData(web3) {
+
+        // this.setState({ statesLoaded: true });
+        // return ;
 
         const auctionContract = new web3.eth.Contract(auctionAbi, AUCTION_CONTRACT_ADDRESS);
         const tokenContract = new web3.eth.Contract(tokenAbi, TOKEN_CONTRACT_ADDRESS);

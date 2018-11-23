@@ -7,6 +7,13 @@ import Section7 from "../components/Layout/Sections/Section7";
 import TeamMembers from "../components/Layout/Sections/Team/TeamMembers";
 import AppConsumer from  "../context/AppConsumer";
 
+import Header from "../components/Layout/Header/Header";
+import StickyHeader from "../components/Sticky/StickyHeader";
+import Popup from "../components/Popup/Popup";
+import Footer from "../components/Layout/Footer/Footer";
+
+
+
 import ScrollableAnchor from 'react-scrollable-anchor';
 
 class MainContainer extends Component {
@@ -14,10 +21,18 @@ class MainContainer extends Component {
         return (
             <div>
                 <main>
+                    <AppConsumer>
+                        {(appProps) => ( <Popup appProps={appProps} />  )}
+                    </AppConsumer>
+                    <StickyHeader enabled={true} />
+                    <AppConsumer>
+                            {(appProps) => ( <Header appProps={appProps} /> )}
+                    </AppConsumer>
+
                     <Section2 />
                     <DutchAuction />
                     <AppConsumer>
-                    {(appProps) => (
+                        {(appProps) => (
                             <ScrollableAnchor id={'bidsection'}>
                                 <Bid  appProps={appProps} />
                             </ScrollableAnchor>
@@ -30,6 +45,7 @@ class MainContainer extends Component {
                     </AppConsumer>
                     <TeamMembers />
                     <Section7 />
+                    <Footer />
                 </main>
             </div>
         )

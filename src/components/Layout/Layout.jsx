@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import Header from "./Header/Header";
 import Main from "./Main/Main";
-import Footer from "./Footer/Footer";
 import Loading from "../Loading/Loading";
-import StickyHeader from "../Sticky/StickyHeader";
-import AppConsumer from "../../context/AppConsumer";
-import Popup from "../Popup/Popup";
 
 class Layout extends Component {
     constructor(props) {
@@ -35,7 +31,6 @@ class Layout extends Component {
         }
 
         return (
-
             <div className="Layout">
 
                 {/* <div className="fixed-top"> 
@@ -48,19 +43,16 @@ class Layout extends Component {
                     </div>
                 </div>  */}
 
-                
-                <AppConsumer>
+                {/* <AppConsumer>
                     {(appProps) => ( <Popup appProps={appProps} />  )}
                 </AppConsumer>
-                
                 <StickyHeader enabled={true} />
-
                 <AppConsumer>
                         {(appProps) => ( <Header appProps={appProps} /> )}
-                </AppConsumer>
+                </AppConsumer> */}
 
                 <Main />
-                <Footer />
+               
             </div>
         );
     }
