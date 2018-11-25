@@ -1,23 +1,23 @@
 const KittieFightToken = artifacts.require("KittiefightToken");
 const DutchWrapper = artifacts.require("Dutchwrapper");
 const PromissoryToken = artifacts.require("PromissoryToken");
-
 const { should, EVMThrow, getParamFromTxEvent } = require('./helpers');
 
-let kittiefightToken;
-let dutchWrapper;
-let promissoryToken;
+contract('DutchWrapper',  accounts  => {
+
+    let kittiefightToken;
+    let dutchWrapper;
+    let promissoryToken;
 const emptyHash = 0xeee00000;
 const ETHER = Math.pow(10, 18);
 
-const auctionStages = [ "AuctionDeployed", "AuctionSetUp", "AuctionStarted", "AuctionEnded", "TradingStarted" ];
+    const auctionStages = [ "AuctionDeployed", "AuctionSetUp", "AuctionStarted", "AuctionEnded", "TradingStarted" ];
 
+    const getAcutionData = async (dutchWrapper, kittiefightToken, accounts) => {
 
-getAcutionData = async (dutchWrapper, kittiefightToken, accounts) => {
-
-    const auctionStage =  await dutchWrapper.stage.call();
-    const pWallet = await dutchWrapper.pWallet.call();
-    const auctionOwner =  await dutchWrapper.owner.call();
+        const auctionStage =  await dutchWrapper.stage.call();
+        const pWallet = await dutchWrapper.pWallet.call();
+        const auctionOwner =  await dutchWrapper.owner.call();
     const ceiling = await dutchWrapper.ceiling.call();
     const priceFactor = await dutchWrapper.priceFactor.call();
     const startBlock = await dutchWrapper.startBlock.call();
@@ -50,11 +50,8 @@ getAcutionData = async (dutchWrapper, kittiefightToken, accounts) => {
         "totalReceived_eth" : web3.fromWei(totalReceived.toNumber(), 'ether'),
         "finalPrice" : finalPrice.toNumber(),
         "currentTokenPrice" : (await dutchWrapper.calcTokenPrice()).toNumber()
+        }
     }
-}
-
-
-contract('DutchWrapper',  accounts  => {
 
     const sleep = ms => {
         return new Promise(resolve => setTimeout(resolve, ms));

@@ -151,6 +151,10 @@ contract Dutchwrapper is DutchAuction {
         DutchAuction(_pWallet, _ceiling, _priceFactor)  public {
     }
 
+    function setPromissoryTokenInstance(address _promissoryAddr) public isOwner {
+       PromissoryTokenIns = PromissoryToken(_promissoryAddr);
+   }
+
     //set an address as admin to moderate and check social media campaigns
     function setAdmin(address _addr) public isOwner returns (bool success){
         Admins[_addr] = true;
