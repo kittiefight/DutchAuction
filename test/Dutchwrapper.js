@@ -102,10 +102,10 @@ contract('DutchWrapper',  accounts  => {
             // await dutchWrapper.startAuction();
     })
 
-    describe.skip('setAdmin', function() {
+    describe('setAdmin', function() {
       it('should fail to setAdmin()', async function() {
         try {
-          await dutchWrapper.setAdmin(accounts[2]).send({
+          await dutchWrapper.setAdmin(accounts[2], {
             from: pWallet
           });
           assert.isNotOk(true, 'Expected function to fail');
@@ -116,11 +116,11 @@ contract('DutchWrapper',  accounts  => {
 
       it('should setAdmin()', async function() {
         try {
-          await dutchWrapper.setAdmin(accounts[2]).send({
+          await dutchWrapper.setAdmin(accounts[2], {
             from: owner
           });
 
-          const isAdmin = await dutchWrapper.Admins(accounts[2]).call();
+          const isAdmin = await dutchWrapper.Admins.call(accounts[2]);
           assert.isTrue(isAdmin, 'New Admin not successfully set');
         } catch(e) {
           assert.isNotOk(true, `Expected function to complete: ${e.message || e}`);
