@@ -9,6 +9,7 @@ contract('DutchWrapper',  accounts  => {
     let dutchWrapper;
     let promissoryToken;
     const emptyHash = 0xeee00000;
+    const NULL_BYTES4 = 0x00000000;
     const ETHER = Math.pow(10, 18);
 
     const auctionStages = [ "AuctionDeployed", "AuctionSetUp", "AuctionStarted", "AuctionEnded", "TradingStarted" ];
@@ -171,27 +172,43 @@ contract('DutchWrapper',  accounts  => {
     });
 
     describe('setupReferal()', function() {
-        it.skip('DutchWrapper setup Partners Referal & Bid', async () => {
+        const  _addr = thirdAccount;
+        const  _percentage = 10;
+        const  _type = 1;
+        const _tokenAmt = 0; // No tokens for Partners, only ethers
+        const _numUsers = 1;
 
-            const  _addr = secondAccount;
-            const  _percentage = 10;
-            const  _type = 1;
-            const _tokenAmt = 0; // No tokens for Partners, only ethers
-            const _numUsers = 1;
+        it('should fail to setupReferal from non-Owner', async function () {
+            try {
+              const tx = await dutchWrapper.setupReferal(_addr, _percentage, _type, _tokenAmt, _numUsers , { from: secondAccount });
+              assert.notExists(tx, 'Transaction should fail');
+            } catch (e) {
+              assert.exists(e, 'Transaction should fail with an error');
+            }
+        })
 
+        it('DutchWrapper setup Partners Referal', async () => {
             //-- address _addr, uint _percentage, uint _type, uint _tokenAmt, uint _numUsers
-            await dutchWrapper.setupReferal(_addr, _percentage, _type, _tokenAmt, _numUsers , { from: owner });
-            const _hash = await dutchWrapper.calculateCampaignHash(secondAccount, { from: owner });
-
+            await dutchWrapper.setupReferal(_addr, _percentage, _type, _tokenAmt, _numUsers , {
+               from: owner
+            });
+            const _hash = await dutchWrapper.calculateCampaignHash(_addr, {
+               from: owner
+           });
             let marketingPartnersMap = await dutchWrapper.MarketingPartners.call(_hash);
 
-            assert.equal(_hash, marketingPartnersMap[0]);
-            assert.equal(secondAccount, marketingPartnersMap[1]);
-            assert.equal(_percentage, marketingPartnersMap[4]);
+            assert.equal(_hash, marketingPartnersMap[0], 'Incorrect referal hash set');
+            assert.equal(thirdAccount, marketingPartnersMap[1], 'Incorrect referal address set');
+            assert.equal(_percentage, marketingPartnersMap[4].toNumber(), 'Incorrect referal percentage set');
+          });
+        });
 
+        describe.skip('bidReferral', function () {
+
+          it.skip('DutchWrapper Bid', async function () {
             // -- bidReferral
-            const bidRefferal = await dutchWrapper.bidReferral(secondAccount, _hash ,
-                    {from : secondAccount, value : web3.toWei('1', 'ether') } );
+            const bidRefferal = await dutchWrapper.bidReferral(thirdAccount, _hash ,
+                    {from : thirdAccount, value : web3.toWei('1', 'ether') } );
 
 
             marketingPartnersMap = await dutchWrapper.MarketingPartners.call(_hash);
@@ -202,23 +219,21 @@ contract('DutchWrapper',  accounts  => {
             let totalTokensEarned = tokenReferrals[3].toNumber();
             assert.equal( totalTokensEarned, 500 * 10**18);
 
-            await dutchWrapper.bidReferral(secondAccount, _hash , {from : secondAccount, value : web3.toWei('4', 'ether') } );
+            await dutchWrapper.bidReferral(thirdAccount, _hash , {from : thirdAccount, value : web3.toWei('4', 'ether') } );
             tokenReferrals = await dutchWrapper.TokenReferrals.call(_hash);
             assert.equal( tokenReferrals[3].toNumber(), totalTokensEarned + 1000 * 10**18 );
             totalTokensEarned = tokenReferrals[3].toNumber();
 
-            await dutchWrapper.bidReferral(secondAccount, _hash , {from : secondAccount, value : web3.toWei('7', 'ether') } );
+            await dutchWrapper.bidReferral(thirdAccount, _hash , {from : thirdAccount, value : web3.toWei('7', 'ether') } );
             tokenReferrals = await dutchWrapper.TokenReferrals.call(_hash);
             assert.equal( tokenReferrals[3].toNumber(), totalTokensEarned + 5000 * 10**18 );
 
             let claimedTokenReferral = await dutchWrapper.claimedTokenReferral();
             assert.isAbove(claimedTokenReferral, 0);
 
-            let superDAOTokens = await dutchWrapper.SuperDAOTokens(secondAccount);
+            let superDAOTokens = await dutchWrapper.SuperDAOTokens(thirdAccount);
             assert.isAbove(superDAOTokens.toNumber(),0);
             assert.isAbove( web3.toWei('12', 'ether') / (await promissoryToken.lastPrice()).toNumber(), superDAOTokens.toNumber() );
-
-
         });
       });
 

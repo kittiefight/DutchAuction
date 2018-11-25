@@ -112,7 +112,7 @@ contract Dutchwrapper is DutchAuction {
         require(stage == Stages.TradingStarted);
         _;
     }
-  
+
 
     // uint constant public MAX_TOKEN_REFERRAL = 800000 * 10**18; // 800,000 : eight hundred  thousand
     // uint constant public MAX_TOKEN_SOCIAL = 200000 * 10**18; // 200,000 : two hundred thousand
@@ -356,7 +356,7 @@ contract Dutchwrapper is DutchAuction {
 
 
 	function referalPercentage(uint _amount, uint _percent)
-	    public
+	    public pure
 	    returns (uint) {
             return SafeMath.mul( SafeMath.div( SafeMath.sub(_amount, _amount%100), 100 ), _percent );
 	}
@@ -402,7 +402,7 @@ contract Dutchwrapper is DutchAuction {
 
         uint soldTokens = totalReceived * 10**18 / finalPrice;
         uint totalSold = (MAX_TOKENS_SOLD + claimedTokenReferral + claimedSocial)  - soldTokens;
-        
+
         require (_unsoldTokens < totalSold );
         KittieFightToken.transfer(_addr, _unsoldTokens);
     }
@@ -411,11 +411,11 @@ contract Dutchwrapper is DutchAuction {
     function tokenAmountPerReferred(bytes4 _hash, uint _amount ) public view returns(uint tokenAmount) {
         tokenAmount = TokenReferrals[_hash].tokenAmountPerReferred[_amount];
     }
-    
+
     function getCurrentBiddersCount () public view returns(uint biddersCount)  {
         biddersCount = CurrentBidders.length;
     }
-    
+
     // helper functions  return msg.senders
     function calculatPersonalHash() public view returns (bytes4 _hash) {
         _hash = bytes4(keccak256(abi.encodePacked(msg.sender)));
