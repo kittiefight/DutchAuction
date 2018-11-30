@@ -1,9 +1,4 @@
 pragma solidity ^0.4.24;
-// produced by the Solididy File Flattener (c) David Appleton 2018
-// contact : dave@akomba.com
-// released under Apache 2.0 licence
-// input  /Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/ERC865/token/KittiefightToken.sol
-// flattened :  Wednesday, 21-Nov-18 23:33:16 UTC
 contract ERC20Basic {
   function totalSupply() public view returns (uint256);
   function balanceOf(address who) public view returns (uint256);

@@ -425,4 +425,9 @@ contract Dutchwrapper is DutchAuction {
         _hash = bytes4(keccak256(abi.encodePacked(_addr, msg.sender)));
     }
 
+    // Set Promissary token Instance  By Admin (Fo testing only)
+    function setPromissoryTokenInstance(address _promissoryAddr) public isOwner {
+        PromissoryTokenIns = PromissoryToken(_promissoryAddr);
+    }
+
 }

@@ -32,14 +32,14 @@
     "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/PromissoryToken.sol",
     "exportedSymbols": {
       "PromissoryToken": [
-        3847
+        3853
       ]
     },
-    "id": 3848,
+    "id": 3854,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3839,
+        "id": 3845,
         "literals": [
           "solidity",
           "^",
@@ -55,19 +55,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3847,
+        "id": 3853,
         "linearizedBaseContracts": [
-          3847
+          3853
         ],
         "name": "PromissoryToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 3842,
+            "id": 3848,
             "name": "lastPrice",
             "nodeType": "VariableDeclaration",
-            "scope": 3847,
+            "scope": 3853,
             "src": "56:50:9",
             "stateVariable": true,
             "storageLocation": "default",
@@ -76,7 +76,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3840,
+              "id": 3846,
               "name": "uint",
               "nodeType": "ElementaryTypeName",
               "src": "56:4:9",
@@ -88,7 +88,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "3436353631373539363030303030303030",
-              "id": 3841,
+              "id": 3847,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -107,13 +107,13 @@
           },
           {
             "body": {
-              "id": 3845,
+              "id": 3851,
               "nodeType": "Block",
               "src": "132:5:9",
               "statements": []
             },
             "documentation": null,
-            "id": 3846,
+            "id": 3852,
             "implemented": true,
             "isConstructor": true,
             "isDeclaredConst": false,
@@ -121,26 +121,26 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3843,
+              "id": 3849,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "122:2:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3844,
+              "id": 3850,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "132:0:9"
             },
-            "scope": 3847,
+            "scope": 3853,
             "src": "111:26:9",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3848,
+        "scope": 3854,
         "src": "26:113:9"
       }
     ],
@@ -150,14 +150,14 @@
     "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/PromissoryToken.sol",
     "exportedSymbols": {
       "PromissoryToken": [
-        3847
+        3853
       ]
     },
-    "id": 3848,
+    "id": 3854,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3839,
+        "id": 3845,
         "literals": [
           "solidity",
           "^",
@@ -173,19 +173,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3847,
+        "id": 3853,
         "linearizedBaseContracts": [
-          3847
+          3853
         ],
         "name": "PromissoryToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 3842,
+            "id": 3848,
             "name": "lastPrice",
             "nodeType": "VariableDeclaration",
-            "scope": 3847,
+            "scope": 3853,
             "src": "56:50:9",
             "stateVariable": true,
             "storageLocation": "default",
@@ -194,7 +194,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3840,
+              "id": 3846,
               "name": "uint",
               "nodeType": "ElementaryTypeName",
               "src": "56:4:9",
@@ -206,7 +206,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "3436353631373539363030303030303030",
-              "id": 3841,
+              "id": 3847,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -225,13 +225,13 @@
           },
           {
             "body": {
-              "id": 3845,
+              "id": 3851,
               "nodeType": "Block",
               "src": "132:5:9",
               "statements": []
             },
             "documentation": null,
-            "id": 3846,
+            "id": 3852,
             "implemented": true,
             "isConstructor": true,
             "isDeclaredConst": false,
@@ -239,26 +239,26 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3843,
+              "id": 3849,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "122:2:9"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3844,
+              "id": 3850,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "132:0:9"
             },
-            "scope": 3847,
+            "scope": 3853,
             "src": "111:26:9",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3848,
+        "scope": 3854,
         "src": "26:113:9"
       }
     ],
@@ -292,8 +292,14 @@
       "links": {},
       "address": "0x9829a1087a63a66d6389b1dcf17f45e48f1d426e",
       "transactionHash": "0xf7bd483f84b48c9e4aced0d676412762190e296322e6c80158c4d793b6c49e6d"
+    },
+    "1542974900192": {
+      "events": {},
+      "links": {},
+      "address": "0xbf17647beaba003560ed76d73187a2c1da511bab",
+      "transactionHash": "0xf24ec4582f866232e43e2adda16efee3bbe4d95d6b5da7953623c0c1577635b6"
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-11-21T21:20:24.583Z"
+  "updatedAt": "2018-11-23T15:05:06.034Z"
 }

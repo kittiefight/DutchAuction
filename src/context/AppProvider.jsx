@@ -78,7 +78,7 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            auctionStartDateClock : Date.parse('2018-11-22T23:00:00Z'),
+            auctionStartDateClock : Date.parse('2018-11-19T23:00:00Z'),
             //auctionStartDateClock : Date.parse('2018-11-07T14:00:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
@@ -128,6 +128,7 @@ class AppProvider extends Component {
     
 
     async calculateAuctionDates() {
+        
         const waitingPeriod = await this.state.auctionContract.methods.WAITING_PERIOD().call();
         const startBlock = await this.state.auctionContract.methods.startBlock().call();
         const startBlockData = await this.state.web3.eth.getBlock(startBlock);
@@ -139,6 +140,12 @@ class AppProvider extends Component {
 
     async getAuctionData(web3) {
 
+        // this.setState({ statesLoaded: true });
+        // return ;
+
+        window._state = this.state;
+
+        
         const auctionContract = new web3.eth.Contract(auctionAbi, AUCTION_CONTRACT_ADDRESS);
         const tokenContract = new web3.eth.Contract(tokenAbi, TOKEN_CONTRACT_ADDRESS);
         const promissoryTokenContract = new web3.eth.Contract(promissoryTokenAbi, POMISSORYTOKEN_CONTRACT_ADDRESS);
@@ -152,9 +159,14 @@ class AppProvider extends Component {
         console.log('promissoryTokenContract', promissoryTokenContract);
 
         const promissoryTokenLastPrice = await promissoryTokenContract.methods.lastPrice().call();        
+        
+        console.log('###############################################');
+
+
         await this.setState({ promissoryTokenLastPrice : promissoryTokenLastPrice });
         await this.setState({ tokenContract: tokenContract });
         await this.setState({ auctionContract: auctionContract });
+
 
         const totalBonusTokens = await auctionContract.methods.TOTAL_BONUS_TOKEN().call();
         const amountUpForAuction = await auctionContract.methods.MAX_TOKENS_SOLD().call();
@@ -165,17 +177,24 @@ class AppProvider extends Component {
         const auctionStage = await auctionContract.methods.stage().call();
         const myAccounts = await web3.eth.getAccounts();
 
+
+
         const ktyTokenPriceUSD = web3.utils.fromWei(currentPrice, 'ether') * ethereumLastPrice;
         this.setState({ ktyTokenPriceUSD });
         
+
         const currentBidders = await auctionContract.methods.getCurrentBiddersCount().call();
         await this.setState({ currentBidders: currentBidders });
 
 
-        if (myAccounts.length !== 0) {
-            const myBalance = await web3.eth.getBalance(myAccounts[0]);
-            await this.setState({ myBalance: this.state.web3.utils.fromWei(myBalance, 'ether') });
-        }
+
+        // if (myAccounts.length !== 0) {
+        //     const myBalance = await web3.eth.getBalance(myAccounts[0]);
+        //     await this.setState({ myBalance: this.state.web3.utils.fromWei(myBalance, 'ether') });
+        // }
+
+
+
         await this.setState({ currentDate: CURRENT_DATE })
         await this.setState({ myAccounts: myAccounts });
         await this.setState({ amountUpForAuction: amountUpForAuction / 10 ** 18 });
@@ -188,21 +207,32 @@ class AppProvider extends Component {
 
         this.calculateAuctionDates();
 
+
+
         // Calculate Start Price 
         // priceFactor * 10**18 / (0+ 7500) + 1;
         const priceFactor = await auctionContract.methods.priceFactor().call();
         const startPrice = priceFactor * 10 ** 18 / 7501;
         await this.setState({ startPrice: this.state.web3.utils.fromWei(startPrice.toString(), 'ether') });
 
+
+        let decreaseRate = 0;
         // Calculare Decarease rate 
         // 1/(block.number - startBlock + 7500)
-        const latestBlock = await this.state.web3.eth.getBlock('latest');
-        await this.setState({ latestBlock: latestBlock.number });
-        const decreaseRate = (1 / (latestBlock.number - this.state.startBlock + 7500)) * 100;
-        await this.setState({ decreaseRate: decreaseRate });
+        try {
+            const latestBlock = web3.eth.getBlock('latest');
+            this.setState({ latestBlock: latestBlock.number });
+            const decreaseRate = (1 / (latestBlock.number - this.state.startBlock + 7500)) * 100;
 
-        const isMetamask = await this.state.web3.currentProvider.isMetaMask;
-        const networkName = await this.state.web3.eth.net.getNetworkType();
+        }catch(err){
+
+        }
+        await this.setState({ decreaseRate: decreaseRate });
+        console.log('###############################################');
+
+
+        const isMetamask = await web3.currentProvider.isMetaMask;
+        const networkName = await web3.eth.net.getNetworkType();
         await this.setState({ isMetamask: isMetamask });
         await this.setState({ networkName: networkName });
 
@@ -231,16 +261,18 @@ class AppProvider extends Component {
         // auctionWillEnd / 250 / hours per day/ 30
         const approximateAuctionDuration = (((auctionWillEnd/250)/24)/30); 
         console.log('approximateAuctionDuration Month : ', approximateAuctionDuration );
-
-
         const waitingPeriod = await auctionContract.methods.WAITING_PERIOD().call();
         const startBlock = await auctionContract.methods.startBlock().call();
         const startBlockData = await web3.eth.getBlock(startBlock);        
         await this.setState({ startBlock : startBlock  });
+
+        const _elapsedTime = new Date().getTime() -  new Date(this.state.auctionStartDateClock).getTime();
+        console.log('Elasped time : ', _elapsedTime);
         const networkLaunchDay = new Date( (startBlockData.timestamp +  parseInt(waitingPeriod, 10))*1000  );
+        
+
         await this.setState({ networkLaunchDay });
         await this.setState({ startBlock });
-
 
         console.log('NETWORK LAUNCH DAY : ', networkLaunchDay);
         console.log('----------------------------------------');
