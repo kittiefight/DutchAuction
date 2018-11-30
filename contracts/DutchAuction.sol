@@ -28,7 +28,7 @@ contract DutchAuction {
     address public pWallet;
     Token public KittieFightToken;
     address public owner;
-    PromissoryToken public PromissoryTokenIns; 
+    PromissoryToken public PromissoryTokenIns;
     address constant public promissoryAddr = 0x0348B55AbD6E1A99C6EBC972A6A4582Ec0bcEb5c;
     uint public ceiling;
     uint public priceFactor;

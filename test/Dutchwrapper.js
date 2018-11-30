@@ -172,15 +172,29 @@ contract('DutchWrapper',  accounts  => {
     });
 
     describe('setupReferal()', function() {
-        const  _addr = thirdAccount;
-        const  _percentage = 10;
-        const  _type = 1;
-        const _tokenAmt = 0; // No tokens for Partners, only ethers
-        const _numUsers = 1;
+        const args = [{
+          _addr: referralAccount,
+          _percentage: 10,
+          _type: 1,
+          _tokenAmt: 0, // No tokens for Partners, only ethers
+          _numUsers: 1
+        }, {
+          _addr: referralAccount1,
+          _percentage: 10,
+          _type: 0,
+          _tokenAmt: 0,
+          _numUsers: 1
+        }];
 
         it('should fail to setupReferal from non-Owner', async function () {
             try {
-              const tx = await dutchWrapper.setupReferal(_addr, _percentage, _type, _tokenAmt, _numUsers , { from: secondAccount });
+              const tx = await dutchWrapper.setupReferal(
+                args[0]._addr,
+                args[0]._percentage,
+                args[0]._type,
+                args[0]._tokenAmt,
+                args[0]._numUsers ,
+                { from: owner });
               assert.notExists(tx, 'Transaction should fail');
             } catch (e) {
               assert.exists(e, 'Transaction should fail with an error');
@@ -188,22 +202,72 @@ contract('DutchWrapper',  accounts  => {
         })
 
         it('DutchWrapper setup Partners Referal', async () => {
-            //-- address _addr, uint _percentage, uint _type, uint _tokenAmt, uint _numUsers
-            await dutchWrapper.setupReferal(_addr, _percentage, _type, _tokenAmt, _numUsers , {
-               from: owner
-            });
-            const _hash = await dutchWrapper.calculateCampaignHash(_addr, {
-               from: owner
-           });
-            let marketingPartnersMap = await dutchWrapper.MarketingPartners.call(_hash);
+            try {
+              await Promise.all(
+                args.map(async(arg) => {
+                    //-- address _addr, uint _percentage, uint _type, uint _tokenAmt, uint _numUsers
+                    await dutchWrapper.setupReferal(
+                      arg._addr,
+                      arg._percentage,
+                      arg._type,
+                      arg._tokenAmt,
+                      arg._numUsers,
+                      {
+                       from: owner
+                    });
+                    const _hash = await dutchWrapper.calculateCampaignHash.call(arg._addr, {
+                       from: owner
+                   });
 
-            assert.equal(_hash, marketingPartnersMap[0], 'Incorrect referal hash set');
-            assert.equal(thirdAccount, marketingPartnersMap[1], 'Incorrect referal address set');
-            assert.equal(_percentage, marketingPartnersMap[4].toNumber(), 'Incorrect referal percentage set');
+                    if (arg._type === 1) {//MarketingPartners
+                      let marketingPartnersMap = await dutchWrapper.MarketingPartners.call(_hash);
+
+                      assert.equal(marketingPartnersMap[0], _hash, 'Incorrect referal hash set');
+                      assert.equal(marketingPartnersMap[1], arg._addr, 'Incorrect referal address set');
+                      assert.equal(marketingPartnersMap[4].toNumber(), arg._percentage, 'Incorrect referal percentage set');
+                    } else {//Social campaign
+                      let socialCampaigns = await dutchWrapper.SocialCampaigns.call(_hash);
+
+                      assert.equal(socialCampaigns[0], _hash, 'Incorrect referal hash set');
+                      assert.equal(socialCampaigns[1], arg._numUsers, 'Incorrect referal address set');
+                      assert.equal(socialCampaigns[2].toNumber(), arg._tokenAmt, 'Incorrect referal percentage set');
+                    }
+                })
+              );
+            } catch (e) {
+                assert.notExists(e.message || e, `Expected function to complete:`);
+            }
           });
         });
 
-        describe.skip('bidReferral', function () {
+        describe('referralSignup()', function () {
+          const  _addr = referralAccount2;
+
+          it('should successfully referralSignup', async function () {
+            try {
+              const _hash = await dutchWrapper.referralSignup.call({ from : _addr });
+              await dutchWrapper.referralSignup({ from : _addr });
+              let tokenReferral = await dutchWrapper.TokenReferrals(_hash);
+
+              assert.equal(tokenReferral[0], _hash, 'Incorrect address set')
+              assert.equal(tokenReferral[1], _addr, 'Incorrect hash set')
+            } catch (e) {
+              assert.notExists( e.message || e, 'Exected function to complete')
+            }
+          })
+
+          it('should fail to multiple referralSignup', async function () {
+            try {
+              await dutchWrapper.referralSignup({ from : _addr });
+
+              assert.notExists(true, 'Function should fail');
+            } catch (e) {
+              assert.exists( e.message || e, 'Exected function to complete')
+            }
+          })
+        })
+
+        describe.skip('bidReferral()', function () {
 
           it.skip('DutchWrapper Bid', async function () {
             // -- bidReferral

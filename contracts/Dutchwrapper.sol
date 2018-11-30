@@ -174,7 +174,7 @@ contract Dutchwrapper is DutchAuction {
     function setupReferal(address _addr, uint _percentage, uint _type, uint _tokenAmt, uint _numUsers)
         public
         isOwner
-        returns (string successmessage)
+        returns (bool)
     {
 
         bytes4 tempHash = bytes4(keccak256(abi.encodePacked(_addr, msg.sender)));
@@ -186,7 +186,7 @@ contract Dutchwrapper is DutchAuction {
             MarketingPartners[tempHash].percentage = _percentage;
             InternalReferalSignup(_addr);
     		    emit SetupReferal(_type);
-            return "partner signed up";
+            return true;
 
         } else {
 
@@ -194,7 +194,7 @@ contract Dutchwrapper is DutchAuction {
             SocialCampaigns[tempHash].maxParticipators = _numUsers;
             SocialCampaigns[tempHash].tokenAmountForEach = _tokenAmt;
             emit SetupReferal(_type);
-            return "social campaign started";
+            return true;
         }
     }
 
