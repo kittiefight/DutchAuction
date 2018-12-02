@@ -99,7 +99,8 @@ contract DutchAuction {
             // Arguments are null.
             revert();
         owner = msg.sender;
-        PromissoryTokenIns = PromissoryToken(promissoryAddr);
+        //---Disable setting PromissaryToken for tests---//
+        // PromissoryTokenIns = PromissoryToken(promissoryAddr);
         pWallet = _pWallet;
         ceiling = _ceiling;
         priceFactor = _priceFactor;

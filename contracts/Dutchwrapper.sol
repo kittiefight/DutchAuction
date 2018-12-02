@@ -151,10 +151,6 @@ contract Dutchwrapper is DutchAuction {
         DutchAuction(_pWallet, _ceiling, _priceFactor)  public {
     }
 
-    function setPromissoryTokenInstance(address _promissoryAddr) public isOwner {
-       PromissoryTokenIns = PromissoryToken(_promissoryAddr);
-   }
-
     //set an address as admin to moderate and check social media campaigns
     function setAdmin(address _addr) public isOwner returns (bool success){
         Admins[_addr] = true;
@@ -425,9 +421,17 @@ contract Dutchwrapper is DutchAuction {
         _hash = bytes4(keccak256(abi.encodePacked(_addr, msg.sender)));
     }
 
+    //------------------Test functions-------------------------//
+
     // Set Promissary token Instance  By Admin (Fo testing only)
     function setPromissoryTokenInstance(address _promissoryAddr) public isOwner {
+        require(address(PromissoryTokenIns) == 0x0, "PromissoryToken can only be set once");
         PromissoryTokenIns = PromissoryToken(_promissoryAddr);
     }
 
+    function isConfirmedSocial (bytes4 _campaignHash, address _addr, bytes32 _userName) public view returns (bool) {
+      uint id = SocialCampaigns[_campaignHash].index[_addr];
+      return (_addr == SocialCampaigns[_campaignHash].SocialLinkProfile[id].addr &&
+        _userName == SocialCampaigns[_campaignHash].SocialLinkProfile[id].username);
+    }
 }
