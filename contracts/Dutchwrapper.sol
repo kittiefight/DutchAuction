@@ -306,15 +306,13 @@ contract Dutchwrapper is DutchAuction {
 
     }
 
-
-
 	function confirmSocial(bytes4 _campaignHash, bytes32 _userName, bytes32 _retweetOrdiscord) public
 	   SocialCampaignLimit
 	   checkSocialDuplicates(_campaignHash, _userName)
     	returns (uint) {
-			uint id = SocialCampaigns[_campaignHash].index[msg.sender];
 
             if(SocialCampaigns[_campaignHash].SocialLinkProfile.length != 0){
+                uint id = SocialCampaigns[_campaignHash].index[msg.sender];
                 require(msg.sender != SocialCampaigns[_campaignHash].SocialLinkProfile[id].addr); //reject already rejistered
             }
 
