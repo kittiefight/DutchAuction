@@ -8,7 +8,8 @@ contract('DutchWrapper',  accounts  => {
     let kittiefightToken;
     let dutchWrapper;
     let promissoryToken;
-    const emptyHash = 0xeee00000;
+    const socialCampaignsHash = [];
+    const emptyHash = 0xeee00000;101010101010
     const NULL_BYTES4 = 0x00000000;
     const ETHER = Math.pow(10, 18);
 
@@ -61,6 +62,25 @@ contract('DutchWrapper',  accounts  => {
     const [owner, secondAccount, thirdAccount, referralAccount, referralAccount1, referralAccount2, seventhAccount, eighthAccount, pWalletAccount] = accounts;
     const _ceiling = 500 * ETHER; // 500 ETH
     const _priceFactor = 7500  / 10; //
+
+    const socialsUsers = [{
+        address: seventhAccount,
+        _userName: 'user1',
+        _retweetOrdiscord:'discord://user1'
+      }, {
+        address: eighthAccount,
+        _userName: 'user2',
+        _retweetOrdiscord:'twitter://user2'
+      }, {
+        address: seventhAccount,
+        _userName: 'user3',
+        _retweetOrdiscord:'discord://user3'
+      }, {
+        address: eighthAccount,
+        _userName: 'user4',
+        _retweetOrdiscord:'twitter://user4'
+      }
+    ];
 
     before('Setup contract for each test', async () => {
         kittiefightToken = await KittieFightToken.new({ from: owner });
@@ -177,13 +197,13 @@ contract('DutchWrapper',  accounts  => {
           _percentage: 10,
           _type: 1,
           _tokenAmt: 0, // No tokens for Partners, only ethers
-          _numUsers: 1
+          _numUsers: 2
         }, {
           _addr: referralAccount1,
           _percentage: 10,
           _type: 0,
           _tokenAmt: 0,
-          _numUsers: 1
+          _numUsers: 2
         }];
 
         it('should fail to setupReferal from non-Owner', async function () {
@@ -226,11 +246,12 @@ contract('DutchWrapper',  accounts  => {
                       assert.equal(marketingPartnersMap[1], arg._addr, 'Incorrect referal address set');
                       assert.equal(marketingPartnersMap[4].toNumber(), arg._percentage, 'Incorrect referal percentage set');
                     } else {//Social campaign
-                      let socialCampaigns = await dutchWrapper.SocialCampaigns.call(_hash);
+                      socialCampaignsHash.push(_hash);
+                      let socialCampaign = await dutchWrapper.SocialCampaigns.call(_hash);
 
-                      assert.equal(socialCampaigns[0], _hash, 'Incorrect referal hash set');
-                      assert.equal(socialCampaigns[1], arg._numUsers, 'Incorrect referal address set');
-                      assert.equal(socialCampaigns[2].toNumber(), arg._tokenAmt, 'Incorrect referal percentage set');
+                      assert.equal(socialCampaign[0], _hash, 'Incorrect referal hash set');
+                      assert.equal(socialCampaign[1], arg._numUsers, 'Incorrect referal address set');
+                      assert.equal(socialCampaign[2].toNumber(), arg._tokenAmt, 'Incorrect referal percentage set');
                     }
                 })
               );
@@ -357,6 +378,64 @@ contract('DutchWrapper',  accounts  => {
 
 
     });
+
+    describe('confirmSocial()', function () {
+      it('should successfully confirmSocial', async function () {
+        await Promise.all(socialCampaignsHash.map(async function(hash) {
+          await Promise.all(socialsUsers.splice(0,2).map ( async function (user) {
+            await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
+              from: user.address
+            });
+            const isConfirmed = await dutchWrapper.isConfirmedSocial.call(hash, user.address, user._userName);
+            assert.isTrue(isConfirmed, 'User participation not successfully confirmed');
+          }));
+        }));
+      });
+
+      it('should fail to confirmSocial with different userNames from same address', async function () {
+        try {
+          await Promise.all(socialCampaignsHash.map(async function(hash) {
+            await Promise.all(socialsUsers.splice(2,4).map ( async function (user) {
+              await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
+                from: user.address
+              });
+              assert.notExists(true, 'Transaction should fail');
+            }));
+          }));
+        } catch (e) {
+          assert.exists(e, 'Transaction should fail with an error');
+        }
+      });
+
+      it('should fail to duplicate confirmSocial', async function () {
+        try {
+          await Promise.all(socialCampaignsHash.map(async function(hash) {
+            await Promise.all(socialsUsers.splice(0,2).map ( async function (user) {
+              await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
+                from: user.address
+              });
+              assert.notExists(true, 'Transaction should fail');
+            }));
+          }));
+        } catch (e) {
+          assert.exists(e, 'Transaction should fail with an error');
+        }
+      });
+
+      it('should fail to exceed maxParticipators limit on confirmSocial', function () {
+        try {
+          const user = socialsUsers[2];
+          const hash = socialCampaignsHash[0];
+          await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
+            from: thirdAccount
+          });
+
+          assert.notExists(true, 'Transaction shoould fail');
+        } catch (e) {
+          assert.exists(e, 'Expect tranasction to fail with error');
+        }
+      })
+    })
 
 
 });
