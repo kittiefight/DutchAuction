@@ -1,10 +1,14 @@
 import React, { Component } from "react";
-import { goToAnchor } from 'react-scrollable-anchor'
+//import { goToAnchor } from 'react-scrollable-anchor'
 import Clock from "../FlipClock/Clock";
 import AppConsumer from "../../context/AppConsumer";
 import AuctionStats from "./AuctionStats";
 import Price from "./Price";
+import Bonus from "./Bonus";
 import "./StickyHeader.css";
+
+import { HashLink as Link } from 'react-router-hash-link';
+
 
 class StickyHeader extends Component {
     constructor(props) {
@@ -18,7 +22,7 @@ class StickyHeader extends Component {
 
     goToBidSection = (event) => {
         event.preventDefault();
-        goToAnchor('bidsection');
+        //goToAnchor('bidsection');
     }
 
     componentDidMount() {
@@ -64,22 +68,40 @@ class StickyHeader extends Component {
                     
                         <div className="d-none d-md-block">
                             <div className="row">
-                                <div className="col-md-4 text-center">
+                                <div className="col-md-1 text-center">
+                                    <img className="stickyImage" src="img/cat-diamond-violet.png"></img>
+                                </div>
+                                <div className="col-md-3 text-center">
                                     <AuctionStats appProps={appProps} />
                                 </div>
+
                                 <div className="col-md-2 col-centered">
-                                    <Clock appProps={appProps} />  
+                                        <Clock appProps={appProps} />  
                                 </div>
-                                
-                                <div className="col-md-3">
+
+                                <div className="col-md-1 col-centered">
                                     <div className="d-flex justify-content-end">
+                                        <Bonus />
+                                    </div>
+                                </div>  
+                                
+                                <div className="col-md-2">
+                                    {/* <div className="d-flex justify-content-end"> */}
                                         <Price appProps={appProps} />
-                                    </div>
+                                    {/* </div> */}
                                 </div>
+
                                 <div className="col-md-2 stickyButton">
-                                    <div className="d-flex justify-content-start">
-                                        <button onClick={this.goToBidSection} className="float-left"> BID </button>
-                                    </div>
+                                    
+                                    {/* <div className="d-flex justify-content-start"> */}
+                                    {/* <button onClick={this.goToBidSection} className="float-left"> BID </button> */}
+                                    {/* </div> */}
+                                   
+                                        <Link  to="#section4">
+                                            <div className="anchoButton">
+                                                BID
+                                            </div>
+                                        </Link>
                                 </div>
                             </div>
                         </div>

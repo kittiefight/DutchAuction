@@ -13,9 +13,6 @@ import Popup from "../components/Popup/Popup";
 import Footer from "../components/Layout/Footer/Footer";
 
 
-
-import ScrollableAnchor from 'react-scrollable-anchor';
-
 class MainContainer extends Component {
     render() {
         return (
@@ -33,9 +30,7 @@ class MainContainer extends Component {
                     <DutchAuction />
                     <AppConsumer>
                         {(appProps) => (
-                            <ScrollableAnchor id={'bidsection'}>
-                                <Bid  appProps={appProps} />
-                            </ScrollableAnchor>
+                            <Bid  appProps={appProps} />
                         )}
                     </AppConsumer>
                     <AppConsumer>                       
