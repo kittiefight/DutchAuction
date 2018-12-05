@@ -78,8 +78,8 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            //auctionStartDateClock : Date.parse('2018-12-03T21:00:00Z'),
-            auctionStartDateClock : Date.parse('2018-11-07T14:00:00Z'),
+            auctionStartDateClock : Date.parse('2018-12-06T04:00:00Z'),
+            //auctionStartDateClock : Date.parse('2018-11-07T14:00:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
             ethereumLastPrice : 0,
@@ -140,8 +140,8 @@ class AppProvider extends Component {
 
     async getAuctionData(web3) {
 
-        // this.setState({ statesLoaded: true });
-        // return ;
+        this.setState({ statesLoaded: true });
+        return ;
 
         window._state = this.state;
 
