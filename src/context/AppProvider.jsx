@@ -78,7 +78,7 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            auctionStartDateClock : Date.parse('2018-12-06T04:00:00Z'),
+            auctionStartDateClock : Date.parse('2018-12-09T04:00:00Z'),
             //auctionStartDateClock : Date.parse('2018-11-07T14:00:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
