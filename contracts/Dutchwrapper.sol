@@ -263,7 +263,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
 
             totalEthEarnedByPartners += referalPercentage(amount, MarketingPartners[_hash].percentage);
 
-            if( (msg.value >= 1 ether) && (msg.value <= 3 ether) && (bidderBonus = true)) {
+            if( (msg.value >= 1 ether) && (msg.value <= 3 ether) && (bidderBonus == true)) {
              if(bonusChecker(oneHundred, thirty) == false){
                     discontinueBonus(oneHundred, thirty);
                     return;
@@ -276,7 +276,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
               emit TokenReferral(_hash ,msg.sender, amount);
 
 
-              } else if ((msg.value > 3 ether)&&(msg.value <= 6 ether) && (bidderBonus = true)) {
+              } else if ((msg.value > 3 ether)&&(msg.value <= 6 ether) && (bidderBonus == true)) {
                    if(bonusChecker(fiveHundred, twoHundred) == false){
                     discontinueBonus(fiveHundred, twoHundred);
                     return;
@@ -289,7 +289,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
                   emit TokenReferral(_hash ,msg.sender, amount);
 
 
-                  } else if ((msg.value > 6 ether) && (bidderBonus = true)) {
+                  } else if ((msg.value > 6 ether) && (bidderBonus == true)) {
                     if(bonusChecker(oneThousand, sixHundred) == false){
                     discontinueBonus(oneThousand, sixHundred);
                     return;
@@ -309,7 +309,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
 
           } else if (_hash == TokenReferrals[_hash].hash){
 
-        			if( (msg.value >= 1 ether) && (msg.value <= 3 ether) && (bidderBonus = true) ) {
+        			if( (msg.value >= 1 ether) && (msg.value <= 3 ether) && (bidderBonus == true) ) {
         			    if(bonusChecker(oneHundred, thirty) == false){
                         discontinueBonus(oneHundred, thirty);
                         return;
@@ -322,7 +322,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
         				emit TokenReferral(_hash ,msg.sender, amount);
         				return Referrals;
 
-        				} else if ((msg.value > 3 ether)&&(msg.value <= 6 ether) && (bidderBonus = true)) {
+        				} else if ((msg.value > 3 ether)&&(msg.value <= 6 ether) && (bidderBonus == true)) {
         				    if(bonusChecker(fiveHundred, twoHundred) == false){
                                 discontinueBonus(fiveHundred, twoHundred);
                                 return;
@@ -335,7 +335,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
         						emit TokenReferral(_hash ,msg.sender, amount);
         						return Referrals;
 
-        						} else if ((msg.value > 6 ether) && (bidderBonus = true)) {
+        						} else if ((msg.value > 6 ether) && (bidderBonus == true)) {
         						    if(bonusChecker(oneThousand, sixHundred) == false){
                                      discontinueBonus(oneThousand, sixHundred);
                                      return;
