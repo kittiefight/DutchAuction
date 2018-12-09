@@ -23,6 +23,16 @@ contract Dutchwrapper is DutchAuction {
 
     uint constant public ONE = 1; // NUMBER 1
 
+    // various reward levels
+uint constant public thirty = 30 * 10**18; // thirty tokens awarded to bidder when earned
+uint constant public twoHundred = 200 * 10**18; // two hundred tokens awarded to bidder when earned
+uint constant public sixHundred = 600 * 10**18; // six hundred tokens awarded to bidder when earned
+
+uint constant public oneHundred = 100 * 10**18; // one hundred tokens awarded to refferer when earned
+uint constant public fiveHundred = 500 * 10**18; // five hundred tokens awarded to refferer when earned
+uint constant public oneThousand = 1000 * 10**18; // one thousand tokens awarded to refferer when earned
+uint public residualToken; // variable tracking number of tokens left at near complete token exhaustion
+
     mapping (address => uint) public SuperDAOTokens; // amount of bonus Superdao Tokens earned per bidder
     //for participation on auction based on eth bid
 
@@ -47,8 +57,14 @@ contract Dutchwrapper is DutchAuction {
         mapping(uint => uint) tokenAmountPerReferred;// Amount of tokens earned for each participator referred
     }
 
-    address [] public TokenReferalList; // list of partners
+     address [] public TokenReferalList; // list of partners
 
+     bytes4 [20] public topAddrHashes; // display top 20 refferers address hashes
+     uint [20] public topReferredNum; // display number of bidders reffered by top 20 refferers
+
+    event topAddrHashesUpdate(bytes4 [20] topAddrHashes); // log display top 20 refferers address hashes ( see function orderTop20 )
+    event topNumbersUpdate(uint[20] topNumArray);  // log number of bidders reffered by top 20 refferers (( see function orderTop20 )
+    bool public bidderBonus = true; // bolean bonus indicator for both refferers and bidders
 
     //Profile for social campaign
     struct SocialProfile{
@@ -112,7 +128,7 @@ contract Dutchwrapper is DutchAuction {
         require(stage == Stages.TradingStarted);
         _;
     }
-  
+
 
     // uint constant public MAX_TOKEN_REFERRAL = 800000 * 10**18; // 800,000 : eight hundred  thousand
     // uint constant public MAX_TOKEN_SOCIAL = 200000 * 10**18; // 200,000 : two hundred thousand
@@ -247,57 +263,88 @@ contract Dutchwrapper is DutchAuction {
 
             totalEthEarnedByPartners += referalPercentage(amount, MarketingPartners[_hash].percentage);
 
-            if(claimedTokenReferral < MAX_TOKEN_REFERRAL){
-            TokenReferrals[_hash].totalReferrals += ONE;
-
-            if( (msg.value >= 1 ether) && (msg.value <= 3 ether) ) {
-              TokenReferrals[_hash].tokenAmountPerReferred[amount] = 100 * 10**18;
-              TokenReferrals[_hash].totalTokensEarned += 100 * 10**18;
-              claimedTokenReferral += 100 * 10**18;
+            if( (msg.value >= 1 ether) && (msg.value <= 3 ether) && (bidderBonus = true)) {
+             if(bonusChecker(oneHundred, thirty) == false){
+                    discontinueBonus(oneHundred, thirty);
+                    return;
+                    }
+              TokenReferrals[_hash].totalReferrals += ONE;
+              orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
+              TokenReferrals[_hash].tokenAmountPerReferred[amount] = oneHundred;
+              TokenReferrals[_hash].totalTokensEarned += oneHundred;
+              bidderEarnings (oneHundred) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
               emit TokenReferral(_hash ,msg.sender, amount);
 
 
-              } else if ((msg.value > 3 ether)&&(msg.value <= 6 ether)) {
-                  TokenReferrals[_hash].tokenAmountPerReferred[amount] = 500 * 10**18;
-                  TokenReferrals[_hash].totalTokensEarned += 500 * 10**18;
-                  claimedTokenReferral += 500 * 10**18;
+              } else if ((msg.value > 3 ether)&&(msg.value <= 6 ether) && (bidderBonus = true)) {
+                   if(bonusChecker(fiveHundred, twoHundred) == false){
+                    discontinueBonus(fiveHundred, twoHundred);
+                    return;
+                    }
+                  TokenReferrals[_hash].totalReferrals += ONE;
+                  orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
+                  TokenReferrals[_hash].tokenAmountPerReferred[amount] = fiveHundred;
+                  TokenReferrals[_hash].totalTokensEarned += fiveHundred;
+                  bidderEarnings (twoHundred) == true ? claimedTokenReferral = fiveHundred + twoHundred : claimedTokenReferral += fiveHundred;
                   emit TokenReferral(_hash ,msg.sender, amount);
 
 
-                  } else if (msg.value > 6 ether) {
-                    TokenReferrals[_hash].tokenAmountPerReferred[amount] = 1000 * 10**18;
-                    TokenReferrals[_hash].totalTokensEarned += 1000 * 10**18;
-                    claimedTokenReferral += 1000 * 10**18;
+                  } else if ((msg.value > 6 ether) && (bidderBonus = true)) {
+                    if(bonusChecker(oneThousand, sixHundred) == false){
+                    discontinueBonus(oneThousand, sixHundred);
+                    return;
+                    }
+                    TokenReferrals[_hash].totalReferrals += ONE;
+                    orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
+                    TokenReferrals[_hash].tokenAmountPerReferred[amount] = oneThousand;
+                    TokenReferrals[_hash].totalTokensEarned += oneThousand;
+                    bidderEarnings (sixHundred) == true ? claimedTokenReferral = oneThousand + sixHundred : claimedTokenReferral += oneThousand;
                     emit TokenReferral(_hash, msg.sender, amount);
 
                   }
-                }
+
             emit PartnerReferral(_hash, MarketingPartners[_hash].addr, amount);
 
             return Partners;
 
-          } else if ((_hash == TokenReferrals[_hash].hash) && (claimedTokenReferral < MAX_TOKEN_REFERRAL)) {
+          } else if (_hash == TokenReferrals[_hash].hash){
 
-        			TokenReferrals[_hash].totalReferrals += ONE;
-
-        			if( (msg.value >= 1 ether) && (msg.value <= 3 ether) ) {
-        				TokenReferrals[_hash].tokenAmountPerReferred[amount] = 100 * 10**18;
-        				TokenReferrals[_hash].totalTokensEarned += 100 * 10**18;
-                claimedTokenReferral += 100 * 10**18;
+        			if( (msg.value >= 1 ether) && (msg.value <= 3 ether) && (bidderBonus = true) ) {
+        			    if(bonusChecker(oneHundred, thirty) == false){
+                        discontinueBonus(oneHundred, thirty);
+                        return;
+                        }
+                        TokenReferrals[_hash].totalReferrals += ONE;
+                        orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
+        				TokenReferrals[_hash].tokenAmountPerReferred[amount] = oneHundred;
+        				TokenReferrals[_hash].totalTokensEarned += oneHundred;
+                        bidderEarnings (oneHundred) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
         				emit TokenReferral(_hash ,msg.sender, amount);
         				return Referrals;
 
-        				} else if ((msg.value > 3 ether)&&(msg.value <= 6 ether)) {
-        						TokenReferrals[_hash].tokenAmountPerReferred[amount] = 500 * 10**18;
-        						TokenReferrals[_hash].totalTokensEarned += 500 * 10**18;
-                    claimedTokenReferral += 500 * 10**18;
+        				} else if ((msg.value > 3 ether)&&(msg.value <= 6 ether) && (bidderBonus = true)) {
+        				    if(bonusChecker(fiveHundred, twoHundred) == false){
+                                discontinueBonus(fiveHundred, twoHundred);
+                                return;
+                                }
+                                TokenReferrals[_hash].totalReferrals += ONE;
+                                orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
+        						TokenReferrals[_hash].tokenAmountPerReferred[amount] = fiveHundred;
+        						TokenReferrals[_hash].totalTokensEarned += fiveHundred;
+                                bidderEarnings (twoHundred) == true ? claimedTokenReferral = fiveHundred + twoHundred : claimedTokenReferral += fiveHundred;
         						emit TokenReferral(_hash ,msg.sender, amount);
         						return Referrals;
 
-        						} else if (msg.value > 6 ether) {
-        							TokenReferrals[_hash].tokenAmountPerReferred[amount] = 1000 * 10**18;
-        							TokenReferrals[_hash].totalTokensEarned += 1000 * 10**18;
-                      claimedTokenReferral += 1000 * 10**18;
+        						} else if ((msg.value > 6 ether) && (bidderBonus = true)) {
+        						    if(bonusChecker(oneThousand, sixHundred) == false){
+                                     discontinueBonus(oneThousand, sixHundred);
+                                     return;
+                                    }
+                                    TokenReferrals[_hash].totalReferrals += ONE;
+                                    orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
+        							TokenReferrals[_hash].tokenAmountPerReferred[amount] = oneThousand;
+        							TokenReferrals[_hash].totalTokensEarned += oneThousand;
+        							bidderEarnings (sixHundred) == true ? claimedTokenReferral = oneThousand + sixHundred : claimedTokenReferral += oneThousand;
         							emit TokenReferral(_hash, msg.sender, amount);
         							return Referrals;
         						}
@@ -353,6 +400,7 @@ contract Dutchwrapper is DutchAuction {
 
 	function referalPercentage(uint _amount, uint _percent)
 	    public
+	    view
 	    returns (uint) {
             return SafeMath.mul( SafeMath.div( SafeMath.sub(_amount, _amount%100), 100 ), _percent );
 	}
@@ -398,7 +446,7 @@ contract Dutchwrapper is DutchAuction {
 
         uint soldTokens = totalReceived * 10**18 / finalPrice;
         uint totalSold = (MAX_TOKENS_SOLD + claimedTokenReferral + claimedSocial)  - soldTokens;
-        
+
         require (_unsoldTokens < totalSold );
         KittieFightToken.transfer(_addr, _unsoldTokens);
     }
@@ -407,18 +455,101 @@ contract Dutchwrapper is DutchAuction {
     function tokenAmountPerReferred(bytes4 _hash, uint _amount ) public view returns(uint tokenAmount) {
         tokenAmount = TokenReferrals[_hash].tokenAmountPerReferred[_amount];
     }
-    
+
     function getCurrentBiddersCount () public view returns(uint biddersCount)  {
         biddersCount = CurrentBidders.length;
     }
-    
-    // helper functions  return msg.senders
+
+    // helper functions  return msg.senders hash
     function calculatPersonalHash() public view returns (bytes4 _hash) {
         _hash = bytes4(keccak256(abi.encodePacked(msg.sender)));
     }
 
     function calculateCampaignHash(address _addr) public view returns (bytes4 _hash) {
         _hash = bytes4(keccak256(abi.encodePacked(_addr, msg.sender)));
+    }
+
+    // helper functions ordering top 20 address by number of reffered bidders
+    // array of addresses and bidder numbers are logged
+    function orderTop20(uint _value, bytes4 _hash) private {
+    uint i = 0;
+    /** get the index of the current max element **/
+    for(i; i < topReferredNum.length; i++) {
+        if(topReferredNum[i] < _value) {
+            break;
+        }
+    }
+
+    /** shift the array of one position (getting rid of the last element) **/
+    for(uint j = topReferredNum.length - 1; j > i; j--) {
+        topReferredNum[j] = topReferredNum[j - 1];
+        topAddrHashes[j] = topAddrHashes[j - 1];
+    }
+
+    /** update the new max element **/
+    (topReferredNum[i], topAddrHashes[i]) = (_value, _hash);
+    emit topAddrHashesUpdate (topAddrHashes);
+    emit topNumbersUpdate(topReferredNum);
+
+    }
+
+  // helper functions returning top 20 leading number of reffered bidders by refferers
+ function getTop20Reffered() public view returns (uint [20]){
+      return topReferredNum;
+    }
+
+  // helper functions  top 20 refferer addresses
+  function getTop20Addr() public view returns (bytes4 [20]){
+      return topAddrHashes;
+   }
+
+  // helper functions  return msg.senders address from given hash
+  function getAddress (bytes4 _hash) public view returns (address){
+
+    return TokenReferrals[_hash].addr;
+}
+
+    // helper checking existence of bidder as a token refferer
+    // creates a token refferer hash for bidder, if bidder is not already a refferer
+    // also allocates  20%, 25% or 40% (30, 200, 600 KTY tokens) discounts to bidder, based on amount bid
+    function bidderEarnings (uint _amountEarned) private returns (bool){
+
+        bytes4 bidderTemphash = calculatPersonalHash();
+
+    if ( bidderTemphash == TokenReferrals[bidderTemphash].hash){
+        TokenReferrals[bidderTemphash].totalTokensEarned += _amountEarned;
+        return true;
+    }else{
+        bytes4 newBidderHash = InternalReferalSignup(msg.sender);
+        TokenReferrals[newBidderHash].totalTokensEarned = _amountEarned;
+        return true;
+        }
+
+    return false;
+
+     }
+
+     // check if both bidder bonus and refferer bonus is avalable
+     // return true if bonus is available
+     function bonusChecker(uint _tokenRefferralBonus, uint _bidderBonusAmount) public view returns (bool){
+      return _tokenRefferralBonus + _bidderBonusAmount + claimedTokenReferral <= MAX_TOKEN_REFERRAL ? true : false;
+    }
+
+    //document actual remaining residual tokens
+    //call function to terminate bonus
+    function discontinueBonus(uint _tokenRefferralBonus, uint _bidderBonusAmount) private returns (string) {
+        residualToken = MAX_TOKEN_REFERRAL - (_tokenRefferralBonus + _bidderBonusAmount + claimedTokenReferral);
+        return setBonustoFalse();
+    }
+
+
+    // bolean bonus switcher, only called when
+    // tokens bonus availability is exhuated
+    // terminate bonus
+    function setBonustoFalse() private returns (string){
+    require (bidderBonus == true,"no more bonuses");
+    bidderBonus = false;
+    return "tokens exhausted";
     }
 
     // Set Promissary token Instance  By Admin (Fo testing only)
