@@ -562,4 +562,8 @@ uint public residualToken; // variable tracking number of tokens left at near co
       return (_addr == SocialCampaigns[_campaignHash].SocialLinkProfile[id].addr &&
         _userName == SocialCampaigns[_campaignHash].SocialLinkProfile[id].username);
     }
+
+    function checkDisqualified (bytes4 _campaignHash, address _addr) public view returns (bool) {
+      return SocialCampaigns[_campaignHash].disqualified[_addr];
+    }
 }

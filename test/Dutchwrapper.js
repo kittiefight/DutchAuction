@@ -203,7 +203,7 @@ contract('DutchWrapper',  accounts  => {
           _percentage: 10,
           _type: 0,
           _tokenAmt: 0,
-          _numUsers: 2
+          _numUsers: 3
         }];
 
         it('should fail to setupReferal from non-Owner', async function () {
@@ -422,7 +422,7 @@ contract('DutchWrapper',  accounts  => {
         }
       });
 
-      it('should fail to exceed maxParticipators limit on confirmSocial', function () {
+      it('should fail to exceed maxParticipators limit on confirmSocial', async function () {
         try {
           const user = socialsUsers[2];
           const hash = socialCampaignsHash[0];
@@ -435,7 +435,51 @@ contract('DutchWrapper',  accounts  => {
           assert.exists(e, 'Expect tranasction to fail with error');
         }
       })
-    })
+    });
+
+    describe('adminRemoveBatch()', function () {
+      const batchList = [
+        socialsUsers[0].address
+      ];
+      it('should fail to adminRemoveBatch() from non-priviledged account', async function () {
+        try {
+          const hash = socialCampaignsHash[1];
+          await dutchWrapper.adminRemoveBatch(hash, batchList, {
+            from: owner
+          });
+          assert.notExists(true, 'Transaction shoould fail');
+        } catch (e) {
+          assert.exists(e, 'Expect tranasction to fail with error');
+        }
+      });
+
+      it('should fail to adminRemoveBatch() to limit exceeded campaign', async function () {
+        try {
+          const hash = socialCampaignsHash[0];
+          await dutchWrapper.adminRemoveBatch(hash, batchList, {
+            from: seventhAccount
+          });
+          assert.notExists(true, 'Transaction shoould fail');
+        } catch (e) {
+          assert.exists(e, 'Expect tranasction to fail with error');
+        }
+      });
+
+      it('should successfully to adminRemoveBatch()', async function () {
+        try {
+          const hash = socialCampaignsHash[1];
+          await dutchWrapper.adminRemoveBatch(hash, batchList, {
+            from: seventhAccount
+          });
+          await Promise.all(batchList.map(async function(one) {
+            //TODO right test to assert update
+          }));
+          assert.notExists(true, 'Transaction shoould fail');
+        } catch (e) {
+          assert.notExists(e, 'Expect tranasction to succeed');
+        }
+      });
+    });
 
 
 });
