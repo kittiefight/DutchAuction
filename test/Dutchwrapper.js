@@ -9,6 +9,7 @@ contract('DutchWrapper',  accounts  => {
     let dutchWrapper;
     let promissoryToken;
     const socialCampaignsHash = [];
+    const marketingPartnersHash = [];
     const emptyHash = 0xeee00000;101010101010
     const NULL_BYTES4 = 0x00000000;
     const ETHER = Math.pow(10, 18);
@@ -202,7 +203,13 @@ contract('DutchWrapper',  accounts  => {
           _addr: referralAccount1,
           _percentage: 10,
           _type: 0,
-          _tokenAmt: 0,
+          _tokenAmt: 20,
+          _numUsers: 2
+        }, {
+          _addr: referralAccount2,
+          _percentage: 8,
+          _type: 0,
+          _tokenAmt: 30,
           _numUsers: 3
         }];
 
@@ -240,6 +247,7 @@ contract('DutchWrapper',  accounts  => {
                    });
 
                     if (arg._type === 1) {//MarketingPartners
+                      marketingPartnersHash.push(_hash);
                       let marketingPartnersMap = await dutchWrapper.MarketingPartners.call(_hash);
 
                       assert.equal(marketingPartnersMap[0], _hash, 'Incorrect referal hash set');
@@ -255,6 +263,7 @@ contract('DutchWrapper',  accounts  => {
                     }
                 })
               );
+              console.log(socialCampaignsHash)
             } catch (e) {
                 assert.notExists(e.message || e, `Expected function to complete:`);
             }
@@ -382,7 +391,7 @@ contract('DutchWrapper',  accounts  => {
     describe('confirmSocial()', function () {
       it('should successfully confirmSocial', async function () {
         await Promise.all(socialCampaignsHash.map(async function(hash) {
-          await Promise.all(socialsUsers.splice(0,2).map ( async function (user) {
+          await Promise.all(socialsUsers.slice(0,2).map ( async function (user) {
             await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
               from: user.address
             });
@@ -395,7 +404,7 @@ contract('DutchWrapper',  accounts  => {
       it('should fail to confirmSocial with different userNames from same address', async function () {
         try {
           await Promise.all(socialCampaignsHash.map(async function(hash) {
-            await Promise.all(socialsUsers.splice(2,4).map ( async function (user) {
+            await Promise.all(socialsUsers.slice(2,4).map ( async function (user) {
               await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
                 from: user.address
               });
@@ -403,14 +412,15 @@ contract('DutchWrapper',  accounts  => {
             }));
           }));
         } catch (e) {
-          assert.exists(e, 'Transaction should fail with an error');
+          assert.exists(e.message || e, 'Transaction should fail with an error');
+          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
         }
       });
 
       it('should fail to duplicate confirmSocial', async function () {
         try {
           await Promise.all(socialCampaignsHash.map(async function(hash) {
-            await Promise.all(socialsUsers.splice(0,2).map ( async function (user) {
+            await Promise.all(socialsUsers.slice(0,2).map ( async function (user) {
               await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
                 from: user.address
               });
@@ -418,7 +428,8 @@ contract('DutchWrapper',  accounts  => {
             }));
           }));
         } catch (e) {
-          assert.exists(e, 'Transaction should fail with an error');
+          assert.exists(e.message || e, 'Transaction should fail with an error');
+          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
         }
       });
 
@@ -432,7 +443,8 @@ contract('DutchWrapper',  accounts  => {
 
           assert.notExists(true, 'Transaction shoould fail');
         } catch (e) {
-          assert.exists(e, 'Expect tranasction to fail with error');
+          assert.exists(e.message || e, 'Expect tranasction to fail with error');
+          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
         }
       })
     });
@@ -449,7 +461,8 @@ contract('DutchWrapper',  accounts  => {
           });
           assert.notExists(true, 'Transaction shoould fail');
         } catch (e) {
-          assert.exists(e, 'Expect tranasction to fail with error');
+          assert.exists(e.message || e, 'Expect tranasction to fail with error');
+          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
         }
       });
 
@@ -457,26 +470,57 @@ contract('DutchWrapper',  accounts  => {
         try {
           const hash = socialCampaignsHash[0];
           await dutchWrapper.adminRemoveBatch(hash, batchList, {
-            from: seventhAccount
+            from: secondAccount
           });
           assert.notExists(true, 'Transaction shoould fail');
         } catch (e) {
-          assert.exists(e, 'Expect tranasction to fail with error');
+          assert.exists(e.message || e, 'Expect tranasction to fail with error');
+          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
         }
       });
 
-      it('should successfully to adminRemoveBatch()', async function () {
+      it('should fail to adminRemoveBatch() on MarketingPartners', async function () {
+        try {
+          const hash = marketingPartnersHash[0];
+          await dutchWrapper.adminRemoveBatch(hash, batchList, {
+            from: secondAccount
+          });
+          assert.notExists(true, 'Expect tranasction to fail');
+        } catch (e) {
+          assert.exists(e.message || e, 'Expect tranasction to fail with an error');
+          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
+        }
+      });
+
+      it('should successfully adminRemoveBatch()', async function () {
         try {
           const hash = socialCampaignsHash[1];
           await dutchWrapper.adminRemoveBatch(hash, batchList, {
-            from: seventhAccount
+            from: secondAccount
           });
           await Promise.all(batchList.map(async function(one) {
-            //TODO right test to assert update
+            const isDisqualified = await dutchWrapper.checkDisqualified.call(hash, one);
+            assert.isTrue(isDisqualified, 'Address not successfully removed');
           }));
-          assert.notExists(true, 'Transaction shoould fail');
         } catch (e) {
-          assert.notExists(e, 'Expect tranasction to succeed');
+          assert.notExists(e.message || e, 'Expect tranasction to succeed');
+        }
+      });
+
+      it('should fail to confirmSocial() with Disqualified address', async function () {
+        try {
+          const hash = socialCampaignsHash[1];
+          const user = socialsUsers.find(user => user.address === batchList[0]);
+          const isDisqualified = await dutchWrapper.checkDisqualified.call(hash, user.address);
+          assert.isTrue(isDisqualified, 'Address not removed');
+
+          await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
+            from: user.address
+          });
+          assert.fail(true, 'Expected transaction should fail');
+        } catch (e) {
+          assert.exists(e.message || e, 'Expected function to fail with error');
+          assert.isFalse((e.message || e) === 'assert.fail()', 'Expected non-assert failure');
         }
       });
     });
