@@ -10,7 +10,7 @@ contract('DutchWrapper',  accounts  => {
     let promissoryToken;
     const socialCampaignsHash = [];
     const marketingPartnersHash = [];
-    const emptyHash = 0xeee00000;101010101010
+    const emptyHash = 0xeee00000;
     const NULL_BYTES4 = 0x00000000;
     const ETHER = Math.pow(10, 18);
 
@@ -263,7 +263,6 @@ contract('DutchWrapper',  accounts  => {
                     }
                 })
               );
-              console.log(socialCampaignsHash)
             } catch (e) {
                 assert.notExists(e.message || e, `Expected function to complete:`);
             }
@@ -297,9 +296,10 @@ contract('DutchWrapper',  accounts  => {
           })
         })
 
-        describe.skip('bidReferral()', function () {
+        describe('bidReferral()', function () {
 
-          it.skip('DutchWrapper Bid', async function () {
+          it('DutchWrapper Bid', async function () {
+            const _hash = await dutchWrapper.calculateCampaignHash(secondAccount, { from: owner });
             // -- bidReferral
             const bidRefferal = await dutchWrapper.bidReferral(thirdAccount, _hash ,
                     {from : thirdAccount, value : web3.toWei('1', 'ether') } );
@@ -329,64 +329,64 @@ contract('DutchWrapper',  accounts  => {
             assert.isAbove(superDAOTokens.toNumber(),0);
             assert.isAbove( web3.toWei('12', 'ether') / (await promissoryToken.lastPrice()).toNumber(), superDAOTokens.toNumber() );
         });
+
+        it.skip('Referral Campaing with sign up ', async () => {
+            const  _addr = thirdAccount;
+            const _hash = await dutchWrapper.referralSignup.call({ from : _addr });
+            await dutchWrapper.referralSignup({ from : _addr });
+            let tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
+
+
+            await dutchWrapper.bidReferral(_addr, _hash, { from: _addr, value : web3.toWei(1, 'ether')  });
+            tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
+            assert.equal(tokenReferrals[3].toNumber(), 500 * 10**18);
+
+            await dutchWrapper.bidReferral(_addr, _hash, { from: _addr, value : web3.toWei(1, 'ether')  });
+            tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
+            assert.equal(tokenReferrals[3].toNumber(), 1000 * 10**18);
+
+            await dutchWrapper.bidReferral(_addr, _hash, { from: _addr, value : web3.toWei(1, 'ether')  });
+            tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
+            assert.equal(tokenReferrals[3].toNumber(), 1500 * 10**18);
+
+            assert.equal( tokenReferrals[2].toNumber(), 3);
+            console.log(tokenReferrals)
+
+        });
+
+
+        it.skip('DutchWrapper setup Referrals Referral & Bid', async () => {
+            const  _addr = thirdAccount;
+            const  _percentage = 0;
+            let  _type = 3; // uint constand public Social = 3; // Distinction between promotion groups, social giveaway bonus
+            let _tokenAmt = 20;
+            let _numUsers = 5;
+
+            let mapSocialCampaigns = null;
+            let mapTokenReferrals = null;
+
+            await dutchWrapper.setupReferal(_addr, _percentage, _type, _tokenAmt, _numUsers , { from: owner });
+            const _AccountHash = await dutchWrapper.calculateRefferalsHash(_addr, { from: owner });
+            mapSocialCampaigns = await dutchWrapper.SocialCampaigns.call(_AccountHash);
+
+            assert.equal(_AccountHash, mapSocialCampaigns[0]);
+            assert.equal( _numUsers, mapSocialCampaigns[1].toNumber());
+            assert.equal(_tokenAmt, mapSocialCampaigns[2].toNumber())
+
+            //-- Referral signup
+            const signUprefferals = await dutchWrapper.referalSignup({ from : _addr });
+            const _referralHash = signUprefferals.logs[0].args._Hash
+            console.log('refferal hash :  ',  _referralHash);
+
+            mapTokenReferrals =  await dutchWrapper.TokenReferrals.call(_referralHash);
+            const bidReferral = await dutchWrapper.bidReferral(_addr, _referralHash ,{from : _addr, value : web3.toWei('2', 'ether') } );
+            mapTokenReferrals =  await dutchWrapper.TokenReferrals.call(_referralHash);
+
+            console.log( await getAcutionData(dutchWrapper, KittieFightToken, accounts)  );
+
+
+        });
       });
-
-    it.skip('Referral Campaing with sign up ', async () => {
-        const  _addr = thirdAccount;
-        const _hash = await dutchWrapper.referralSignup.call({ from : _addr });
-        await dutchWrapper.referralSignup({ from : _addr });
-        let tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
-
-
-        await dutchWrapper.bidReferral(_addr, _hash, { from: _addr, value : web3.toWei(1, 'ether')  });
-        tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
-        assert.equal(tokenReferrals[3].toNumber(), 500 * 10**18);
-
-        await dutchWrapper.bidReferral(_addr, _hash, { from: _addr, value : web3.toWei(1, 'ether')  });
-        tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
-        assert.equal(tokenReferrals[3].toNumber(), 1000 * 10**18);
-
-        await dutchWrapper.bidReferral(_addr, _hash, { from: _addr, value : web3.toWei(1, 'ether')  });
-        tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
-        assert.equal(tokenReferrals[3].toNumber(), 1500 * 10**18);
-
-        assert.equal( tokenReferrals[2].toNumber(), 3);
-        console.log(tokenReferrals)
-
-    });
-
-
-    it.skip('DutchWrapper setup Referrals Referral & Bid', async () => {
-        const  _addr = thirdAccount;
-        const  _percentage = 0;
-        let  _type = 3; // uint constand public Social = 3; // Distinction between promotion groups, social giveaway bonus
-        let _tokenAmt = 20;
-        let _numUsers = 5;
-
-        let mapSocialCampaigns = null;
-        let mapTokenReferrals = null;
-
-        await dutchWrapper.setupReferal(_addr, _percentage, _type, _tokenAmt, _numUsers , { from: owner });
-        const _AccountHash = await dutchWrapper.calculateRefferalsHash(_addr, { from: owner });
-        mapSocialCampaigns = await dutchWrapper.SocialCampaigns.call(_AccountHash);
-
-        assert.equal(_AccountHash, mapSocialCampaigns[0]);
-        assert.equal( _numUsers, mapSocialCampaigns[1].toNumber());
-        assert.equal(_tokenAmt, mapSocialCampaigns[2].toNumber())
-
-        //-- Referral signup
-        const signUprefferals = await dutchWrapper.referalSignup({ from : _addr });
-        const _referralHash = signUprefferals.logs[0].args._Hash
-        console.log('refferal hash :  ',  _referralHash);
-
-        mapTokenReferrals =  await dutchWrapper.TokenReferrals.call(_referralHash);
-        const bidReferral = await dutchWrapper.bidReferral(_addr, _referralHash ,{from : _addr, value : web3.toWei('2', 'ether') } );
-        mapTokenReferrals =  await dutchWrapper.TokenReferrals.call(_referralHash);
-
-        console.log( await getAcutionData(dutchWrapper, KittieFightToken, accounts)  );
-
-
-    });
 
     describe('confirmSocial()', function () {
       it('should successfully confirmSocial', async function () {
@@ -522,6 +522,18 @@ contract('DutchWrapper',  accounts  => {
           assert.exists(e.message || e, 'Expected function to fail with error');
           assert.isFalse((e.message || e) === 'assert.fail()', 'Expected non-assert failure');
         }
+      });
+
+      describe('claimtokenBonus()', function () {
+
+      });
+
+      describe('transferUnsoldTokens()', function () {
+
+      });
+
+      describe('orderTop20()', function () {
+
       });
     });
 

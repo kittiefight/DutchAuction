@@ -397,7 +397,8 @@ uint public residualToken; // variable tracking number of tokens left at near co
 
 
 	function referalPercentage(uint _amount, uint _percent)
-	    public pure
+	    public
+	    pure
 	    returns (uint) {
             return SafeMath.mul( SafeMath.div( SafeMath.sub(_amount, _amount%100), 100 ), _percent );
 	}
@@ -469,21 +470,21 @@ uint public residualToken; // variable tracking number of tokens left at near co
     // helper functions ordering top 20 address by number of reffered bidders
     // array of addresses and bidder numbers are logged
     function orderTop20(uint _value, bytes4 _hash) private {
-      uint i = 0;
-      /** get the index of the current max element **/
-      for(i; i < topReferredNum.length; i++) {
-          if(topReferredNum[i] < _value) {
-              break;
-          }
-      }
+    uint i = 0;
+    /** get the index of the current max element **/
+    for(i; i < topReferredNum.length; i++) {
+        if(topReferredNum[i] < _value) {
+            break;
+        }
+    }
 
-      /** shift the array of one position (getting rid of the last element) **/
-      for(uint j = topReferredNum.length - 1; j > i; j--) {
-          topReferredNum[j] = topReferredNum[j - 1];
-          topAddrHashes[j] = topAddrHashes[j - 1];
-      }
+    /** shift the array of one position (getting rid of the last element) **/
+    for(uint j = topReferredNum.length - 1; j > i; j--) {
+        topReferredNum[j] = topReferredNum[j - 1];
+        topAddrHashes[j] = topAddrHashes[j - 1];
+    }
 
-      /** update the new max element **/
+    /** update the new max element **/
       (topReferredNum[i], topAddrHashes[i]) = (_value, _hash);
       emit topAddrHashesUpdate (topAddrHashes);
       emit topNumbersUpdate(topReferredNum);
@@ -491,63 +492,63 @@ uint public residualToken; // variable tracking number of tokens left at near co
 
     // helper functions returning top 20 leading number of reffered bidders by refferers
    function getTop20Reffered() public view returns (uint [20]){
-      return topReferredNum;
-    }
+        return topReferredNum;
+      }
 
-  // helper functions  top 20 refferer addresses
-  function getTop20Addr() public view returns (bytes4 [20]){
-      return topAddrHashes;
-   }
+    // helper functions  top 20 refferer addresses
+    function getTop20Addr() public view returns (bytes4 [20]){
+        return topAddrHashes;
+     }
 
   // helper functions  return msg.senders address from given hash
   function getAddress (bytes4 _hash) public view returns (address){
     return TokenReferrals[_hash].addr;
   }
 
-  // helper checking existence of bidder as a token refferer
-  // creates a token refferer hash for bidder, if bidder is not already a refferer
-  // also allocates  20%, 25% or 40% (30, 200, 600 KTY tokens) discounts to bidder, based on amount bid
-  function bidderEarnings (uint _amountEarned) private returns (bool){
+    // helper checking existence of bidder as a token refferer
+    // creates a token refferer hash for bidder, if bidder is not already a refferer
+    // also allocates  20%, 25% or 40% (30, 200, 600 KTY tokens) discounts to bidder, based on amount bid
+    function bidderEarnings (uint _amountEarned) private returns (bool){
 
-      bytes4 bidderTemphash = calculatPersonalHash();
+        bytes4 bidderTemphash = calculatPersonalHash();
 
-  if ( bidderTemphash == TokenReferrals[bidderTemphash].hash){
-      TokenReferrals[bidderTemphash].totalTokensEarned += _amountEarned;
-      return true;
-  }else{
-      bytes4 newBidderHash = InternalReferalSignup(msg.sender);
-      TokenReferrals[newBidderHash].totalTokensEarned = _amountEarned;
-      return true;
-      }
+    if ( bidderTemphash == TokenReferrals[bidderTemphash].hash){
+        TokenReferrals[bidderTemphash].totalTokensEarned += _amountEarned;
+        return true;
+    }else{
+        bytes4 newBidderHash = InternalReferalSignup(msg.sender);
+        TokenReferrals[newBidderHash].totalTokensEarned = _amountEarned;
+        return true;
+        }
 
-  return false;
+    return false;
 
-   }
+     }
 
-   // check if both bidder bonus and refferer bonus is avalable
-   // return true if bonus is available
-   function bonusChecker(uint _tokenRefferralBonus, uint _bidderBonusAmount) public view returns (bool){
-    return _tokenRefferralBonus + _bidderBonusAmount + claimedTokenReferral <= MAX_TOKEN_REFERRAL ? true : false;
-  }
+     // check if both bidder bonus and refferer bonus is avalable
+     // return true if bonus is available
+     function bonusChecker(uint _tokenRefferralBonus, uint _bidderBonusAmount) public view returns (bool){
+      return _tokenRefferralBonus + _bidderBonusAmount + claimedTokenReferral <= MAX_TOKEN_REFERRAL ? true : false;
+    }
 
-  //document actual remaining residual tokens
-  //call function to terminate bonus
-  function discontinueBonus(uint _tokenRefferralBonus, uint _bidderBonusAmount) private returns (string) {
-      residualToken = MAX_TOKEN_REFERRAL - (_tokenRefferralBonus + _bidderBonusAmount + claimedTokenReferral);
-      return setBonustoFalse();
-  }
+    //document actual remaining residual tokens
+    //call function to terminate bonus
+    function discontinueBonus(uint _tokenRefferralBonus, uint _bidderBonusAmount) private returns (string) {
+        residualToken = MAX_TOKEN_REFERRAL - (_tokenRefferralBonus + _bidderBonusAmount + claimedTokenReferral);
+        return setBonustoFalse();
+    }
 
 
-  // bolean bonus switcher, only called when
-  // tokens bonus availability is exhuasted
-  // terminate bonus
-  function setBonustoFalse() private returns (string){
-  require (bidderBonus == true,"no more bonuses");
-  bidderBonus = false;
-  return "tokens exhausted";
-  }
+    // bolean bonus switcher, only called when
+    // tokens bonus availability is exhuated
+    // terminate bonus
+    function setBonustoFalse() private returns (string){
+    require (bidderBonus == true,"no more bonuses");
+    bidderBonus = false;
+    return "tokens exhausted";
+    }
 
-  //------------------Test functions-------------------------//
+    //------------------Test functions-------------------------//
 
   // Set Promissary token Instance  By Admin (Fo testing only)
   function setPromissoryTokenInstance(address _promissoryAddr) public isOwner {
@@ -555,13 +556,13 @@ uint public residualToken; // variable tracking number of tokens left at near co
       PromissoryTokenIns = PromissoryToken(_promissoryAddr);
   }
 
-  function isConfirmedSocial (bytes4 _campaignHash, address _addr, bytes32 _userName) public view returns (bool) {
-    uint id = SocialCampaigns[_campaignHash].index[_addr];
-    return (_addr == SocialCampaigns[_campaignHash].SocialLinkProfile[id].addr &&
-      _userName == SocialCampaigns[_campaignHash].SocialLinkProfile[id].username);
-  }
+    function isConfirmedSocial (bytes4 _campaignHash, address _addr, bytes32 _userName) public view returns (bool) {
+      uint id = SocialCampaigns[_campaignHash].index[_addr];
+      return (_addr == SocialCampaigns[_campaignHash].SocialLinkProfile[id].addr &&
+        _userName == SocialCampaigns[_campaignHash].SocialLinkProfile[id].username);
+    }
 
-  function checkDisqualified (bytes4 _campaignHash, address _addr) public view returns (bool) {
-    return SocialCampaigns[_campaignHash].disqualified[_addr];
-  }
+    function checkDisqualified (bytes4 _campaignHash, address _addr) public view returns (bool) {
+      return SocialCampaigns[_campaignHash].disqualified[_addr];
+    }
 }
