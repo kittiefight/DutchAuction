@@ -272,7 +272,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
               orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
               TokenReferrals[_hash].tokenAmountPerReferred[amount] = oneHundred;
               TokenReferrals[_hash].totalTokensEarned += oneHundred;
-              bidderEarnings (oneHundred) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
+              bidderEarnings (thirty) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
               emit TokenReferral(_hash ,msg.sender, amount);
 
 
@@ -318,7 +318,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
                         orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
         				TokenReferrals[_hash].tokenAmountPerReferred[amount] = oneHundred;
         				TokenReferrals[_hash].totalTokensEarned += oneHundred;
-                        bidderEarnings (oneHundred) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
+                        bidderEarnings (thirty) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
         				emit TokenReferral(_hash ,msg.sender, amount);
         				return Referrals;
 
