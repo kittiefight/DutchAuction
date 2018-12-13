@@ -10,6 +10,7 @@ contract('DutchWrapper',  accounts  => {
     let promissoryToken;
     const socialCampaignsHash = [];
     const marketingPartnersHash = [];
+    const tokenReferralsHash = [];
     const emptyHash = 0xeee00000;
     const NULL_BYTES4 = 0x00000000;
     const ETHER = Math.pow(10, 18);
@@ -280,6 +281,7 @@ contract('DutchWrapper',  accounts  => {
 
               assert.equal(tokenReferral[0], _hash, 'Incorrect address set')
               assert.equal(tokenReferral[1], _addr, 'Incorrect hash set')
+              tokenReferralsHash.ush(_hash);
             } catch (e) {
               assert.notExists( e.message || e, 'Exected function to complete')
             }
