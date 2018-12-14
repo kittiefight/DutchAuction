@@ -131,7 +131,8 @@ const increaseTime = function(duration) {
 
 contract('DutchWrapper',  accounts  => {
 
-    const [owner, secondAccount, thirdAccount, referralAccount, referralAccount1, referralAccount2, seventhAccount, eighthAccount, pWalletAccount] = accounts;
+    const [owner, secondAccount, thirdAccount, referralAccount, referralAccount1, referralAccount2, seventhAccount, eighthAccount, pWalletAccount] = 
+        accounts;
 
     const sleep = ms => {
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -152,16 +153,16 @@ contract('DutchWrapper',  accounts  => {
         const cmpaignHash = await dutchWrapper.calculateCampaignHash(campaingAccount, { from: owner });
 
         //-- address _addr, uint _percentage, uint _type, uint _tokenAmt, uint _numUsers
-        await dutchWrapper.setupReferal(campaingAccount, 10, 1, 0, 1 , { from: owner });
+        await dutchWrapper.setupReferal(campaingAccount, 10, { from: owner });
         
-        let  claimedTokenReferral = (await dutchWrapper.claimedTokenReferral()).toNumber();
+        let claimedTokenReferral = (await dutchWrapper.claimedTokenReferral()).toNumber();
 
         // -- bidReferral
         await dutchWrapper.bidReferral(accounts[11], cmpaignHash , {from : accounts[11], value : web3.toWei('1', 'ether') } );
         assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[11], false) ).totalTokensEarned, 30  );
 
         claimedTokenReferral = (await dutchWrapper.claimedTokenReferral()).toNumber();
-        console.log( 'claimedTokenReferral : ',  claimedTokenReferral )
+        //console.log( 'claimedTokenReferral : ',  claimedTokenReferral )
 
         assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[10], true)).totalReferrals, 1  );
         assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[10], true)).totalTokensEarned, 100  );
@@ -184,14 +185,6 @@ contract('DutchWrapper',  accounts  => {
         let marketingPartnersMap = await dutchWrapper.MarketingPartners.call(cmpaignHash);
 
     });
-
-
-    it.skip('ReferralSignup signup & bidReferral', async () => {  
-        // Accounts 30 - 40 
-
-
-    })
-
 
 
     it('Finalize Auction  & start Trading', async () => { 
@@ -218,28 +211,32 @@ contract('DutchWrapper',  accounts  => {
 
         assert.equal(state.stage , 4, 'Auction stage should be  Auction started' );
 
-        console.log('---- CONTRACT STATE ----');
-        console.log( state ); 
-        console.log('---- CONTRACT STATE ----');
+        // console.log('---- CONTRACT STATE ----');
+        // console.log( state ); 
+        // console.log('---- CONTRACT STATE ----');
 
     });
 
 
-    it('claimtokenBonus for accounts : ', async () => {  
-
+    it('claimtokenBonus for campaign Account 10 : ', async () => {  
         // Claim For Bonus tokens for account[10]
-        const account10Campaignhash = await dutchWrapper.calculateCampaignHash(accounts[10], { from: owner });
+        const account10Campaignhash = await dutchWrapper.calculateCampaignHash(accounts[10], { from: accounts[0] });
         assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[10], true)).totalTokensEarned, (100 + 100 + 500 + 1000)  );
+        const claimCampaignTokenBonusStatus = await dutchWrapper.claimCampaignTokenBonus(account10Campaignhash, { from: accounts[10] } );
+        assert.equal( (await kittieFightToken.balanceOf(accounts[10])).toNumber(),  (100 + 100 + 500 + 1000) * 10 ** 18);
 
+    });
 
-        // const claimtx = await dutchWrapper.claimtokenBonus.call( account10Campaignhash, { from: accounts[10] } );
-        // console.log('-------------------------');
-        // console.log(claimtx);
+    it('claimtokenBonus for bidder Account 11  : ', async () => {  
+        // accounts[11]  accounts[12]  accounts[13]
+        const data = (await getMyreferralTokens(dutchWrapper, accounts[11], false));
+        console.log(data)
+        // await dutchWrapper.claimtokenBonus(data.hash, { from: accounts[11] } );
 
+        // assert.equal( (await kittieFightToken.balanceOf(accounts[11])).toNumber(), data.totalTokensEarned * 10 ** 18);
 
+        // console.log( (await getMyreferralTokens(dutchWrapper, accounts[11], false)).totalTokensEarned ) 
     });
     
-
-
 });
 

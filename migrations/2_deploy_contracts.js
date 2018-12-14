@@ -19,24 +19,20 @@ module.exports = (deployer, network, accounts) => {
         const dutchWrapper = await DutchWrapper.deployed(); 
         const promissoryToken = await PromissoryToken.deployed();
 
-        console.log('-------------------------------');
-        console.log('Token address: ', token.address);
-        console.log('Dutch Wrapper Address : ', dutchWrapper.address);
-        //console.log('PromissaryToken Address : ', promissoryToken.address);
-        console.log('--------------------------------');
+        // console.log('-------------------------------');
+        // console.log('Token address: ', token.address);
+        // console.log('Dutch Wrapper Address : ', dutchWrapper.address);
+        // //console.log('PromissaryToken Address : ', promissoryToken.address);
+        // console.log('--------------------------------');
 
-        // Set PromissaryToken Instance 
+        // console.log('PromissoryToken price : ', (await promissoryToken.lastPrice()).toNumber() );
 
-        //await dutchWrapper.setPromissoryTokenInstance(promissoryToken.address);
-
-        console.log('PromissoryToken price : ', (await promissoryToken.lastPrice()).toNumber() );
-
-        // Mint 100  Tokens 
+        // Mint 10 million  Tokens for dutchwrapper
         await token.mint(dutchWrapper.address, 10000000 * 10 ** 18);
     
         // // Transfer 100  tokens to DutchAuction
         //await token.transfer(dutchWrapper.address, 5000000 * 10**18 );
-        console.log('Dutch Wrapper Balance : ',  (await token.balanceOf(dutchWrapper.address)).toNumber() );
+        // console.log('Dutch Wrapper Balance : ',  (await token.balanceOf(dutchWrapper.address)).toNumber() );
 
         //Setup  Auction 
         await dutchWrapper.setup(token.address);
