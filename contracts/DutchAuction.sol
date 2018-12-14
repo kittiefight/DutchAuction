@@ -18,7 +18,7 @@ contract DutchAuction {
      *  Constants
      */
     uint constant public MAX_TOKENS_SOLD = 10000000 * 10**18; // 10M
-    uint constant public WAITING_PERIOD = 45 days;
+    uint constant public WAITING_PERIOD = 0 days;
 
     /*
      *  Storage

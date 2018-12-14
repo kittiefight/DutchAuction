@@ -146,7 +146,7 @@ contract('DutchWrapper',  accounts  => {
         accounts_num = accounts.length;
     })
 
-    it('DutchWrapper setup Partners Referal & Bid', async () => {
+    it('DutchWrapper setup Partners Referral & Bid', async () => {
         
         const campaingAccount = accounts[10];
         const cmpaignHash = await dutchWrapper.calculateCampaignHash(campaingAccount, { from: owner });
@@ -183,8 +183,14 @@ contract('DutchWrapper',  accounts  => {
 
         let marketingPartnersMap = await dutchWrapper.MarketingPartners.call(cmpaignHash);
 
-
     });
+
+
+    it.skip('ReferralSignup signup & bidReferral', async () => {  
+        // Accounts 30 - 40 
+
+
+    })
 
 
 
@@ -194,7 +200,6 @@ contract('DutchWrapper',  accounts  => {
             var val2 = await dutchWrapper.bid(accounts[i], { from: accounts[i], value: 250*10**18});
             //console.log(" Bid from Account[" + i + "]. Tx= "+  val2);
         }
-
         val = await dutchWrapper.stage();
         console.log("Stage= "+ val);
             
@@ -214,10 +219,26 @@ contract('DutchWrapper',  accounts  => {
         assert.equal(state.stage , 4, 'Auction stage should be  Auction started' );
 
         console.log('---- CONTRACT STATE ----');
-        console.log( state); 
+        console.log( state ); 
         console.log('---- CONTRACT STATE ----');
 
     });
+
+
+    it('claimtokenBonus for accounts : ', async () => {  
+
+        // Claim For Bonus tokens for account[10]
+        const account10Campaignhash = await dutchWrapper.calculateCampaignHash(accounts[10], { from: owner });
+        assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[10], true)).totalTokensEarned, (100 + 100 + 500 + 1000)  );
+
+
+        // const claimtx = await dutchWrapper.claimtokenBonus.call( account10Campaignhash, { from: accounts[10] } );
+        // console.log('-------------------------');
+        // console.log(claimtx);
+
+
+    });
+    
 
 
 });

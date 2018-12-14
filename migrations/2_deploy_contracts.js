@@ -7,7 +7,7 @@ module.exports = (deployer, network, accounts) => {
 
     const _pWallet = accounts[9]; 
     const _ceiling = 10000 * 10 ** 18; // 10 000  ETH 
-    const _priceFactor = 7500  / 10; //  
+    const _priceFactor = 50; //  
     
 
     return deployer.deploy(Token).then(async () => {

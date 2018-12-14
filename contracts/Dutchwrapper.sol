@@ -196,7 +196,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
             MarketingPartners[tempHash].hash = tempHash;
             MarketingPartners[tempHash].addr = _addr;
             MarketingPartners[tempHash].percentage = _percentage;
-            InternalReferalSignup(_addr);
+            InternalReferalSignupByhash(tempHash, _addr);
     		    emit SetupReferal(_type);
             return "partner signed up";
 
@@ -214,6 +214,15 @@ uint public residualToken; // variable tracking number of tokens left at near co
     //removed because partner signup it will fail if referal tokens are used up
     function InternalReferalSignup(address _addr) internal returns (bytes4 referalhash) {
         bytes4 tempHash = bytes4(keccak256(abi.encodePacked(_addr)));
+        TokenReferrals[tempHash].addr = msg.sender;
+        TokenReferrals[tempHash].hash = tempHash;
+        referalhash = tempHash;
+        emit ReferalSignup(tempHash, _addr);
+    }
+
+    //
+    function InternalReferalSignupByhash(bytes4 _hash, address _addr) internal returns (bytes4 referalhash) {
+        bytes4 tempHash = _hash;
         TokenReferrals[tempHash].addr = msg.sender;
         TokenReferrals[tempHash].hash = tempHash;
         referalhash = tempHash;
