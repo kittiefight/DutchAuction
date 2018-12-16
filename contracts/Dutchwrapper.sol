@@ -238,16 +238,16 @@ contract Dutchwrapper is DutchAuction {
 
         			if( (msg.value >= 1 ether) && (msg.value <= 3 ether) && (bidderBonus == true) ) {
         			    if(bonusChecker(oneHundred, thirty) == false){
-                        discontinueBonus(oneHundred, thirty);
-                        return;
-                        }
-                        TokenReferrals[_hash].totalReferrals += ONE;
-                        orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
-        				TokenReferrals[_hash].tokenAmountPerReferred[amount] = oneHundred;
-        				TokenReferrals[_hash].totalTokensEarned += oneHundred;
-                        bidderEarnings (thirty) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
-        				emit TokenReferral(_hash ,msg.sender, amount);
-        				return Referrals;
+                            discontinueBonus(oneHundred, thirty);
+                                return;
+                            }
+                            TokenReferrals[_hash].totalReferrals += ONE;
+                            orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
+            				TokenReferrals[_hash].tokenAmountPerReferred[amount] = oneHundred;
+            				TokenReferrals[_hash].totalTokensEarned += oneHundred;
+                            bidderEarnings (thirty) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
+            				emit TokenReferral(_hash ,msg.sender, amount);
+            				return Referrals;
 
         				} else if ((msg.value > 3 ether)&&(msg.value <= 6 ether) && (bidderBonus == true)) {
         				    if(bonusChecker(fiveHundred, twoHundred) == false){
@@ -280,7 +280,7 @@ contract Dutchwrapper is DutchAuction {
 
 
 	function referalPercentage(uint _amount, uint _percent)
-	    public
+	    internal
 	    pure
 	    returns (uint) {
             return SafeMath.mul( SafeMath.div( SafeMath.sub(_amount, _amount%100), 100 ), _percent );
