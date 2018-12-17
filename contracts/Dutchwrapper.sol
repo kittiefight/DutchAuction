@@ -374,9 +374,14 @@ contract Dutchwrapper is DutchAuction {
             }
         }
 
-        /** shift the array of one position (getting rid of the last element) **/
-        for(uint j = topReferredNum.length - 1; j > i; j--) {
-            (topReferredNum[j], topAddrHashes[j] ) = (topReferredNum[j - 1],topAddrHashes[j - 1]);
+        if(topAddrHashes[i]!=_hash)
+        {
+            /** shift the array of one position (getting rid of the last element) **/
+            for(uint j = topReferredNum.length - 1; j > i; j--) {
+                (topReferredNum[j], topAddrHashes[j] ) = (topReferredNum[j - 1],topAddrHashes[j - 1]);
+            }
+
+        
         }
 
         /** update the new max element **/
