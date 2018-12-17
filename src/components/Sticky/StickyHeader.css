@@ -2,6 +2,7 @@
     background-color: #59b7eb !important;
 }
 
+
 .stickyImage {
     width: 80px;
 }
@@ -9,7 +10,7 @@
 .stikytext {
    margin-top: 15px !important;
    margin-bottom: 4px !important;
-   font-size: 15px;
+   font-size: 14px;
    text-align: center;
 }
 

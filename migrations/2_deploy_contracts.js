@@ -19,11 +19,11 @@ module.exports = (deployer, network, accounts) => {
         const dutchWrapper = await DutchWrapper.deployed(); 
         const promissoryToken = await PromissoryToken.deployed();
 
-        // console.log('-------------------------------');
-        // console.log('Token address: ', token.address);
-        // console.log('Dutch Wrapper Address : ', dutchWrapper.address);
-        // //console.log('PromissaryToken Address : ', promissoryToken.address);
-        // console.log('--------------------------------');
+        console.log('-------------------------------');
+        console.log('REACT_APP_TOKEN_CONTRACT_ADDRESS='+token.address);
+        console.log('REACT_APP_AUCTION_CONTRACT_ADDRESS='+dutchWrapper.address);
+        console.log('REACT_APP_POMISSORYTOKEN_CONTRACT_ADDRESS='+promissoryToken.address);
+        console.log('--------------------------------');
 
         // console.log('PromissoryToken price : ', (await promissoryToken.lastPrice()).toNumber() );
 

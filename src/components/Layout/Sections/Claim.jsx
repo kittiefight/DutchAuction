@@ -76,7 +76,7 @@ class Claim extends Component {
 
         this.setState({ claimBonusTokensLoading : true });
 
-        auctionContract.methods.claimtokenBonus(this.state.referralHash)
+        auctionContract.methods.claimtokenBonus()
         .send({ 
             from: myAccount
         })
@@ -93,13 +93,15 @@ class Claim extends Component {
                 NotificationManager.success('Transaction Confirmed', 'Success');
             }
             this.setState({ transactionConfirmations: 1  });
-            this.setState({ claimBonusTokensLoading : false });
+            
         })
         .on('error', (error) => {
             console.log('error: ', error);
             NotificationManager.error('Error');
             this.setState({ claimBonusTokensLoading : false });
         });
+
+        this.setState({ claimBonusTokensLoading : false });
 
     }
 
@@ -166,26 +168,15 @@ class Claim extends Component {
        try {
             const { auctionContract, tokenContract,  web3 } = this.props.appProps; 
             this.setState({auctionContract, tokenContract, web3 })
-            
-            console.log('Token contract : ', tokenContract);
-
-
             const tokenSymbol =  await tokenContract.methods.symbol().call();
-
-
-
             this.setState({ tokenSymbol : tokenSymbol });
-
             const { networkLaunchDay, startBlock } = this.props.appProps;
             await this.setState({ startBlock }); 
             await this.setState({ networkLaunchDay });
-
             const myAccount = this.props.appProps.myAccounts[0];
-
             this.setState({claimAddress : myAccount});
             this.setState({tokenAddress : myAccount});
             this.setState({myAccount})
-
 
         }catch(error){
             console.log(error);
@@ -235,10 +226,9 @@ class Claim extends Component {
 
                             <div className="col-md-6 pt-4">
                                 <form>
-                                    
                                     {  claimBonusTokensLoading &&    
                                         <div className="alert alert-danger" role="alert">
-                                            Sending Transaction ...
+                                            Sending Transaction 
                                         </div>
                                     
                                     }
