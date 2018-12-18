@@ -79,7 +79,7 @@ class StickyHeader extends Component {
                                         <Clock appProps={appProps} />  
                                 </div>
 
-                                <div className="col-md-1 col-centered">
+                                <div className="col-md-2 col-centered">
                                     <div className="d-flex justify-content-end">
                                         <Bonus />
                                     </div>

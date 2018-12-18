@@ -63,20 +63,19 @@ class Claim extends Component {
         this.setState({tokenAddress: event.target.value});
     }
 
-    campaignHashChanged = (event) => {
-        console.log('Referral Hash Changed ...');
-        this.setState({ referralHash : event.target.value });
+    campaignHashChanged = (e) => {
+        console.log('Referral Hash Changed ...', e.target.value);
+        this.setState({ referralHash : e.target.value });
     }
 
     claimBonusTokensClicked = async (event) => {
         event.preventDefault();
         console.log('Claim Bonus Token  Clicked !!!!');
-
+        console.log('claim Hash : ', this.state.referralHash);
         const { auctionContract, myAccount, claimAddress } = this.state;
+        //this.setState({ claimBonusTokensLoading : true });
 
-        this.setState({ claimBonusTokensLoading : true });
-
-        auctionContract.methods.claimtokenBonus(this.state.referralHash)
+        auctionContract.methods.claimCampaignTokenBonus(this.state.referralHash)
         .send({ 
             from: myAccount
         })
@@ -93,14 +92,13 @@ class Claim extends Component {
                 NotificationManager.success('Transaction Confirmed', 'Success');
             }
             this.setState({ transactionConfirmations: 1  });
-            this.setState({ claimBonusTokensLoading : false });
         })
         .on('error', (error) => {
             console.log('error: ', error);
             NotificationManager.error('Error');
             this.setState({ claimBonusTokensLoading : false });
         });
-
+        this.setState({ claimBonusTokensLoading : false });
     }
 
     checkTokenBalanceCliked = async (event) => {
@@ -166,26 +164,15 @@ class Claim extends Component {
        try {
             const { auctionContract, tokenContract,  web3 } = this.props.appProps; 
             this.setState({auctionContract, tokenContract, web3 })
-            
-            console.log('Token contract : ', tokenContract);
-
-
             const tokenSymbol =  await tokenContract.methods.symbol().call();
-
-
-
             this.setState({ tokenSymbol : tokenSymbol });
-
             const { networkLaunchDay, startBlock } = this.props.appProps;
             await this.setState({ startBlock }); 
             await this.setState({ networkLaunchDay });
-
             const myAccount = this.props.appProps.myAccounts[0];
-
             this.setState({claimAddress : myAccount});
             this.setState({tokenAddress : myAccount});
             this.setState({myAccount})
-
 
         }catch(error){
             console.log(error);
@@ -219,6 +206,7 @@ class Claim extends Component {
                 <NotificationContainer/>
 
                 <section id="section5">
+
                     <div className="container">
                         <div className="row" style={Styles.Style1}>
                             <div className="col-md-12">
@@ -233,28 +221,8 @@ class Claim extends Component {
                                 </div>
                             </div>
 
-                            <div className="col-md-6 pt-4">
-                                <form>
-                                    
-                                    {  claimBonusTokensLoading &&    
-                                        <div className="alert alert-danger" role="alert">
-                                            Sending Transaction ...
-                                        </div>
-                                    
-                                    }
-                                    <input className="mb-4" 
-                                            type="text" 
-                                            ref={this.input}
-                                            name="address" 
-                                            onChange={this.campaignHashChanged}
-                                            placeholder="Campaign hash" />
-
-                                    <button onClick={this.claimBonusTokensClicked}>CLAIM BONUS TOKENS</button>
-
-                                </form>
-                            </div>
-
-                            <div className="col-md-6 pt-4">
+                            {/* {'Claim Tokens'} */}
+                            <div className="col-md-12 pt-4">
                                 <form>
                                     {  claimTokenLoading &&    
                                         <div className="alert alert-danger" role="alert">
@@ -280,6 +248,53 @@ class Claim extends Component {
 
                                 </form>
                             </div>
+                        
+
+                            {/* { 'claim Bonus Tokens' } */}
+                            <div className="col-md-6 pt-4">
+                                <form>
+                                    {  claimBonusTokensLoading &&    
+                                        <div className="alert alert-danger" role="alert">
+                                            Sending Transaction 
+                                        </div>
+                                    
+                                    }
+                                    <input className="mb-4" 
+                                            type="text" 
+                                            ref={this.input}
+                                            name="address" 
+                                            onChange={this.campaignHashChanged}
+                                            placeholder="Campaign hash" />
+
+                                    <button onClick={this.claimBonusTokensClicked}>CLAIM BONUS TOKENS</button>
+
+                                </form>
+                            </div>
+
+                            
+                            {/* { 'claim Bonus Tokens' } */}
+                            <div className="col-md-6 pt-4">
+                                <form>
+                                    {  claimBonusTokensLoading &&    
+                                        <div className="alert alert-danger" role="alert">
+                                            Sending Transaction 
+                                        </div>
+                                    
+                                    }
+                                    <input className="mb-4" 
+                                            type="text" 
+                                            ref={this.input}
+                                            name="address" 
+                                            onChange={this.campaignHashChanged}
+                                            placeholder="Campaign hash" />
+
+                                    <button onClick={this.claimBonusTokensClicked}>CLAIM MARKETINK BONUS TOKENS</button>
+
+                                </form>
+                            </div>
+                            
+                            
+                        
                         </div>
 
                         <div className="title-1 mb-5">

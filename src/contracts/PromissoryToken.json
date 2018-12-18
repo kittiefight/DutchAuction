@@ -24,22 +24,22 @@
   ],
   "bytecode": "0x6080604052348015600f57600080fd5b50609e8061001e6000396000f300608060405260043610603e5763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663053f14da81146043575b600080fd5b348015604e57600080fd5b5060556067565b60408051918252519081900360200190f35b66a56bac75133c00815600a165627a7a72305820f605d0ecd34a87a1eabe6bd444b839f0930b69c021ce3b7dfb1c8b39b988abba0029",
   "deployedBytecode": "0x608060405260043610603e5763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663053f14da81146043575b600080fd5b348015604e57600080fd5b5060556067565b60408051918252519081900360200190f35b66a56bac75133c00815600a165627a7a72305820f605d0ecd34a87a1eabe6bd444b839f0930b69c021ce3b7dfb1c8b39b988abba0029",
-  "sourceMap": "26:113:9:-;;;111:26;8:9:-1;5:2;;;30:1;27;20:12;5:2;111:26:9;26:113;;;;;;",
-  "deployedSourceMap": "26:113:9:-;;;;;;;;;;;;;;;;;;;;;;;56:50;;8:9:-1;5:2;;;30:1;27;20:12;5:2;56:50:9;;;;;;;;;;;;;;;;;;;;;89:17;56:50;:::o",
+  "sourceMap": "26:113:7:-;;;111:26;8:9:-1;5:2;;;30:1;27;20:12;5:2;111:26:7;26:113;;;;;;",
+  "deployedSourceMap": "26:113:7:-;;;;;;;;;;;;;;;;;;;;;;;56:50;;8:9:-1;5:2;;;30:1;27;20:12;5:2;56:50:7;;;;;;;;;;;;;;;;;;;;;89:17;56:50;:::o",
   "source": "pragma solidity ^0.4.23;\n\ncontract PromissoryToken  {\n\n\tuint constant public lastPrice = 46561759600000000;\n\t\n\tconstructor() public {\n\n\t}\n}\n",
   "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/PromissoryToken.sol",
   "ast": {
     "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/PromissoryToken.sol",
     "exportedSymbols": {
       "PromissoryToken": [
-        3917
+        3626
       ]
     },
-    "id": 3918,
+    "id": 3627,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3909,
+        "id": 3618,
         "literals": [
           "solidity",
           "^",
@@ -47,7 +47,7 @@
           ".23"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:9"
+        "src": "0:24:7"
       },
       {
         "baseContracts": [],
@@ -55,20 +55,20 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3917,
+        "id": 3626,
         "linearizedBaseContracts": [
-          3917
+          3626
         ],
         "name": "PromissoryToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 3912,
+            "id": 3621,
             "name": "lastPrice",
             "nodeType": "VariableDeclaration",
-            "scope": 3917,
-            "src": "56:50:9",
+            "scope": 3626,
+            "src": "56:50:7",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -76,10 +76,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3910,
+              "id": 3619,
               "name": "uint",
               "nodeType": "ElementaryTypeName",
-              "src": "56:4:9",
+              "src": "56:4:7",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -88,14 +88,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "3436353631373539363030303030303030",
-              "id": 3911,
+              "id": 3620,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "89:17:9",
+              "src": "89:17:7",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_46561759600000000_by_1",
@@ -107,13 +107,13 @@
           },
           {
             "body": {
-              "id": 3915,
+              "id": 3624,
               "nodeType": "Block",
-              "src": "132:5:9",
+              "src": "132:5:7",
               "statements": []
             },
             "documentation": null,
-            "id": 3916,
+            "id": 3625,
             "implemented": true,
             "isConstructor": true,
             "isDeclaredConst": false,
@@ -121,43 +121,43 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3913,
+              "id": 3622,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "122:2:9"
+              "src": "122:2:7"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3914,
+              "id": 3623,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "132:0:9"
+              "src": "132:0:7"
             },
-            "scope": 3917,
-            "src": "111:26:9",
+            "scope": 3626,
+            "src": "111:26:7",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3918,
-        "src": "26:113:9"
+        "scope": 3627,
+        "src": "26:113:7"
       }
     ],
-    "src": "0:140:9"
+    "src": "0:140:7"
   },
   "legacyAST": {
     "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/PromissoryToken.sol",
     "exportedSymbols": {
       "PromissoryToken": [
-        3917
+        3626
       ]
     },
-    "id": 3918,
+    "id": 3627,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3909,
+        "id": 3618,
         "literals": [
           "solidity",
           "^",
@@ -165,7 +165,7 @@
           ".23"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:9"
+        "src": "0:24:7"
       },
       {
         "baseContracts": [],
@@ -173,20 +173,20 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 3917,
+        "id": 3626,
         "linearizedBaseContracts": [
-          3917
+          3626
         ],
         "name": "PromissoryToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 3912,
+            "id": 3621,
             "name": "lastPrice",
             "nodeType": "VariableDeclaration",
-            "scope": 3917,
-            "src": "56:50:9",
+            "scope": 3626,
+            "src": "56:50:7",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -194,10 +194,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3910,
+              "id": 3619,
               "name": "uint",
               "nodeType": "ElementaryTypeName",
-              "src": "56:4:9",
+              "src": "56:4:7",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -206,14 +206,14 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "3436353631373539363030303030303030",
-              "id": 3911,
+              "id": 3620,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
               "kind": "number",
               "lValueRequested": false,
               "nodeType": "Literal",
-              "src": "89:17:9",
+              "src": "89:17:7",
               "subdenomination": null,
               "typeDescriptions": {
                 "typeIdentifier": "t_rational_46561759600000000_by_1",
@@ -225,13 +225,13 @@
           },
           {
             "body": {
-              "id": 3915,
+              "id": 3624,
               "nodeType": "Block",
-              "src": "132:5:9",
+              "src": "132:5:7",
               "statements": []
             },
             "documentation": null,
-            "id": 3916,
+            "id": 3625,
             "implemented": true,
             "isConstructor": true,
             "isDeclaredConst": false,
@@ -239,30 +239,30 @@
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3913,
+              "id": 3622,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "122:2:9"
+              "src": "122:2:7"
             },
             "payable": false,
             "returnParameters": {
-              "id": 3914,
+              "id": 3623,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "132:0:9"
+              "src": "132:0:7"
             },
-            "scope": 3917,
-            "src": "111:26:9",
+            "scope": 3626,
+            "src": "111:26:7",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3918,
-        "src": "26:113:9"
+        "scope": 3627,
+        "src": "26:113:7"
       }
     ],
-    "src": "0:140:9"
+    "src": "0:140:7"
   },
   "compiler": {
     "name": "solc",
@@ -302,10 +302,16 @@
     "1545047814057": {
       "events": {},
       "links": {},
-      "address": "0xf8fb3752e99e93379b70241f9b5be2d50c285083",
-      "transactionHash": "0xcefdde95e7ced4fc69c461c9ef23133f520b411163d38a9e4ce4e3cb01ed1fd2"
+      "address": "0x04da72d82edde66a5b25278b8c38cda462e6ed09",
+      "transactionHash": "0xe4b55cb49f2f86f285190017c57f4b82506d8088eb663d00eb4da595672c5189"
+    },
+    "1545148224649": {
+      "events": {},
+      "links": {},
+      "address": "0x4c024872bb92c9a1c598968212e085c9f25c5f28",
+      "transactionHash": "0xa3eaee8dbd794b5e626293967ad5943d37d245f1d0a69e973820dbee54ae1cfd"
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-12-17T12:07:35.859Z"
+  "updatedAt": "2018-12-18T15:58:43.681Z"
 }

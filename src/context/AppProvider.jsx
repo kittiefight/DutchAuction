@@ -78,7 +78,7 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            auctionStartDateClock : Date.parse('2018-12-19T04:59:00Z'),
+            auctionStartDateClock : Date.parse('2018-12-10T04:59:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
             ethereumLastPrice : 0,
@@ -124,7 +124,6 @@ class AppProvider extends Component {
         this.calculateAuctionStartTime();
     }
 
-    
 
     async calculateAuctionDates() {
         
@@ -132,25 +131,29 @@ class AppProvider extends Component {
         const startBlock = await this.state.auctionContract.methods.startBlock().call();
         const startBlockData = await this.state.web3.eth.getBlock(startBlock);
         const auctionStartDate = new Date(startBlockData.timestamp * 1000);
-        //await this.setState({auctionEndDate });
         await this.setState({ auctionStartTime: formatDate(auctionStartDate) });
         //await this.setState({ auctionEndTime: this.getFormattedDate(auctionEndDate) });
     }
 
     async getAuctionData(web3) {
 
-        this.setState({ statesLoaded: true });
-        return ;
-
-        window._state = this.state;
-
+        // this.setState({ statesLoaded: true });
+        // return ;
+        //window._state = this.state;
         
         const auctionContract = new web3.eth.Contract(auctionAbi, AUCTION_CONTRACT_ADDRESS);
         const tokenContract = new web3.eth.Contract(tokenAbi, TOKEN_CONTRACT_ADDRESS);
         const promissoryTokenContract = new web3.eth.Contract(promissoryTokenAbi, POMISSORYTOKEN_CONTRACT_ADDRESS);
 
-        const priceTicker =  await axios('https://api.coinmarketcap.com/v2/ticker/1027/');
-        const ethereumLastPrice = priceTicker.data.data.quotes.USD.price;
+        let ethereumLastPrice = 90; //
+
+        try {
+            const priceTicker =  await axios('https://api.coinmarketcap.com/v2/ticker/1027/');
+            ethereumLastPrice = priceTicker.data.data.quotes.USD.price;
+        } catch(err) {
+
+        }
+        
         await this.setState({ethereumLastPrice});
 
         console.log('auctionContract :', auctionContract);
@@ -176,23 +179,15 @@ class AppProvider extends Component {
         const auctionStage = await auctionContract.methods.stage().call();
         const myAccounts = await web3.eth.getAccounts();
 
-
-
         const ktyTokenPriceUSD = web3.utils.fromWei(currentPrice, 'ether') * ethereumLastPrice;
         this.setState({ ktyTokenPriceUSD });
         
 
         const currentBidders = await auctionContract.methods.getCurrentBiddersCount().call();
         await this.setState({ currentBidders: currentBidders });
-
-
-
-        // if (myAccounts.length !== 0) {
-        //     const myBalance = await web3.eth.getBalance(myAccounts[0]);
-        //     await this.setState({ myBalance: this.state.web3.utils.fromWei(myBalance, 'ether') });
-        // }
-
-
+        
+        const bidderBonus = await auctionContract.methods.bidderBonus().call();
+        await this.setState({ bidderBonus : bidderBonus });
 
         await this.setState({ currentDate: CURRENT_DATE })
         await this.setState({ myAccounts: myAccounts });
@@ -205,7 +200,6 @@ class AppProvider extends Component {
         await this.setState({ totalBonusTokens: totalBonusTokens / 10 ** 18 });
 
         this.calculateAuctionDates();
-
 
 
         // Calculate Start Price 
@@ -223,7 +217,7 @@ class AppProvider extends Component {
             this.setState({ latestBlock: latestBlock.number });
             const decreaseRate = (1 / (latestBlock.number - this.state.startBlock + 7500)) * 100;
 
-        }catch(err){
+        } catch(err) {
 
         }
         await this.setState({ decreaseRate: decreaseRate });
@@ -266,11 +260,19 @@ class AppProvider extends Component {
         await this.setState({ startBlock : startBlock  });
 
         const _elapsedTime = new Date().getTime() -  new Date(this.state.auctionStartDateClock).getTime();
-        console.log('Elasped time : ', _elapsedTime);
-        const networkLaunchDay = new Date( (startBlockData.timestamp +  parseInt(waitingPeriod, 10))*1000  );
-        
 
-        await this.setState({ networkLaunchDay });
+        const _test =  new Date(this.state.auctionStartDateClock).getTime();
+        console.log('Test :  ',_test);
+
+        console.log('startBlockData.timestamp', startBlockData.timestamp);
+        console.log('Elasped time : ', _elapsedTime);
+        console.log('waiting Period :', waitingPeriod);
+
+        //const networkLaunchDay = new Date( (startBlockData.timestamp +  parseInt(waitingPeriod, 10))*1000  );
+
+        const networkLaunchDay = new Date(_test +  (   +  parseInt(waitingPeriod, 10) )*1000  );
+
+        await this.setState({ networkLaunchDay:  networkLaunchDay });
         await this.setState({ startBlock });
 
         console.log('NETWORK LAUNCH DAY : ', networkLaunchDay);

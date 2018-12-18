@@ -42,6 +42,7 @@ class Bid extends Component {
         console.log('----------------------------------------');
         let urlParams = new URLSearchParams(window.location.search);
         if(urlParams.has('ref')) {
+            console.log('REFERRAL CODE : ', urlParams.get('ref') );
             this.setState({ referalcode : urlParams.get('ref') });
         }
 
@@ -75,9 +76,7 @@ class Bid extends Component {
 
     BidClicked = async  (event) => {
         event.preventDefault();
-
         console.log('Bid clicked !!! ');
-        
         let web3 = window.web3;
         if (window.ethereum) {
             try {
@@ -113,7 +112,13 @@ class Bid extends Component {
 
     BidReferral = (account, bidAmount, refCode) => {
 
+        console.log('BID REFERRAL :::');
+        console.log('account : ', account);
+        console.log('bidAmount : ', bidAmount);
+        console.log('RefCode  : ', refCode);
+
         const auctionContract = this.props.appProps.auctionContract;
+
         auctionContract.methods.bidReferral(account,refCode)
         .send({ 
             from: account, 
@@ -279,7 +284,7 @@ class Bid extends Component {
                                           {  estimateTokensAmount !== 0 &&    
                                                 <div className="alert alert-info" role="alert">
                                                     <p>Approx : {this.state.estimateTokensAmount} KTY tokens @currentPrice: &nbsp;
-                                                        { Number(appProps.ktyTokenPriceUSD).toFixed(0) } USD | { Number(appProps.currentPrice).toFixed(4) }  [ Eth ]</p>
+                                                        { Number(appProps.ktyTokenPriceUSD).toFixed(2) } USD | { Number(appProps.currentPrice).toFixed(4) }  [ Eth ]</p>
                                                     <p>SuperDAO bonus tokens :  { this.state.estimatedPromissoryTokens} </p>
                                                 </div>
                                         }

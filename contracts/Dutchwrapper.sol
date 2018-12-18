@@ -359,6 +359,10 @@ contract Dutchwrapper is DutchAuction {
         _hash = bytes4(keccak256(abi.encodePacked(msg.sender)));
     }
 
+    function calculatPersonalHashByAddress(address _addr) public view returns (bytes4 _hash) {
+        _hash = bytes4(keccak256(abi.encodePacked(_addr)));
+    }
+
     function calculateCampaignHash(address _addr) public view returns (bytes4 _hash) {
         _hash = bytes4(keccak256(abi.encodePacked(_addr, msg.sender)));
     }
@@ -374,20 +378,24 @@ contract Dutchwrapper is DutchAuction {
             }
         }
 
-        if(topAddrHashes[i]!=_hash)
+        if(i < topReferredNum.length)
         {
-            /** shift the array of one position (getting rid of the last element) **/
-            for(uint j = topReferredNum.length - 1; j > i; j--) {
-                (topReferredNum[j], topAddrHashes[j] ) = (topReferredNum[j - 1],topAddrHashes[j - 1]);
-            }
+            if(topAddrHashes[i]!=_hash)
+            {
+                /** shift the array of one position (getting rid of the last element) **/
+                for(uint j = topReferredNum.length - 1; j > i; j--) {
+                    (topReferredNum[j], topAddrHashes[j] ) = (topReferredNum[j - 1],topAddrHashes[j - 1]);
+                }
 
-        
+            
+            }
+            /** update the new max element **/
+            (topReferredNum[i], topAddrHashes[i]) = (_value, _hash);
+            emit topAddrHashesUpdate (topAddrHashes);
+            emit topNumbersUpdate(topReferredNum);
         }
 
-        /** update the new max element **/
-        (topReferredNum[i], topAddrHashes[i]) = (_value, _hash);
-        emit topAddrHashesUpdate (topAddrHashes);
-        emit topNumbersUpdate(topReferredNum);
+
 
     }
 
