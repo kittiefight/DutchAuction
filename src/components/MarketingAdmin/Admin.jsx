@@ -37,10 +37,8 @@ class Admin extends Component {
         const { auctionContract } = this.props.appProps;
         const response = await auctionContract.methods.SocialCampaigns(this.state.socialReferralsHash).call();
         console.log(response);
-
         const socialreferralsTable = this.buildSocialferralsTable(response);
         this.setState({ socialreferralsTable: socialreferralsTable })
-
     }
 
     tokenReferrals = async (e) => {
@@ -52,9 +50,7 @@ class Admin extends Component {
         console.log(response);
         const tokenreferralsTable = this.buildTokenreferralsTable(response);
         this.setState({ tokenreferralsTable: tokenreferralsTable })
-
     }
-
 
     marketingPartners = async (e) => {
         console.log('.... get Marketing Partners .... ');
@@ -64,7 +60,6 @@ class Admin extends Component {
         console.log(response);
         const marketingPartnersTable = this.buildMarketingPartnersTable(response);
         this.setState({ marketingPartnersTable: marketingPartnersTable })
-
     }
 
     buildSocialferralsTable = (data) => {
@@ -99,10 +94,12 @@ class Admin extends Component {
 
 
     buildTokenreferralsTable = (data) => {
+        
         // addr: "0x0000000000000000000000000000000000000000"
         // hash: "0x00000000"
         // totalReferrals: "0"
         // totalTokensEarned: "0"
+
         return (
             <div>
                 <hr />
@@ -184,10 +181,11 @@ class Admin extends Component {
     getPersonalHashByAddress = async (e) => {
         e.preventDefault();
         const { auctionContract } = this.props.appProps;
-        const hash = 
-             auctionContract.methods.calculatPersonalHashByAddress().call(this.state.address);
-        
-        this.setState({personalHashByAddress : hash});
+        console.log('Adderss : ', this.state.personaladdress)
+        const personalHashByAddress = 
+           await auctionContract.methods.calculatPersonalHashByAddress(this.state.personaladdress).call();
+        console.log('Hash : ', personalHashByAddress);
+        this.setState({personalHashByAddress});
     }
 
     referralSignUp = (e) => {
@@ -315,7 +313,7 @@ class Admin extends Component {
                         </div>
                     </div>
 
-
+                    {/* { Get My refferal Link  } */}
                     <div className="row" id="section4">
                         <div className="col">
                             <div className="card">
@@ -328,22 +326,22 @@ class Admin extends Component {
                         </div>
                         <div className="col-md-12">
                             <br/>
-
+                            {this.state.referallSignUpTx &&
+                                <h4 className="etherscantext"> 
+                                    <a href={referralSignUpTrasactionLink}> 
+                                        See Transaction On Ethersacn ...  
+                                    </a>
+                                </h4>
+                            }
+                            <br/>
                             { this.state.personalHash && 
                                 <h3>Referral Link : <a href={referralLink}>{referralLink}</a></h3>
                             }
 
-                            {this.state.referallSignUpTx &&
-                                <h3 className="etherscantext"> 
-                                    <a href={referralSignUpTrasactionLink}> 
-                                        See Transaction On Ethersacn ...  
-                                    </a>
-                                </h3>
-                            }
                         </div>
                     </div>
 
-                    {/* {' Get personal hash  '} */}
+                    {/* {' Get personal hash By address '} */}
 
                     <div className="row" id="section4">
                         <div className="col-md-6">
@@ -359,11 +357,12 @@ class Admin extends Component {
                                 <div className="card-body">
                                     <button onClick={this.getPersonalHashByAddress}>
                                             Get Referral Link
-                                        </button>
+                                    </button>
                                 </div>
                             </div>
                         </div>
                         <div className="col-md-12">
+                            <br/>
                             { this.state.personalHashByAddress && 
                                 <h3>Referral Link : <a href={referralLinkByAddress}>
                                     {referralLinkByAddress}</a></h3>
@@ -434,9 +433,7 @@ class Admin extends Component {
                             </div>
                         </div>
                         <div className="col-md-12">
-                            
-                                { this.state.top20Table }
-                            
+                            { this.state.top20Table }
                         </div>
                     </div>
 
