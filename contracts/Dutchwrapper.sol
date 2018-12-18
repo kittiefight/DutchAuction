@@ -14,6 +14,9 @@ contract Dutchwrapper is DutchAuction {
     // 2,000,000 :  2 million: total MAX_TOKEN_REFERRAL
     uint constant public TOTAL_BONUS_TOKEN = 2000000 * 10**18;
 
+    uint public softCap;
+    bool public softcapReached = false;
+
 
     uint constant public Partners = 1; // Distinction between promotion groups, partnership for eth
     uint constant public Referrals = 2; // Distinction between promotion groups, referral campaign for tokens
@@ -102,10 +105,18 @@ contract Dutchwrapper is DutchAuction {
     }
 
 
-    constructor  (address _pWallet, uint _ceiling, uint _priceFactor)
+    constructor  (address _pWallet, uint _ceiling, uint _priceFactor, uint _softCap)
         DutchAuction(_pWallet, _ceiling, _priceFactor)  public {
+
+            softCap = _softCap;
     }
 
+    function checksoftCAP() internal {
+        //require (softcapReached == false);
+        if( totalReceived >= softCap ) {
+            softcapReached = true;
+        }
+    }
 
     // creates either a marketing partnering for eth or a twitter retweet campaign. referal marketing in
     // exchange for tokens are self generated in referal signup function
@@ -172,12 +183,13 @@ contract Dutchwrapper is DutchAuction {
 
         require( bid(_receiver) == bidAmount );
 
-    		uint amount = msg.value;
-    		bidder memory _bidder;
-    		_bidder.addr = _receiver;
-    		_bidder.amount = amount;
-            SuperDAOTokens[msg.sender] += amount/promissorytokenLastPrice;
-    		CurrentBidders.push(_bidder);
+		uint amount = msg.value;
+		bidder memory _bidder;
+		_bidder.addr = _receiver;
+		_bidder.amount = amount;
+        SuperDAOTokens[msg.sender] += amount/promissorytokenLastPrice;
+		CurrentBidders.push(_bidder);
+        checksoftCAP();
 
         emit BidEvent(_hash, msg.sender, amount);
 
@@ -276,6 +288,7 @@ contract Dutchwrapper is DutchAuction {
         							return Referrals;
         						}
                         }
+    
     }
 
 

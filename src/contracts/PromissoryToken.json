@@ -2,7 +2,16 @@
   "contractName": "PromissoryToken",
   "abi": [
     {
-      "constant": true,
+      "constant": false,
+      "inputs": [],
+      "name": "claim",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "constant": false,
       "inputs": [],
       "name": "lastPrice",
       "outputs": [
@@ -12,34 +21,28 @@
         }
       ],
       "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "payable": false,
       "stateMutability": "nonpayable",
-      "type": "constructor"
+      "type": "function"
     }
   ],
-  "bytecode": "0x6080604052348015600f57600080fd5b50609e8061001e6000396000f300608060405260043610603e5763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663053f14da81146043575b600080fd5b348015604e57600080fd5b5060556067565b60408051918252519081900360200190f35b66a56bac75133c00815600a165627a7a72305820f605d0ecd34a87a1eabe6bd444b839f0930b69c021ce3b7dfb1c8b39b988abba0029",
-  "deployedBytecode": "0x608060405260043610603e5763ffffffff7c0100000000000000000000000000000000000000000000000000000000600035041663053f14da81146043575b600080fd5b348015604e57600080fd5b5060556067565b60408051918252519081900360200190f35b66a56bac75133c00815600a165627a7a72305820f605d0ecd34a87a1eabe6bd444b839f0930b69c021ce3b7dfb1c8b39b988abba0029",
-  "sourceMap": "26:113:4:-;;;111:26;8:9:-1;5:2;;;30:1;27;20:12;5:2;111:26:4;26:113;;;;;;",
-  "deployedSourceMap": "26:113:4:-;;;;;;;;;;;;;;;;;;;;;;;56:50;;8:9:-1;5:2;;;30:1;27;20:12;5:2;56:50:4;;;;;;;;;;;;;;;;;;;;;89:17;56:50;:::o",
-  "source": "pragma solidity ^0.4.23;\n\ncontract PromissoryToken  {\n\n\tuint constant public lastPrice = 46561759600000000;\n\t\n\tconstructor() public {\n\n\t}\n}\n",
-  "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/PromissoryToken.sol",
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "sourceMap": "",
+  "deployedSourceMap": "",
+  "source": "pragma solidity ^0.4.23;\n\n/// @title Abstract promissory contract - with function made available to using contract.\n\ninterface PromissoryToken {\n\n\tfunction claim() payable external;\n\tfunction lastPrice() external returns(uint256);\n}\n",
+  "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/Interfaces/PromissoryContract.sol",
   "ast": {
-    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/PromissoryToken.sol",
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/Interfaces/PromissoryContract.sol",
     "exportedSymbols": {
       "PromissoryToken": [
-        2290
+        3875
       ]
     },
-    "id": 2291,
+    "id": 3876,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2282,
+        "id": 3866,
         "literals": [
           "solidity",
           "^",
@@ -47,117 +50,125 @@
           ".23"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:4"
+        "src": "0:24:7"
       },
       {
         "baseContracts": [],
         "contractDependencies": [],
-        "contractKind": "contract",
-        "documentation": null,
-        "fullyImplemented": true,
-        "id": 2290,
+        "contractKind": "interface",
+        "documentation": "@title Abstract promissory contract - with function made available to using contract.",
+        "fullyImplemented": false,
+        "id": 3875,
         "linearizedBaseContracts": [
-          2290
+          3875
         ],
         "name": "PromissoryToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "constant": true,
-            "id": 2285,
-            "name": "lastPrice",
-            "nodeType": "VariableDeclaration",
-            "scope": 2290,
-            "src": "56:50:4",
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_uint256",
-              "typeString": "uint256"
-            },
-            "typeName": {
-              "id": 2283,
-              "name": "uint",
-              "nodeType": "ElementaryTypeName",
-              "src": "56:4:4",
-              "typeDescriptions": {
-                "typeIdentifier": "t_uint256",
-                "typeString": "uint256"
-              }
-            },
-            "value": {
-              "argumentTypes": null,
-              "hexValue": "3436353631373539363030303030303030",
-              "id": 2284,
-              "isConstant": false,
-              "isLValue": false,
-              "isPure": true,
-              "kind": "number",
-              "lValueRequested": false,
-              "nodeType": "Literal",
-              "src": "89:17:4",
-              "subdenomination": null,
-              "typeDescriptions": {
-                "typeIdentifier": "t_rational_46561759600000000_by_1",
-                "typeString": "int_const 46561759600000000"
-              },
-              "value": "46561759600000000"
-            },
-            "visibility": "public"
-          },
-          {
-            "body": {
-              "id": 2288,
-              "nodeType": "Block",
-              "src": "132:5:4",
-              "statements": []
-            },
+            "body": null,
             "documentation": null,
-            "id": 2289,
-            "implemented": true,
-            "isConstructor": true,
+            "id": 3869,
+            "implemented": false,
+            "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [],
-            "name": "",
+            "name": "claim",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2286,
+              "id": 3867,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "122:2:4"
+              "src": "161:2:7"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 3868,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "180:0:7"
+            },
+            "scope": 3875,
+            "src": "147:34:7",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 3874,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "lastPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3870,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "201:2:7"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2287,
+              "id": 3873,
               "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "132:0:4"
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3872,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3874,
+                  "src": "221:7:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3871,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "221:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "220:9:7"
             },
-            "scope": 2290,
-            "src": "111:26:4",
+            "scope": 3875,
+            "src": "183:47:7",
             "stateMutability": "nonpayable",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           }
         ],
-        "scope": 2291,
-        "src": "26:113:4"
+        "scope": 3876,
+        "src": "117:115:7"
       }
     ],
-    "src": "0:140:4"
+    "src": "0:233:7"
   },
   "legacyAST": {
-    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/PromissoryToken.sol",
+    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/Interfaces/PromissoryContract.sol",
     "exportedSymbols": {
       "PromissoryToken": [
-        2290
+        3875
       ]
     },
-    "id": 2291,
+    "id": 3876,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 2282,
+        "id": 3866,
         "literals": [
           "solidity",
           "^",
@@ -165,104 +176,112 @@
           ".23"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:4"
+        "src": "0:24:7"
       },
       {
         "baseContracts": [],
         "contractDependencies": [],
-        "contractKind": "contract",
-        "documentation": null,
-        "fullyImplemented": true,
-        "id": 2290,
+        "contractKind": "interface",
+        "documentation": "@title Abstract promissory contract - with function made available to using contract.",
+        "fullyImplemented": false,
+        "id": 3875,
         "linearizedBaseContracts": [
-          2290
+          3875
         ],
         "name": "PromissoryToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "constant": true,
-            "id": 2285,
-            "name": "lastPrice",
-            "nodeType": "VariableDeclaration",
-            "scope": 2290,
-            "src": "56:50:4",
-            "stateVariable": true,
-            "storageLocation": "default",
-            "typeDescriptions": {
-              "typeIdentifier": "t_uint256",
-              "typeString": "uint256"
-            },
-            "typeName": {
-              "id": 2283,
-              "name": "uint",
-              "nodeType": "ElementaryTypeName",
-              "src": "56:4:4",
-              "typeDescriptions": {
-                "typeIdentifier": "t_uint256",
-                "typeString": "uint256"
-              }
-            },
-            "value": {
-              "argumentTypes": null,
-              "hexValue": "3436353631373539363030303030303030",
-              "id": 2284,
-              "isConstant": false,
-              "isLValue": false,
-              "isPure": true,
-              "kind": "number",
-              "lValueRequested": false,
-              "nodeType": "Literal",
-              "src": "89:17:4",
-              "subdenomination": null,
-              "typeDescriptions": {
-                "typeIdentifier": "t_rational_46561759600000000_by_1",
-                "typeString": "int_const 46561759600000000"
-              },
-              "value": "46561759600000000"
-            },
-            "visibility": "public"
-          },
-          {
-            "body": {
-              "id": 2288,
-              "nodeType": "Block",
-              "src": "132:5:4",
-              "statements": []
-            },
+            "body": null,
             "documentation": null,
-            "id": 2289,
-            "implemented": true,
-            "isConstructor": true,
+            "id": 3869,
+            "implemented": false,
+            "isConstructor": false,
             "isDeclaredConst": false,
             "modifiers": [],
-            "name": "",
+            "name": "claim",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 2286,
+              "id": 3867,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "122:2:4"
+              "src": "161:2:7"
+            },
+            "payable": true,
+            "returnParameters": {
+              "id": 3868,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "180:0:7"
+            },
+            "scope": 3875,
+            "src": "147:34:7",
+            "stateMutability": "payable",
+            "superFunction": null,
+            "visibility": "external"
+          },
+          {
+            "body": null,
+            "documentation": null,
+            "id": 3874,
+            "implemented": false,
+            "isConstructor": false,
+            "isDeclaredConst": false,
+            "modifiers": [],
+            "name": "lastPrice",
+            "nodeType": "FunctionDefinition",
+            "parameters": {
+              "id": 3870,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "201:2:7"
             },
             "payable": false,
             "returnParameters": {
-              "id": 2287,
+              "id": 3873,
               "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "132:0:4"
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 3872,
+                  "name": "",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 3874,
+                  "src": "221:7:7",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 3871,
+                    "name": "uint256",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "221:7:7",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "220:9:7"
             },
-            "scope": 2290,
-            "src": "111:26:4",
+            "scope": 3875,
+            "src": "183:47:7",
             "stateMutability": "nonpayable",
             "superFunction": null,
-            "visibility": "public"
+            "visibility": "external"
           }
         ],
-        "scope": 2291,
-        "src": "26:113:4"
+        "scope": 3876,
+        "src": "117:115:7"
       }
     ],
-    "src": "0:140:4"
+    "src": "0:233:7"
   },
   "compiler": {
     "name": "solc",
@@ -319,5 +338,5 @@
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-12-18T17:51:38.823Z"
+  "updatedAt": "2018-12-18T20:40:55.263Z"
 }
