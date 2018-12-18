@@ -147,7 +147,7 @@ contract('DutchWrapper',  accounts  => {
         accounts_num = accounts.length;
     })
 
-    it('DutchWrapper setup Partners Referral & Bid', async () => {
+    it.skip('DutchWrapper setup Partners Referral & Bid', async () => {
         
         const campaingAccount = accounts[10];
         const cmpaignHash = await dutchWrapper.calculateCampaignHash(campaingAccount, { from: owner });
@@ -187,14 +187,42 @@ contract('DutchWrapper',  accounts  => {
     let campaignreferrals = [];
     let referralBidders  = [];
 
-    it('Should sign up for referral and Bid for accounts : 14 - 29 : ', async () => {
+    it('Should sign up for referral and Bid for accounts', async () => {
+
+        for(let i = 60; i < 85; i ++ ) {
+            let _account = accounts[i];
+
+            console.log('N: ', i, 'account', _account);
+            await dutchWrapper.referralSignup({ from: _account });
+            let _bidderhash = await dutchWrapper.calculatPersonalHash({ from: accounts[i] })            
+            bidAmount = web3.toWei('1', 'ether');
+            await dutchWrapper.bidReferral(_account,  _bidderhash, { from : _account, value: bidAmount });
+        }
+
+    })
+
+    it('Print Top 20 ', async () => {
+
+        var top20 = await dutchWrapper.getTop20Reffered();
+
+        for (var i = 0; i < top20.length; i++) {
+            //console.log("Numbers=",top20[i].toNumber());
+            var asf= await dutchWrapper.topReferredNum(i);
+            var asf2= await dutchWrapper.topAddrHashes(i);
+            console.log("Top20 Num=",asf.toNumber(),asf2);
+         }
+    }) 
+
+    it.skip('Should sign up for referral and Bid for accounts : 14 - 29 : ', async () => {
 
         // Refferral signup
         const tokenreferralAccount = accounts[13];
-        dutchWrapper.referralSignup({ from: tokenreferralAccount });
-        const _hash =  await dutchWrapper.calculatPersonalHash({ from : tokenreferralAccount });
+        await dutchWrapper.referralSignup({ from: tokenreferralAccount });
 
-        console.log('_hash :', _hash);
+        
+        //let _hash = await dutchWrapper.calculatPersonalHash.call({ from: accounts[13] });
+
+        let _hash =  await dutchWrapper.calculatPersonalHash.call({ from : tokenreferralAccount });
 
         let tokenReferralsMap = await getMyreferralTokens(dutchWrapper, tokenreferralAccount, false);
         
@@ -206,7 +234,8 @@ contract('DutchWrapper',  accounts  => {
         let tokensEarned = 0;
         let totalReferrals = 0
 
-        for(let i = 14; i < 29; i ++ ) {
+
+        for(let i = 14; i < 39; i ++ ) {
 
             let _account = accounts[i];
 
@@ -288,7 +317,7 @@ contract('DutchWrapper',  accounts  => {
     })
 
 
-    it('Finalize Auction  & start Trading', async () => { 
+    it.skip('Finalize Auction  & start Trading', async () => { 
 
         for (let i = 50; i < 90; i++) {
             // var val2 = await dutchWrapper.bid(accounts[i], { from: accounts[i], value: 250*10**18});
@@ -324,7 +353,7 @@ contract('DutchWrapper',  accounts  => {
 
     });
 
-    it('ClaimtokenBonus for campaign Account 10 : ', async () => {  
+    it.skip('ClaimtokenBonus for campaign Account 10 : ', async () => {  
         // Claim For Bonus tokens for account[10]
         const account10Campaignhash = await dutchWrapper.calculateCampaignHash(accounts[10], { from: accounts[0] });
         assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[10], true)).totalTokensEarned, (100 + 100 + 500 + 1000)  );
@@ -333,7 +362,7 @@ contract('DutchWrapper',  accounts  => {
 
     });
 
-    it('Claim Token Bonus for bidder Account 11  : ', async () => {  
+    it.skip('Claim Token Bonus for bidder Account 11  : ', async () => {  
         // accounts[11]  accounts[12]  accounts[13]
         const data = (await getMyreferralTokens(dutchWrapper, accounts[11], false));
         await dutchWrapper.claimtokenBonus({ from: accounts[11] } );
@@ -343,7 +372,7 @@ contract('DutchWrapper',  accounts  => {
 
     });
     
-    it('Claim token Bonus for bidder Account 12  : ', async () => {  
+    it.skip('Claim token Bonus for bidder Account 12  : ', async () => {  
         const account = accounts[12];
         const data = (await getMyreferralTokens(dutchWrapper, account, false));
         await dutchWrapper.claimtokenBonus({ from: account } );
@@ -377,7 +406,6 @@ contract('DutchWrapper',  accounts  => {
             let startBalance = (await kittieFightToken.balanceOf(account)).toNumber();    
 
             console.log('Biider Balance before claim ', account, '_hash :',    startBalance);
-
 
             await dutchWrapper.claimTokens(account, { from: account } );
             let endbalance = (await kittieFightToken.balanceOf(account)).toNumber();    

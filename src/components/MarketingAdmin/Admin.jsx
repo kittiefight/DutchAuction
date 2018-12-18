@@ -21,6 +21,7 @@ class Admin extends Component {
         this.marketingPartners = this.marketingPartners.bind(this);
         this.tokenReferrals = this.tokenReferrals.bind(this);
         this.socialReferrals = this.socialReferrals.bind(this);
+        this.getPersonalHashByAddress = this.getPersonalHashByAddress.bind(this);
     }
 
     inputChanged = (e) => {
@@ -155,7 +156,7 @@ class Admin extends Component {
                     </li>
                     <li className="list-group-item d-flex justify-content-between align-items-center">
                         Total Contribution
-                        <span className="badge badge-primary badge-pill">{data.totalContribution}</span>
+                        <span className="badge badge-primary badge-pill">{data.totalContribution/ (10**18) }</span>
                     </li>
                     <li className="list-group-item d-flex justify-content-between align-items-center">
                         Total Referrals
@@ -163,12 +164,30 @@ class Admin extends Component {
                     </li>
                     <li className="list-group-item d-flex justify-content-between align-items-center">
                         EthEarned
-                        <span className="badge badge-primary badge-pill">{data.EthEarned} Eth / {data.EthEarned * ethereumLastPrice} USD </span>
+                        <span className="badge badge-primary badge-pill">{data.EthEarned/ (10**18) } Eth / { data.EthEarned/(10**18) * ethereumLastPrice} USD </span>
                     </li>
                 </ul>
             </div>
         )
 
+    }
+
+    getPersonalHash = async () => {
+        const { auctionContract } = this.props.appProps;
+        const personalHash = 
+            await auctionContract.methods.calculatPersonalHash().call(
+                    { from: this.state.ethereumAddress });
+        this.setState({ personalHash })
+        
+    }
+
+    getPersonalHashByAddress = async (e) => {
+        e.preventDefault();
+        const { auctionContract } = this.props.appProps;
+        const hash = 
+             auctionContract.methods.calculatPersonalHashByAddress().call(this.state.address);
+        
+        this.setState({personalHashByAddress : hash});
     }
 
     referralSignUp = (e) => {
@@ -178,6 +197,7 @@ class Admin extends Component {
         // return;
 
         const { auctionContract } = this.props.appProps;
+
         auctionContract.methods.referralSignup()
             .send({
                 from: this.state.ethereumAddress
@@ -189,6 +209,9 @@ class Admin extends Component {
                 this.setState({ tx: hash });
                 this.setState({ BidConfirmModalOpen: true });
                 this.setState({ transactionConfirmations: 0 });
+
+                this.getPersonalHash();
+
             })
             .on('receipt', (receipt) => {
                 console.log('recipt :  ', receipt);
@@ -275,7 +298,8 @@ class Admin extends Component {
 
         const confirmSocialTrasactionLink = "https://etherscan.io/tx/" + this.state.confirmSocialTx;
         const referralSignUpTrasactionLink = "https://etherscan.io/tx/" + this.state.referallSignUpTx;
-
+        const referralLink = "https://dutchauction.kittiefight.io/?ref=" + this.state.personalHash;
+        const referralLinkByAddress = "https://dutchauction.kittiefight.io/?ref=" + this.state.personalHashByAddress;
 
         return (
             <div>
@@ -290,6 +314,113 @@ class Admin extends Component {
                             <p>Account : {this.state.ethereumAddress} </p>
                         </div>
                     </div>
+
+
+                    <div className="row" id="section4">
+                        <div className="col">
+                            <div className="card">
+                                <div className="card-body">
+                                    <button onClick={this.referralSignUp}>
+                                            KTY Token Referral SignUp
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-12">
+                            <br/>
+
+                            { this.state.personalHash && 
+                                <h3>Referral Link : <a href={referralLink}>{referralLink}</a></h3>
+                            }
+
+                            {this.state.referallSignUpTx &&
+                                <h3 className="etherscantext"> 
+                                    <a href={referralSignUpTrasactionLink}> 
+                                        See Transaction On Ethersacn ...  
+                                    </a>
+                                </h3>
+                            }
+                        </div>
+                    </div>
+
+                    {/* {' Get personal hash  '} */}
+
+                    <div className="row" id="section4">
+                        <div className="col-md-6">
+                            <input
+                                name="personaladdress"
+                                onChange={this.inputChanged}
+                                className="form-control form-control-lg"
+                                type="text"
+                                placeholder="Address" />
+                        </div>
+                        <div className="col-md-6">
+                            <div className="card">
+                                <div className="card-body">
+                                    <button onClick={this.getPersonalHashByAddress}>
+                                            Get Referral Link
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-12">
+                            { this.state.personalHashByAddress && 
+                                <h3>Referral Link : <a href={referralLinkByAddress}>
+                                    {referralLinkByAddress}</a></h3>
+                            }
+
+                        </div>
+                    </div>
+
+                    {/* {'Token referral'} */}
+                    <div className="row" id="section4">
+                        <div className="col-md-6">
+                            <input
+                                name="tokenReferralsHash"
+                                value={this.state.ethereumAddress}
+                                onChange={this.inputChanged}
+                                className="form-control form-control-lg"
+                                type="text"
+                                placeholder="hash" />
+                        </div>
+                        <div className="col-md-6">
+                            <div className="card">
+                                <div className="card-body">
+                                    <button onClick={this.tokenReferrals}>
+                                            Check Token Referrals
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-12">
+                            {this.state.tokenreferralsTable}
+                        </div>
+                    </div>
+                    
+                    {/* {Marketing Partners} */}
+                    <div className="row" id="section4">
+                            <div className="col-md-6">
+                                <input 
+                                    name="marketingHash"
+                                    onChange={this.inputChanged}
+                                    className="form-control form-control-lg" 
+                                    type="text" 
+                                    placeholder="hash" />
+                            </div>
+                            <div className="col-md-6">
+                                <div className="card">
+                                    <div className="card-body">
+                                        <button  onClick={this.marketingPartners}>
+                                            Marketing Partners
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-md-12"> 
+                                    { this.state.marketingPartnersTable }
+                            </div>
+                        </div>
+
 
                     {/* {'get top 20'} */}
                     <div className="row" id="section4">
@@ -309,72 +440,6 @@ class Admin extends Component {
                         </div>
                     </div>
 
-
-                    <div className="row" id="section4">
-                        <div className="col">
-                            <div className="card">
-                                <div className="card-body">
-                                    <button onClick={this.referralSignUp}>
-                                            KTY Token Referral SignUp
-                                        </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-12">
-                            {this.state.referallSignUpTx &&
-                                <h3 className="etherscantext"> <a href={referralSignUpTrasactionLink}> See Transaction On Ethersacn ...  </a></h3>
-                            }
-                        </div>
-                    </div>
-
-                    <div className="row" id="section4">
-                        <div className="col-md-6">
-                            <input
-                                name="marketingHash"
-                                onChange={this.inputChanged}
-                                className="form-control form-control-lg"
-                                type="text"
-                                placeholder="hash" />
-                        </div>
-                        <div className="col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <button onClick={this.marketingPartners}>
-                                        Marketing Partners
-                                        </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-12">
-                            {this.state.marketingPartnersTable}
-                        </div>
-                    </div>
-
-                    <div className="row" id="section4">
-                        <div className="col-md-6">
-                            <input
-                                name="tokenReferralsHash"
-                                value={this.state.ethereumAddress}
-                                onChange={this.inputChanged}
-                                className="form-control form-control-lg"
-                                type="text"
-                                placeholder="hash" />
-                        </div>
-                        <div className="col-md-6">
-                            <div className="card">
-                                <div className="card-body">
-                                    <button onClick={this.tokenReferrals}>
-                                            Token Referrals
-                                        </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-12">
-                            {this.state.tokenreferralsTable}
-                        </div>
-                    </div>
-
-            
                 </div>
 
             </div>

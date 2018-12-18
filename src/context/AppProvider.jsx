@@ -78,7 +78,7 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            auctionStartDateClock : Date.parse('2018-12-16T04:59:00Z'),
+            auctionStartDateClock : Date.parse('2018-12-10T04:59:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
             ethereumLastPrice : 0,
@@ -260,11 +260,19 @@ class AppProvider extends Component {
         await this.setState({ startBlock : startBlock  });
 
         const _elapsedTime = new Date().getTime() -  new Date(this.state.auctionStartDateClock).getTime();
-        console.log('Elasped time : ', _elapsedTime);
-        const networkLaunchDay = new Date( (startBlockData.timestamp +  parseInt(waitingPeriod, 10))*1000  );
-        
 
-        await this.setState({ networkLaunchDay });
+        const _test =  new Date(this.state.auctionStartDateClock).getTime();
+        console.log('Test :  ',_test);
+
+        console.log('startBlockData.timestamp', startBlockData.timestamp);
+        console.log('Elasped time : ', _elapsedTime);
+        console.log('waiting Period :', waitingPeriod);
+
+        //const networkLaunchDay = new Date( (startBlockData.timestamp +  parseInt(waitingPeriod, 10))*1000  );
+
+        const networkLaunchDay = new Date(_test +  (   +  parseInt(waitingPeriod, 10) )*1000  );
+
+        await this.setState({ networkLaunchDay:  networkLaunchDay });
         await this.setState({ startBlock });
 
         console.log('NETWORK LAUNCH DAY : ', networkLaunchDay);

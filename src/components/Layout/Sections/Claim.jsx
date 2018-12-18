@@ -210,6 +210,7 @@ class Claim extends Component {
                 <NotificationContainer/>
 
                 <section id="section5">
+
                     <div className="container">
                         <div className="row" style={Styles.Style1}>
                             <div className="col-md-12">
@@ -224,27 +225,8 @@ class Claim extends Component {
                                 </div>
                             </div>
 
-                            <div className="col-md-6 pt-4">
-                                <form>
-                                    {  claimBonusTokensLoading &&    
-                                        <div className="alert alert-danger" role="alert">
-                                            Sending Transaction 
-                                        </div>
-                                    
-                                    }
-                                    <input className="mb-4" 
-                                            type="text" 
-                                            ref={this.input}
-                                            name="address" 
-                                            onChange={this.campaignHashChanged}
-                                            placeholder="Campaign hash" />
-
-                                    <button onClick={this.claimBonusTokensClicked}>CLAIM BONUS TOKENS</button>
-
-                                </form>
-                            </div>
-
-                            <div className="col-md-6 pt-4">
+                            {/* {'Claim Tokens'} */}
+                            <div className="col-md-12 pt-4">
                                 <form>
                                     {  claimTokenLoading &&    
                                         <div className="alert alert-danger" role="alert">
@@ -270,6 +252,53 @@ class Claim extends Component {
 
                                 </form>
                             </div>
+                        
+
+                            {/* { 'claim Bonus Tokens' } */}
+                            <div className="col-md-6 pt-4">
+                                <form>
+                                    {  claimBonusTokensLoading &&    
+                                        <div className="alert alert-danger" role="alert">
+                                            Sending Transaction 
+                                        </div>
+                                    
+                                    }
+                                    <input className="mb-4" 
+                                            type="text" 
+                                            ref={this.input}
+                                            name="address" 
+                                            onChange={this.campaignHashChanged}
+                                            placeholder="Campaign hash" />
+
+                                    <button onClick={this.claimBonusTokensClicked}>CLAIM BONUS TOKENS</button>
+
+                                </form>
+                            </div>
+
+                            
+                            {/* { 'claim Bonus Tokens' } */}
+                            <div className="col-md-6 pt-4">
+                                <form>
+                                    {  claimBonusTokensLoading &&    
+                                        <div className="alert alert-danger" role="alert">
+                                            Sending Transaction 
+                                        </div>
+                                    
+                                    }
+                                    <input className="mb-4" 
+                                            type="text" 
+                                            ref={this.input}
+                                            name="address" 
+                                            onChange={this.campaignHashChanged}
+                                            placeholder="Campaign hash" />
+
+                                    <button onClick={this.claimBonusTokensClicked}>CLAIM MARKETINK BONUS TOKENS</button>
+
+                                </form>
+                            </div>
+                            
+                            
+                        
                         </div>
 
                         <div className="title-1 mb-5">
