@@ -359,6 +359,10 @@ contract Dutchwrapper is DutchAuction {
         _hash = bytes4(keccak256(abi.encodePacked(msg.sender)));
     }
 
+    function calculatPersonalHashByAddress(address _addr) public view returns (bytes4 _hash) {
+        _hash = bytes4(keccak256(abi.encodePacked(_addr)));
+    }
+
     function calculateCampaignHash(address _addr) public view returns (bytes4 _hash) {
         _hash = bytes4(keccak256(abi.encodePacked(_addr, msg.sender)));
     }
