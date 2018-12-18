@@ -281,7 +281,7 @@ contract('DutchWrapper',  accounts  => {
 
               assert.equal(tokenReferral[0], _hash, 'Incorrect address set')
               assert.equal(tokenReferral[1], _addr, 'Incorrect hash set')
-              tokenReferralsHash.ush(_hash);
+              tokenReferralsHash.push(_hash);
             } catch (e) {
               assert.notExists( e.message || e, 'Exected function to complete')
             }
@@ -299,6 +299,8 @@ contract('DutchWrapper',  accounts  => {
         })
 
         describe('bidReferral()', function () {
+          it('should fail to bidReferral before stage', async function () {
+          })
 
           it('DutchWrapper Bid', async function () {
             const _hash = await dutchWrapper.calculateCampaignHash(secondAccount, { from: owner });

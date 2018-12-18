@@ -25,11 +25,12 @@ module.exports = (deployer, network, accounts) => {
         const dutchWrapper = await DutchWrapper.deployed();
 
         //Handle promissory instance across networks
+        let promissoryToken;
         if (_promissoryAddresses[network]) {
-          const promissoryToken = await PromissoryToken.at(_promissoryAddresses[network]);
+          promissoryToken = await PromissoryToken.at(_promissoryAddresses[network]);
         } else {
           await deployer.deploy(PromissoryToken);
-          const promissoryToken = await PromissoryToken.deployed();
+          promissoryToken = await PromissoryToken.deployed();
 
           // Set PromissaryToken Instance
           await dutchWrapper.setPromissoryTokenInstance(promissoryToken.address);
