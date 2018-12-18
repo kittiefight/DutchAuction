@@ -63,20 +63,19 @@ class Claim extends Component {
         this.setState({tokenAddress: event.target.value});
     }
 
-    campaignHashChanged = (event) => {
-        console.log('Referral Hash Changed ...');
-        this.setState({ referralHash : event.target.value });
+    campaignHashChanged = (e) => {
+        console.log('Referral Hash Changed ...', e.target.value);
+        this.setState({ referralHash : e.target.value });
     }
 
     claimBonusTokensClicked = async (event) => {
         event.preventDefault();
         console.log('Claim Bonus Token  Clicked !!!!');
-
+        console.log('claim Hash : ', this.state.referralHash);
         const { auctionContract, myAccount, claimAddress } = this.state;
+        //this.setState({ claimBonusTokensLoading : true });
 
-        this.setState({ claimBonusTokensLoading : true });
-
-        auctionContract.methods.claimtokenBonus()
+        auctionContract.methods.claimCampaignTokenBonus(this.state.referralHash)
         .send({ 
             from: myAccount
         })
@@ -93,16 +92,13 @@ class Claim extends Component {
                 NotificationManager.success('Transaction Confirmed', 'Success');
             }
             this.setState({ transactionConfirmations: 1  });
-            
         })
         .on('error', (error) => {
             console.log('error: ', error);
             NotificationManager.error('Error');
             this.setState({ claimBonusTokensLoading : false });
         });
-
         this.setState({ claimBonusTokensLoading : false });
-
     }
 
     checkTokenBalanceCliked = async (event) => {

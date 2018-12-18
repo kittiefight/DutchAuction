@@ -76,9 +76,7 @@ class Bid extends Component {
 
     BidClicked = async  (event) => {
         event.preventDefault();
-
         console.log('Bid clicked !!! ');
-        
         let web3 = window.web3;
         if (window.ethereum) {
             try {
