@@ -78,7 +78,7 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            auctionStartDateClock : Date.parse('2018-12-10T04:59:00Z'),
+            auctionStartDateClock : Date.parse('2018-12-20T02:59:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
             ethereumLastPrice : 0,
@@ -137,9 +137,9 @@ class AppProvider extends Component {
 
     async getAuctionData(web3) {
 
-        // this.setState({ statesLoaded: true });
-        // return ;
-        //window._state = this.state;
+        this.setState({ statesLoaded: true });
+        return ;
+        window._state = this.state;
         
         const auctionContract = new web3.eth.Contract(auctionAbi, AUCTION_CONTRACT_ADDRESS);
         const tokenContract = new web3.eth.Contract(tokenAbi, TOKEN_CONTRACT_ADDRESS);
