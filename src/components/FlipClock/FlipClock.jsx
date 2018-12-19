@@ -7,13 +7,16 @@ export default class FlipClock extends React.Component {
 
 	constructor(props) {
 		super(props);
+		this.state = {
 
-		this.state = {};
+		};
 	}
 
 	// 		--------------------------------		--------------------------------		---------
 
 	componentDidMount() {
+		// console.log('TIMER DID MOUNT :::: ', this.props)
+		// this.updateTime();
 		this.timerID = setInterval(
 			() => this.updateTime(),
 			1000
@@ -29,6 +32,7 @@ export default class FlipClock extends React.Component {
 	// 		--------------------------------		--------------------------------		---------
 
 	updateTime() {
+
 		const { type, count_to, count_from } = this.props;
 
 		let units = [];
@@ -87,7 +91,7 @@ export default class FlipClock extends React.Component {
 			units.seconds = timeRemaining>0 ? seconds : 0;
 
 		}
-		else if (type=='clock') {
+		if (type=='clock') {
 
 			const time_now = new Date;
 
@@ -97,6 +101,36 @@ export default class FlipClock extends React.Component {
 			units.hours = time_now.getHours();
 			units.minutes = time_now.getMinutes();
 			units.seconds = time_now.getSeconds();
+
+		}
+
+		if (type==='face') {
+
+			console.log('FACE VALUE !!!!');
+			
+			let days, hours, minutes, seconds;
+			let endDate = new Date(count_to).getTime();
+
+			let startDate = new Date();
+        	startDate = startDate.getTime();
+        
+			let timeRemaining = parseInt( (endDate - startDate) / 1000, 10 );
+		
+            days = parseInt( timeRemaining / 86400, 10) ;
+            timeRemaining = ( timeRemaining % 86400);
+            
+            hours = parseInt( timeRemaining / 3600, 10);
+            timeRemaining = ( timeRemaining % 3600);
+            
+            minutes = parseInt( timeRemaining / 60, 10);
+			timeRemaining = (timeRemaining % 60);
+
+			seconds = parseInt(timeRemaining);
+
+			units.days = timeRemaining>0 ? parseInt(days, 10) : 0;
+			units.hours = timeRemaining>0 ? hours : 0;
+			units.minutes = timeRemaining>0 ? minutes : 0;
+			units.seconds = timeRemaining>0 ? seconds : 0;
 
 		}
 
@@ -168,28 +202,28 @@ export default class FlipClock extends React.Component {
 								}
 							]
 						:
-					// type=='clock' ?
-					// 		[
-					// 			{
-					// 				type: 'days',
-					// 				title: 'day',
-					// 			},
-					// 			{
-					// 				type: 'hours',
-					// 				title: 'hour',
-					// 			},
-					// 			{
-					// 				sep: ':',
-					// 				type: 'minutes',
-					// 				title: 'minute',
-					// 			},
-					// 			{
-					// 				sep: ':',
-					// 				type: 'seconds',
-					// 				title: 'second',
-					// 			}
-					// 		]
-					// 	:
+					type=='face' ?
+							[
+								{
+									type: 'days',
+									title: 'day',
+								},
+								{
+									type: 'hours',
+									title: 'hour',
+								},
+								{
+									sep: ':',
+									type: 'minutes',
+									title: 'minute',
+								},
+								{
+									sep: ':',
+									type: 'seconds',
+									title: 'second',
+								}
+							]
+						:
 							null;
 
 

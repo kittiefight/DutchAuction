@@ -288,7 +288,7 @@ class Claim extends Component {
                                             onChange={this.campaignHashChanged}
                                             placeholder="Campaign hash" />
 
-                                    <button onClick={this.claimBonusTokensClicked}>CLAIM MARKETINK BONUS TOKENS</button>
+                                    <button onClick={this.claimBonusTokensClicked}>MARKETING BONUS TOKENS</button>
 
                                 </form>
                             </div>

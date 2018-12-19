@@ -315,6 +315,7 @@ class Admin extends Component {
 
                     {/* { Get My refferal Link  } */}
                     <div className="row" id="section4">
+                        <br/>
                         <div className="col">
                             <div className="card">
                                 <div className="card-body">
@@ -326,18 +327,20 @@ class Admin extends Component {
                         </div>
                         <div className="col-md-12">
                             <br/>
-                            {this.state.referallSignUpTx &&
-                                <h4 className="etherscantext"> 
-                                    <a href={referralSignUpTrasactionLink}> 
-                                        See Transaction On Ethersacn ...  
-                                    </a>
-                                </h4>
+                            { this.state.personalHash && 
+                                <span className="etherscantext">Referral Link: &nbsp; 
+                                    <a href={referralLink}>{referralLink}</a>
+                                </span>
                             }
                             <br/>
-                            { this.state.personalHash && 
-                                <h3>Referral Link : <a href={referralLink}>{referralLink}</a></h3>
+                            <br/>
+                            {this.state.referallSignUpTx &&
+                                <span className="etherscantext"> 
+                                    <a href={referralSignUpTrasactionLink}> 
+                                        See Transaction On Etherscan ...  
+                                    </a>
+                                </span>
                             }
-
                         </div>
                     </div>
 
@@ -427,7 +430,7 @@ class Admin extends Component {
                             <div className="card">
                                 <div className="card-body">
                                     <button onClick={this.getTop20}>
-                                            Get Top 20 refferer 
+                                            Get Top 20 refferers 
                                         </button>
                                 </div>
                             </div>

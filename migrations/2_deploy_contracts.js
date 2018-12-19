@@ -8,11 +8,12 @@ module.exports = (deployer, network, accounts) => {
     const _pWallet = accounts[9]; 
     const _ceiling = 10000 * 10 ** 18; // 10 000  ETH 
     const _priceFactor = 50; //  
+    const _softCap = 1000 * 10 ** 18; // 1000 ETH 
     
 
     return deployer.deploy(Token).then(async () => {
         
-        await deployer.deploy(DutchWrapper, _pWallet, _ceiling, _priceFactor);
+        await deployer.deploy(DutchWrapper, _pWallet, _ceiling, _priceFactor, _softCap);
         await deployer.deploy(PromissoryToken);
 
         const token = await Token.deployed();
@@ -42,5 +43,7 @@ module.exports = (deployer, network, accounts) => {
 
         // Setup Finished ! 
         // Next go to tests ...
+
+
     });
 };

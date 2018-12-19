@@ -12,11 +12,10 @@ class Clock extends Component {
     }
 
     componentDidMount() {
-       
     }
 
     componentWillUnmount() {
-        
+
     }
 
     render() {

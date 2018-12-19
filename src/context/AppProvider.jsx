@@ -78,7 +78,7 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            auctionStartDateClock : Date.parse('2018-12-10T04:59:00Z'),
+            auctionStartDateClock : Date.parse('2018-12-15T02:59:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
             ethereumLastPrice : 0,
@@ -139,19 +139,19 @@ class AppProvider extends Component {
 
         // this.setState({ statesLoaded: true });
         // return ;
-        //window._state = this.state;
+        // window._state = this.state;
         
         const auctionContract = new web3.eth.Contract(auctionAbi, AUCTION_CONTRACT_ADDRESS);
         const tokenContract = new web3.eth.Contract(tokenAbi, TOKEN_CONTRACT_ADDRESS);
         const promissoryTokenContract = new web3.eth.Contract(promissoryTokenAbi, POMISSORYTOKEN_CONTRACT_ADDRESS);
 
-        let ethereumLastPrice = 90; //
+        let ethereumLastPrice = 105; //
 
         try {
             const priceTicker =  await axios('https://api.coinmarketcap.com/v2/ticker/1027/');
             ethereumLastPrice = priceTicker.data.data.quotes.USD.price;
         } catch(err) {
-
+            
         }
         
         await this.setState({ethereumLastPrice});
@@ -213,9 +213,10 @@ class AppProvider extends Component {
         // Calculare Decarease rate 
         // 1/(block.number - startBlock + 7500)
         try {
-            const latestBlock = web3.eth.getBlock('latest');
+            const latestBlock = await web3.eth.getBlock('latest');
+            console.log('LATEST BLOCK ::: ',  latestBlock );
             this.setState({ latestBlock: latestBlock.number });
-            const decreaseRate = (1 / (latestBlock.number - this.state.startBlock + 7500)) * 100;
+            decreaseRate = (1 / (latestBlock.number - this.state.startBlock + 7500)) * 100;
 
         } catch(err) {
 
@@ -259,19 +260,18 @@ class AppProvider extends Component {
         const startBlockData = await web3.eth.getBlock(startBlock);        
         await this.setState({ startBlock : startBlock  });
 
-        const _elapsedTime = new Date().getTime() -  new Date(this.state.auctionStartDateClock).getTime();
+        const _nowDate = new Date();
+        const _auctionStartDate = new Date(this.state.auctionStartDateClock);
+        let timeDiff = Math.abs(_nowDate.getTime() - _auctionStartDate.getTime()); // Elapsed Time !
+        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+        console.log('Auction started ' +  diffDays + ' Days !!!')
 
-        const _test =  new Date(this.state.auctionStartDateClock).getTime();
-        console.log('Test :  ',_test);
+        // Add conitions here 
+        // If sofcap reached === true
+        // networkLaunchDay _nowDate.setDate( _nowDate.getDate() + 45 );
 
-        console.log('startBlockData.timestamp', startBlockData.timestamp);
-        console.log('Elasped time : ', _elapsedTime);
-        console.log('waiting Period :', waitingPeriod);
-
-        //const networkLaunchDay = new Date( (startBlockData.timestamp +  parseInt(waitingPeriod, 10))*1000  );
-
-        const networkLaunchDay = new Date(_test +  (   +  parseInt(waitingPeriod, 10) )*1000  );
-
+        const networkLaunchDay = _nowDate.setDate( _nowDate.getDate() + 45 + diffDays);
+        
         await this.setState({ networkLaunchDay:  networkLaunchDay });
         await this.setState({ startBlock });
 
