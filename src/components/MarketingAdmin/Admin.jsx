@@ -327,14 +327,14 @@ class Admin extends Component {
                         </div>
                         <div className="col-md-12">
                             <br/>
-                            { !this.state.personalHash && 
+                            { this.state.personalHash && 
                                 <span className="etherscantext">Referral Link: &nbsp; 
                                     <a href={referralLink}>{referralLink}</a>
                                 </span>
                             }
                             <br/>
                             <br/>
-                            {!this.state.referallSignUpTx &&
+                            {this.state.referallSignUpTx &&
                                 <span className="etherscantext"> 
                                     <a href={referralSignUpTrasactionLink}> 
                                         See Transaction On Etherscan ...  
@@ -430,7 +430,7 @@ class Admin extends Component {
                             <div className="card">
                                 <div className="card-body">
                                     <button onClick={this.getTop20}>
-                                            Get Top 20 refferer 
+                                            Get Top 20 refferers 
                                         </button>
                                 </div>
                             </div>

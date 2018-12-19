@@ -225,6 +225,11 @@ contract('DutchWrapper',  accounts  => {
         let _hash =  await dutchWrapper.calculatPersonalHash.call({ from : tokenreferralAccount });
         let tokenReferralsMap = await getMyreferralTokens(dutchWrapper, tokenreferralAccount, false);
         
+        console.log('---------------------------------');
+        console.log(' REFFREALS MAP ');
+        console.log(tokenReferralsMap)
+        console.log('---------------------------------');
+
         assert.equal(tokenReferralsMap.hash , _hash); 
         assert.equal(tokenReferralsMap.address, tokenreferralAccount);
         assert.equal(tokenReferralsMap.totalReferrals, 0);
@@ -440,8 +445,32 @@ contract('DutchWrapper',  accounts  => {
         console.log('softcapReached : ', softcapReached);
         console.log('totalReceived : ', web3.fromWei(totalReceived.toNumber(), 'ether') );
         assert.equal(softcapReached, true);
-        
     });
+
+    it('Should print correct getTop20Reffered ', async () => {
+
+        const top20Reffered = await dutchWrapper.getTop20Reffered();
+        const top20Addr = await dutchWrapper.getTop20Addr();
+
+        let top20List = [];
+
+        for(let i=0; i < top20Reffered.length; i++ ){
+            top20List.push({
+                hash : top20Addr[i],
+                number :  top20Reffered[i].toNumber()
+            })
+        }
+
+        console.log('----');
+        console.log(top20List);
+
+        assert.equal(top20List.length, 20);
+        // Account13 hash (Should be a top 1 )
+        let _account13Hash =  await dutchWrapper.calculatPersonalHash.call({ from : accounts[13] });
+        assert.equal( top20List[0].hash, _account13Hash);
+
+    });
+
 
     it.skip('Shoudl claim bonus tokens for campaign Account', async () => {
         
