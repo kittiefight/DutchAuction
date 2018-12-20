@@ -7,6 +7,8 @@ import Price from "./Price";
 import Bonus from "./Bonus";
 import "./StickyHeader.css";
 
+import Web3warning from './Web3warning';
+
 import { HashLink as Link } from 'react-router-hash-link';
 
 
@@ -52,6 +54,7 @@ class StickyHeader extends Component {
             <AppConsumer>
                 {(appProps) => (
                     <div className={`${isHidden ? 'top_div_hidden' : 'top_div_active'}`}>
+
                         <div className="d-md-none">
                             <div className="row">
                                 <div className="col-sm">
@@ -103,12 +106,14 @@ class StickyHeader extends Component {
                                             </div>
                                         </Link>
                                 </div>
-                            </div>
+                            </div>    
                         </div>
-                    </div>
-                )}
-            </AppConsumer>
 
+                        <Web3warning appProps={appProps}></Web3warning>
+
+                    </div>
+            )}
+            </AppConsumer>
     )}
 }
 

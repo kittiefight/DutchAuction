@@ -28,7 +28,6 @@ console.log('APP HOST IS ::: ', HOST, 'Token address :', TOKEN_CONTRACT_ADDRESS,
 // }
 
 
-
 const auctionTypes = {
     0: "Deployed",
     1: "SetUp",
@@ -78,7 +77,7 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            auctionStartDateClock : Date.parse('2018-12-21T020:00:00Z'),
+            auctionStartDateClock : Date.parse('2018-12-20T20:00:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
             ethereumLastPrice : 0,
@@ -97,11 +96,9 @@ class AppProvider extends Component {
         window.addEventListener('load', async () => {
             if (window.ethereum) {
                 window.web3 = new Web3(window.ethereum);
-                // await window.ethereum.enable();  // Request account access if needed
+                await window.ethereum.enable();  // Request account access if needed
                 await this.setState({ web3: window.web3 });
                 this.getAuctionData(window.web3);
-                //console.log('Error', error);
-                //await this.setState({ statesLoaded: true });
             }
             // Legacy dapp browsers...
             else if (window.web3) {
@@ -109,7 +106,6 @@ class AppProvider extends Component {
                 window.web3 = new Web3( new Web3.providers.HttpProvider(HOST) );
                 await this.setState({ web3 : window.web3 });
                 this.getAuctionData(window.web3);
-                //await this.setState({ statesLoaded: true });
             }
             else {
                 console.log("%cNon-Ethereum browser detected. You should consider trying MetaMask!", "color: red; background-color: yellow; font-size: large");
@@ -117,7 +113,6 @@ class AppProvider extends Component {
                 const web3 = new Web3(new Web3.providers.HttpProvider(HOST));
                 await this.setState({ web3 : web3 });
                 this.getAuctionData(web3);
-                //await this.setState({ statesLoaded: true });
             }
         });
 
@@ -125,35 +120,36 @@ class AppProvider extends Component {
     }
 
 
-    async calculateAuctionDates() {
-        
-        const waitingPeriod = await this.state.auctionContract.methods.WAITING_PERIOD().call();
+    async calculateAuctionDates() {        
         const startBlock = await this.state.auctionContract.methods.startBlock().call();
         const startBlockData = await this.state.web3.eth.getBlock(startBlock);
         const auctionStartDate = new Date(startBlockData.timestamp * 1000);
         await this.setState({ auctionStartTime: formatDate(auctionStartDate) });
-        //await this.setState({ auctionEndTime: this.getFormattedDate(auctionEndDate) });
     }
 
     async getAuctionData(web3) {
 
         // this.setState({ statesLoaded: true });
         // return ;
-        // window._state = this.state;
         
         const auctionContract = new web3.eth.Contract(auctionAbi, AUCTION_CONTRACT_ADDRESS);
         const tokenContract = new web3.eth.Contract(tokenAbi, TOKEN_CONTRACT_ADDRESS);
         const promissoryTokenContract = new web3.eth.Contract(promissoryTokenAbi, POMISSORYTOKEN_CONTRACT_ADDRESS);
 
-        let ethereumLastPrice = 105; //
+        let ethereumLastPrice = 0; 
 
         try {
             const priceTicker =  await axios('https://api.coinmarketcap.com/v2/ticker/1027/');
             ethereumLastPrice = priceTicker.data.data.quotes.USD.price;
-        } catch(err) {
-            
-        }
-        
+        } catch(err) {}
+
+        if(ethereumLastPrice === 0) {
+            try {
+                const newPriceTicker =  await axios('https://demo.mark.space/base2/value.smx');
+                console.log('new price ticker : ', newPriceTicker);
+                ethereumLastPrice = parseFloat(newPriceTicker.data.ethusd);
+            }catch(err) { }
+        }        
         await this.setState({ethereumLastPrice});
 
         console.log('auctionContract :', auctionContract);
@@ -198,6 +194,10 @@ class AppProvider extends Component {
         await this.setState({ currentPrice: web3.utils.fromWei(currentPrice, 'ether') });
         await this.setState({ auctionStage: auctionTypes[auctionStage] });
         await this.setState({ totalBonusTokens: totalBonusTokens / 10 ** 18 });
+        
+        const softcapReached = await auctionContract.methods.softcapReached().call();
+        console.log('softcapReached : ', softcapReached);
+        await this.setState({ softcapReached })
 
         this.calculateAuctionDates();
 
@@ -263,23 +263,21 @@ class AppProvider extends Component {
         const _nowDate = new Date();
         const _auctionStartDate = new Date(this.state.auctionStartDateClock);
         let timeDiff = Math.abs(_nowDate.getTime() - _auctionStartDate.getTime()); // Elapsed Time !
-        let diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
-        console.log('Auction started ' +  diffDays + ' Days !!!')
+        let elapsedDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+        console.log('Auction started ' +  elapsedDays + ' Days !!!')
 
         // Add conitions here 
-        // If sofcap reached === true
-        // networkLaunchDay _nowDate.setDate( _nowDate.getDate() + 45 );
-
-        const networkLaunchDay = _nowDate.setDate( _nowDate.getDate() + 45 + diffDays);
+        let networkLaunchDay = _nowDate.setDate( _nowDate.getDate() + 45 + elapsedDays);
         
-        await this.setState({ networkLaunchDay:  networkLaunchDay });
-        await this.setState({ startBlock });
-
+        if(softcapReached) {
+            networkLaunchDay =  _nowDate.setDate( _nowDate.getDate() + 45 );
+        }
         console.log('NETWORK LAUNCH DAY : ', networkLaunchDay);
         console.log('----------------------------------------');
 
+        await this.setState({ networkLaunchDay:  networkLaunchDay });
+        await this.setState({ startBlock });
         await this.setState({ statesLoaded: true });
-
     }
 
     render() {

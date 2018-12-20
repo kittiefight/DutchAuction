@@ -1,3 +1,10 @@
+.network-banner--warning {
+    background: #ff3232 !important;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
 .discordicon {
     width: 150px !important;
 }

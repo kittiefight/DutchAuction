@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import Header from "./Header/Header";
 import Main from "./Main/Main";
 import Loading from "../Loading/Loading";
+import Web3warning from '../Sticky/Web3warning';
+
 
 class Layout extends Component {
     constructor(props) {
@@ -31,28 +32,34 @@ class Layout extends Component {
         }
 
         return (
-            <div className="Layout">
+        
+            <div>
+                <Web3warning appProps={this.props.appProps} />
 
-                {/* <div className="fixed-top"> 
-                    <div className="container">
-                        <div className="row justify-content-center">
-                            <div className="col-6">
-                                No Metamask or web3 browser detected ...    
+                {/* <div className="fixed-top">
+                    <div className="network-banner--warning">
+                        <div className="col">
+                            <p className="text-center">Non-Ethereum browser detected. You should consider trying MetaMask!</p>
+                        </div>
+                    </div>
+                </div> */}
+
+                {/* <div className="Layout network-banner--warning">
+                    <div className="fixed-top"> 
+                        <div className="container">
+                            <div className="row justify-content-center">
+                                <div className="col-6">
+                                    No Metamask or web3 browser detected ...    
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>  */}
+                </div> */}
 
-                {/* <AppConsumer>
-                    {(appProps) => ( <Popup appProps={appProps} />  )}
-                </AppConsumer>
-                <StickyHeader enabled={true} />
-                <AppConsumer>
-                        {(appProps) => ( <Header appProps={appProps} /> )}
-                </AppConsumer> */}
+                <div>
+                    <Main />
+                </div>
 
-                <Main />
-               
             </div>
         );
     }
