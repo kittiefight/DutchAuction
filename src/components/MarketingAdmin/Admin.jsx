@@ -305,13 +305,26 @@ class Admin extends Component {
                 <NotificationContainer />
                 
                 <div className="container">
-
+                
+                    <br/>
                     <div className="row">
+
                         <div className="col">
                             <h1> Marketing Admin </h1>
                             <p>Account : {this.state.ethereumAddress} </p>
                         </div>
+
+                        <div className="col">
+                            <h3>
+                                <a href="https://blog.superdao.io/kittiefight-community-driven-dutch-auction-tutorial-ether-reward-competition-a371cafade91">
+                                    Marketing Dashboard Tutorial
+                                </a>
+                            </h3>
+                        </div>
+
                     </div>
+
+                    
 
                     {/* { Get My refferal Link  } */}
                     <div className="row" id="section4">

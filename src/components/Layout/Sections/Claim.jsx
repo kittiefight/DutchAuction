@@ -264,7 +264,7 @@ class Claim extends Component {
                                             ref={this.input}
                                             name="address" 
                                             onChange={this.campaignHashChanged}
-                                            placeholder="Campaign hash" />
+                                            placeholder="Address hash" />
 
                                     <button onClick={this.claimBonusTokensClicked}>CLAIM BONUS TOKENS</button>
 

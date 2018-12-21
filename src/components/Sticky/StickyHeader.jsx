@@ -94,17 +94,20 @@ class StickyHeader extends Component {
                                     {/* </div> */}
                                 </div>
 
-                                <div className="col-md-2 stickyButton">
-                                    
-                                    {/* <div className="d-flex justify-content-start"> */}
-                                    {/* <button onClick={this.goToBidSection} className="float-left"> BID </button> */}
-                                    {/* </div> */}
-                                   
+                                <div className="col-md-1 stickyButton">
                                         <Link  to="#section4">
                                             <div className="anchoButton">
                                                 BID
                                             </div>
                                         </Link>
+                                </div>
+
+                                <div className="col-md-1 stickyButton">
+                                        <a href='#/marketingadmin'>
+                                            <div className="anchoButton">
+                                                Dashboard
+                                            </div>
+                                        </a>
                                 </div>
                             </div>    
                         </div>
