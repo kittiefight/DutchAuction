@@ -77,7 +77,7 @@ class AppProvider extends Component {
             walletIsMetamask: false,
             networkName: '',
             statesLoaded: false,
-            auctionStartDateClock : Date.parse('2018-12-19T14:00:00Z'),
+            auctionStartDateClock : Date.parse('2018-12-21T14:00:00Z'),
             auctionTimeremaining: 0,
             promissoryTokenLastPrice: 0,
             ethereumLastPrice : 0,
@@ -272,8 +272,8 @@ class AppProvider extends Component {
         if(softcapReached) {
             networkLaunchDay =  _nowDate.setDate( _nowDate.getDate() + 45 );
         }
-        console.log('NETWORK LAUNCH DAY : ', networkLaunchDay);
-        console.log('----------------------------------------');
+        // console.log('NETWORK LAUNCH DAY : ', networkLaunchDay);
+        // console.log('----------------------------------------');
 
         await this.setState({ networkLaunchDay:  networkLaunchDay });
         await this.setState({ startBlock });
