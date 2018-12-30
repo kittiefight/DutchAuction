@@ -272,7 +272,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
               orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
               TokenReferrals[_hash].tokenAmountPerReferred[amount] = oneHundred;
               TokenReferrals[_hash].totalTokensEarned += oneHundred;
-              bidderEarnings (oneHundred) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
+              bidderEarnings (thirty) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
               emit TokenReferral(_hash ,msg.sender, amount);
 
 
@@ -318,7 +318,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
                         orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
         				TokenReferrals[_hash].tokenAmountPerReferred[amount] = oneHundred;
         				TokenReferrals[_hash].totalTokensEarned += oneHundred;
-                        bidderEarnings (oneHundred) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
+                        bidderEarnings (thirty) == true ? claimedTokenReferral = oneHundred + thirty : claimedTokenReferral += oneHundred;
         				emit TokenReferral(_hash ,msg.sender, amount);
         				return Referrals;
 
@@ -480,8 +480,7 @@ uint public residualToken; // variable tracking number of tokens left at near co
 
     /** shift the array of one position (getting rid of the last element) **/
     for(uint j = topReferredNum.length - 1; j > i; j--) {
-        topReferredNum[j] = topReferredNum[j - 1];
-        topAddrHashes[j] = topAddrHashes[j - 1];
+        (topReferredNum[j], topAddrHashes[j] ) = (topReferredNum[j - 1],topAddrHashes[j - 1]);
     }
 
     /** update the new max element **/
