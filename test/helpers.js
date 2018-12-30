@@ -1,10 +1,12 @@
 const BigNumber = web3.BigNumber
 
-
 const should = require('chai')
     .use(require('chai-as-promised'))
+    .use(require('chai-stats'))
     .use(require('chai-bignumber')(BigNumber))
+    //.use(require('chai-bignumber')());
     .should()
+
 
 const EVMThrow = 'VM Exception'
 

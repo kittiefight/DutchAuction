@@ -1,545 +1,488 @@
 const KittieFightToken = artifacts.require("KittiefightToken");
-const DutchWrapper = artifacts.require("Dutchwrapper");
+const DutchWrapper = artifacts.require("DutchWrapper");
 const PromissoryToken = artifacts.require("PromissoryToken");
+
 const { should, EVMThrow, getParamFromTxEvent } = require('./helpers');
+
+let kittieFightToken = null;
+let dutchWrapper = null;
+let promissoryToken = null;
+const WEI = 10**18;
+const emptyHash = 0xeee00000;
+let _accounts = null;
+
+const auctionStages = [ "AuctionDeployed", "AuctionSetUp", "AuctionStarted", "AuctionEnded", "TradingStarted" ];
+
+
+getAcutionData = async (dutchWrapper, kittieFightToken, accounts) => {
+
+    const auctionStage =  await dutchWrapper.stage.call();
+    const pWallet = await dutchWrapper.pWallet.call();
+    const auctionOwner =  await dutchWrapper.owner.call();
+    const ceiling = await dutchWrapper.ceiling.call();
+    const priceFactor = await dutchWrapper.priceFactor.call();
+    const startBlock = await dutchWrapper.startBlock.call();
+    const endTime = await dutchWrapper.endTime.call();
+    const totalReceived = await dutchWrapper.totalReceived.call();
+    const finalPrice = await dutchWrapper.finalPrice.call();
+
+    const currentBlock = await web3.eth.getBlock('latest');
+
+    // console.log('----- Auction Params ----- ');
+    // console.log('auctionStage :', auctionStages[auctionStage] );
+    // console.log('pWallet :', pWallet );
+    // console.log('auctionOwner :', auctionOwner );
+    // console.log('ceiling :',  ceiling.toNumber(), web3.fromWei(ceiling.toNumber()), 'ETH' );
+    // console.log('priceFactor :', priceFactor.toNumber() );
+    // console.log('startBlock :', startBlock.toNumber() );
+    // console.log('endTime :', endTime.toNumber() );
+    // console.log('totalReceived :', totalReceived.toNumber(), web3.fromWei(totalReceived.toNumber()), 'ETH' );
+    // console.log('finalPrice :', finalPrice.toNumber(), web3.fromWei(finalPrice.toNumber()) );
+    // console.log('-----------------------------');
+
+    return  data = {
+        "stage" : auctionStage,
+        "auctionStage" : auctionStages[auctionStage],
+        "pWallet" : pWallet,
+        "auctionOwner" : auctionOwner,
+        "ceiling" :   web3.fromWei(ceiling.toNumber(), 'ether') ,
+        "priceFactor" : priceFactor.toNumber(),
+        "startBlock" : startBlock.toNumber(),
+        "endTime" : endTime.toNumber(),
+        "_endTime" : new Date( endTime.toNumber() * 1000),
+        "totalReceived" : ceiling.toNumber(),
+        "totalReceived_eth" : web3.fromWei(totalReceived.toNumber(), 'ether'),
+        "finalPrice" : finalPrice.toNumber(),
+        "currentTokenPrice" : (await dutchWrapper.calcTokenPrice()).toNumber(),
+        "currentBlock" : currentBlock.number,
+        "currentBlockTimeStapm" : currentBlock.timestamp
+    }
+}
+
+
+getMyreferralTokens = async (dutchWrapper, _address, isPartner) => {
+
+    let _hash = null;
+
+    if(isPartner) {
+        _hash = await dutchWrapper.calculateCampaignHash(_address,   { from: _accounts[0] });
+    }else{
+        _hash = await dutchWrapper.calculatPersonalHash({ from: _address });
+    }
+
+    let data = await dutchWrapper.TokenReferrals.call(_hash);
+
+    return {
+        _hash : _hash,
+        hash : data[0],
+        address : data[1],
+        totalReferrals :  data[2].toNumber(),
+        totalTokensEarned : data[3].toNumber() / (10**18)
+    }
+}
+
+const forceMine = async (value, isBlock) => {
+    //value: number of seconds or blocks to advance by
+    let count = 1;
+    if (!isBlock) {
+         await web3.currentProvider.send({
+           jsonrpc: "2.0",
+           method: "evm_increaseTime",
+           params: [value],
+           id: new Date().getTime()
+         });
+     } else {
+        count = value;
+    }
+
+     for( let i=0;i<count;i++) {
+        console.log('i :', i);
+        await web3.currentProvider.send({
+           jsonrpc: "2.0",
+           method: "evm_mine",
+           id: new Date().getTime()
+        });
+    }
+}
+
+const increaseTime = function(duration) {
+  const id = Date.now()
+
+  return new Promise((resolve, reject) => {
+    web3.currentProvider.sendAsync({
+      jsonrpc: '2.0',
+      method: 'evm_increaseTime',
+      params: [duration],
+      id: id,
+    }, err1 => {
+      if (err1) return reject(err1)
+
+      web3.currentProvider.sendAsync({
+        jsonrpc: '2.0',
+        method: 'evm_mine',
+        id: id+1,
+      }, (err2, res) => {
+        return err2 ? reject(err2) : resolve(res)
+      })
+    })
+  })
+}
 
 contract('DutchWrapper',  accounts  => {
 
-    let kittiefightToken;
-    let dutchWrapper;
-    let promissoryToken;
-    const socialCampaignsHash = [];
-    const marketingPartnersHash = [];
-    const tokenReferralsHash = [];
-    const emptyHash = 0xeee00000;
-    const NULL_BYTES4 = 0x00000000;
-    const ETHER = Math.pow(10, 18);
-
-    const auctionStages = [ "AuctionDeployed", "AuctionSetUp", "AuctionStarted", "AuctionEnded", "TradingStarted" ];
-
-    const getAcutionData = async (dutchWrapper, kittiefightToken, accounts) => {
-
-        const auctionStage =  await dutchWrapper.stage.call();
-        const pWallet = await dutchWrapper.pWallet.call();
-        const auctionOwner =  await dutchWrapper.owner.call();
-        const ceiling = await dutchWrapper.ceiling.call();
-        const priceFactor = await dutchWrapper.priceFactor.call();
-        const startBlock = await dutchWrapper.startBlock.call();
-        const endTime = await dutchWrapper.endTime.call();
-        const totalReceived = await dutchWrapper.totalReceived.call();
-        const finalPrice = await dutchWrapper.finalPrice.call();
-
-        // console.log('----- Auction Params ----- ');
-        // console.log('auctionStage :', auctionStages[auctionStage] );
-        // console.log('pWallet :', pWallet );
-        // console.log('auctionOwner :', auctionOwner );
-        // console.log('ceiling :',  ceiling.toNumber(), web3.fromWei(ceiling.toNumber()), 'ETH' );
-        // console.log('priceFactor :', priceFactor.toNumber() );
-        // console.log('startBlock :', startBlock.toNumber() );
-        // console.log('endTime :', endTime.toNumber() );
-        // console.log('totalReceived :', totalReceived.toNumber(), web3.fromWei(totalReceived.toNumber()), 'ETH' );
-        // console.log('finalPrice :', finalPrice.toNumber(), web3.fromWei(finalPrice.toNumber()) );
-        // console.log('-----------------------------');
-
-        return  data = {
-            "stage" : auctionStage,
-            "auctionStage" : auctionStages[auctionStage],
-            "pWallet" : pWallet,
-            "auctionOwner" : auctionOwner,
-            "ceiling" : ceiling.toNumber(),
-            "priceFactor" : priceFactor.toNumber(),
-            "startBlock" : startBlock.toNumber(),
-            "endTime" : endTime.toNumber(),
-            "totalReceived" : totalReceived.toNumber(),
-            "totalReceived_eth" : web3.fromWei(totalReceived.toNumber(), 'ether'),
-            "finalPrice" : finalPrice.toNumber(),
-            "currentTokenPrice" : (await dutchWrapper.calcTokenPrice()).toNumber()
-        }
-    }
+    const [owner, secondAccount, thirdAccount, referralAccount, referralAccount1, referralAccount2, seventhAccount, eighthAccount, pWalletAccount] =
+        accounts;
 
     const sleep = ms => {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    const [owner, secondAccount, thirdAccount, referralAccount, referralAccount1, referralAccount2, seventhAccount, eighthAccount, pWalletAccount] = accounts;
-    const _ceiling = 500 * ETHER; // 500 ETH
-    const _priceFactor = 7500  / 10; //
-
-    const socialsUsers = [{
-        address: seventhAccount,
-        _userName: 'user1',
-        _retweetOrdiscord:'discord://user1'
-      }, {
-        address: eighthAccount,
-        _userName: 'user2',
-        _retweetOrdiscord:'twitter://user2'
-      }, {
-        address: seventhAccount,
-        _userName: 'user3',
-        _retweetOrdiscord:'discord://user3'
-      }, {
-        address: eighthAccount,
-        _userName: 'user4',
-        _retweetOrdiscord:'twitter://user4'
-      }
-    ];
-
     before('Setup contract for each test', async () => {
-        kittiefightToken = await KittieFightToken.new({ from: owner });
-        assert.isNotNull(kittiefightToken.address, 'Failed to deploy KittiefightToken with address');
-
-        dutchWrapper = await DutchWrapper.new(pWalletAccount, _ceiling, _priceFactor, {
-          from: owner
-        });
-        assert.isNotNull(dutchWrapper.address, 'Failed to deploy Dutchwrapper with address');
-
-        promissoryToken = await PromissoryToken.new({ from: owner });
-        assert.isNotNull(promissoryToken.address, 'Failed to deploy PromissoryToken with address');
-
-
-        console.log('-------------------------------');
-        console.log('Token address: ', kittiefightToken.address);
-        console.log('Dutch Wrapper Address : ', dutchWrapper.address);
-        console.log('PromissaryToken Address : ', promissoryToken.address);
-        console.log('--------------------------------');
-
+        _accounts = accounts;
+        kittieFightToken = await KittieFightToken.deployed();
+        dutchWrapper = await DutchWrapper.deployed();
+        promissoryToken = await PromissoryToken.deployed();
         await dutchWrapper.setPromissoryTokenInstance(promissoryToken.address);
         accounts_num = accounts.length;
+    })
 
-            // console.log('PromissoryToken price : ', (await promissoryToken.lastPrice()).toNumber() );
-            //
-            // // Mint 100  Tokens
-            // await token.mint(dutchWrapper.address, 10000000 * 10 ** 18);
-            //
-            // // // Transfer 100  tokens to DutchAuction
-            // //await token.transfer(dutchWrapper.address, 5000000 * 10**18 );
-            // console.log('Dutch Wrapper Balance : ',  (await token.balanceOf(dutchWrapper.address)).toNumber() );
-            //
-            // //Setup  Auction
-            // await dutchWrapper.setup(token.address);
-            //
-            // //Start Auction
-            // await dutchWrapper.startAuction();
+    it('DutchWrapper setup Partners Referral & Bid', async () => {
+
+        const campaingAccount = accounts[10];
+        const cmpaignHash = await dutchWrapper.calculateCampaignHash(campaingAccount, { from: owner });
+
+        console.log('Account 10 campaign hash : ', cmpaignHash);
+
+        //-- address _addr, uint _percentage, uint _type, uint _tokenAmt, uint _numUsers
+        await dutchWrapper.setupReferal(campaingAccount, 10, { from: owner });
+        let claimedTokenReferral = (await dutchWrapper.claimedTokenReferral()).toNumber();
+
+        // -- bidReferral
+        await dutchWrapper.bidReferral(accounts[11], cmpaignHash , {from : accounts[11], value : web3.toWei('1', 'ether') } );
+        assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[11], false) ).totalTokensEarned, 30  );
+
+        claimedTokenReferral = (await dutchWrapper.claimedTokenReferral()).toNumber();
+
+        assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[10], true)).totalReferrals, 1  );
+        assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[10], true)).totalTokensEarned, 100  );
+
+        await dutchWrapper.bidReferral(accounts[11], cmpaignHash , {from : accounts[11], value : web3.toWei('2', 'ether') } );
+        assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[11], false) ).totalTokensEarned, 60  );
+        assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[10], true)).totalTokensEarned, 200  );
+
+        await dutchWrapper.bidReferral(accounts[11], cmpaignHash , {from : accounts[11], value : web3.toWei('4', 'ether') } );
+        assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[11], false) ).totalTokensEarned, 260  );
+
+        await dutchWrapper.bidReferral(accounts[12], cmpaignHash , {from : accounts[12], value : web3.toWei('50', 'ether') } );
+        assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[12], false) ).totalTokensEarned, 600 );
+
+        assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[10], true)).totalReferrals, 4  );
+        assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[10], true)).totalTokensEarned, (100 + 100 + 500 + 1000)  );
+
+        let marketingPartnersMap = await dutchWrapper.MarketingPartners.call(cmpaignHash);
+
+        console.log('Campaigns Earned : ');
+        console.log(marketingPartnersMap);
+
     });
 
-    describe('setAdmin()', function() {
-      const admins = [
-        secondAccount,
-        thirdAccount
-      ];
 
-      it('should fail to setAdmin()', async function() {
-        try {
-          await dutchWrapper.setAdmin(secondAccount, {
-            from: pWallet
-          });
-          assert.isNotOk(true, 'Expected function to fail');
-        } catch(e) {
-          assert.exists(e, 'Expected error to exist from throw');
-        };
-      })
 
-      it('should setAdmin()', async function() {
-        try {
-          await Promise.all(admins.map((admin) => {
-            return dutchWrapper.setAdmin(admin, {
-              from: owner
-            });
-          }));
+    let campaignreferrals = [];
+    let referralBidders  = [];
 
-          const isAdmin = await Promise.all(admins.map(async (admin) => {
-            return await dutchWrapper.Admins.call(admin);
-          }));
-          const expected = [
-            true,
-            true
-          ];
-          assert.deepEqual(isAdmin, expected, 'New Admins not successfully set');
-        } catch(e) {
-          assert.notExists(e, `Expected function to complete:`);
-        };
-      })
-    });
+    it('Should sign up for referral and Bid for accounts', async () => {
 
-    describe('removeAdmin()', function() {
-      it('should fail to removeAdmin()', async function() {
-        const isAdmin = await dutchWrapper.Admins.call(thirdAccount);
-        assert.isTrue(isAdmin, 'Address is not yet Admin');
+        for(let i = 130; i < 190; i ++ ) {
+            let _account = accounts[i];
+            await dutchWrapper.referralSignup({ from: _account });
+            let _bidderhash = await dutchWrapper.calculatPersonalHash({ from: accounts[i] })
+            bidAmount = web3.toWei('10', 'ether');
+            await dutchWrapper.bidReferral(_account,  _bidderhash, { from : _account, value: bidAmount });
+        }
 
-        try {
-          await dutchWrapper.removeAdmin(thirdAccount, {
-            from: pWallet
-          });
-          assert.isNotOk(true, 'Expected function to fail');
-        } catch(e) {
-          assert.exists(e, 'Expected error to exist from throw');
-        };
-      })
+    })
 
-      it('should removeAdmin()', async function() {
-        const isAdmin = await dutchWrapper.Admins.call(thirdAccount);
-        assert.isTrue(isAdmin, 'Address is not yet Admin');
+    it('Print Top 20 ', async () => {
 
-        try {
-          await dutchWrapper.removeAdmin(thirdAccount, {
-            from: owner
-          });
+        var top20 = await dutchWrapper.getTop20Reffered();
 
-          const newIsAdmin = await dutchWrapper.Admins.call(thirdAccount);
-          assert.isFalse(newIsAdmin, 'Admin not successfully removed');
-        } catch(e) {
-          assert.notExists(e, `Expected function to complete:`);
-        };
-      })
-    });
+        for (var i = 0; i < top20.length; i++) {
+            //console.log("Numbers=",top20[i].toNumber());
+            var asf= await dutchWrapper.topReferredNum(i);
+            var asf2= await dutchWrapper.topAddrHashes(i);
+            //console.log("Top20 Num=",asf.toNumber(),asf2);
+         }
+    })
 
-    describe('setupReferal()', function() {
-        const args = [{
-          _addr: referralAccount,
-          _percentage: 10,
-          _type: 1,
-          _tokenAmt: 0, // No tokens for Partners, only ethers
-          _numUsers: 2
-        }, {
-          _addr: referralAccount1,
-          _percentage: 10,
-          _type: 0,
-          _tokenAmt: 20,
-          _numUsers: 2
-        }, {
-          _addr: referralAccount2,
-          _percentage: 8,
-          _type: 0,
-          _tokenAmt: 30,
-          _numUsers: 3
-        }];
+    it('Should sign up for referral and Bid for accounts : 14 - 29 : ', async () => {
 
-        it('should fail to setupReferal from non-Owner', async function () {
-            try {
-              const tx = await dutchWrapper.setupReferal(
-                args[0]._addr,
-                args[0]._percentage,
-                args[0]._type,
-                args[0]._tokenAmt,
-                args[0]._numUsers ,
-                { from: owner });
-              assert.notExists(tx, 'Transaction should fail');
-            } catch (e) {
-              assert.exists(e, 'Transaction should fail with an error');
-            }
+        // Refferral signup
+        const tokenreferralAccount = accounts[13];
+        await dutchWrapper.referralSignup({ from: tokenreferralAccount });
+        //let _hash = await dutchWrapper.calculatPersonalHash.call({ from: accounts[13] });
+
+        let _hash =  await dutchWrapper.calculatPersonalHash.call({ from : tokenreferralAccount });
+        let tokenReferralsMap = await getMyreferralTokens(dutchWrapper, tokenreferralAccount, false);
+
+        console.log('---------------------------------');
+        console.log(' REFFREALS MAP ');
+        console.log(tokenReferralsMap)
+        console.log('---------------------------------');
+
+        assert.equal(tokenReferralsMap.hash , _hash);
+        assert.equal(tokenReferralsMap.address, tokenreferralAccount);
+        assert.equal(tokenReferralsMap.totalReferrals, 0);
+        assert.equal(tokenReferralsMap.totalTokensEarned, 0);
+
+        let tokensEarned = 0;
+        let totalReferrals = 0
+
+
+        for(let i = 14; i < 39; i ++ ) {
+
+            let _account = accounts[i];
+
+            console.log('N: ', i, 'account', _account);
+
+            let _bidderhash = await dutchWrapper.calculatPersonalHash({ from: accounts[i] });
+
+            // bid 0.9 ether
+            let bidAmount = web3.toWei('0.9', 'ether');
+            dutchWrapper.bidReferral( _account, _hash, { from : _account, value: bidAmount });
+
+            tokenReferralsMap = await getMyreferralTokens(dutchWrapper, tokenreferralAccount, false);
+            accountTokeReferralsMap = await getMyreferralTokens(dutchWrapper, _account, false);
+
+            assert.equal( accountTokeReferralsMap.totalTokensEarned, 0)
+            assert.equal(tokenReferralsMap.totalReferrals, totalReferrals);
+            // assert.equal(tokenReferralsMap.totalTokensEarned, tokensEarned);
+
+            // Bid 1 ether
+            bidAmount = web3.toWei('1', 'ether');
+            await dutchWrapper.bidReferral(_account,  _hash, { from : _account, value: bidAmount });
+
+            tokensEarned += 100;
+            totalReferrals += 1;
+
+            accountTokeReferralsMap = await getMyreferralTokens(dutchWrapper, _account, false);
+            tokenReferralsMap = await getMyreferralTokens(dutchWrapper, tokenreferralAccount, false);
+
+            assert.equal( accountTokeReferralsMap.totalTokensEarned, 30)
+            assert.equal(tokenReferralsMap.totalReferrals, totalReferrals);
+
+            // Bid 4 ether
+            bidAmount = web3.toWei('4', 'ether');
+            await dutchWrapper.bidReferral(_account,  _hash, { from : _account, value: bidAmount });
+
+            tokensEarned += 500;
+            totalReferrals += 1;
+
+            accountTokeReferralsMap = await getMyreferralTokens(dutchWrapper, _account, false);
+            tokenReferralsMap = await getMyreferralTokens(dutchWrapper, tokenreferralAccount, false);
+            assert.equal( accountTokeReferralsMap.totalTokensEarned, 30 + 200);
+            assert.equal(tokenReferralsMap.totalReferrals, totalReferrals);
+
+            // Bid 8 ether
+            bidAmount = web3.toWei('8', 'ether');
+            await dutchWrapper.bidReferral(_account,  _hash, { from : _account, value: bidAmount });
+
+            tokensEarned += 1000;
+            totalReferrals += 1;
+
+            accountTokeReferralsMap = await getMyreferralTokens(dutchWrapper, _account, false);
+            tokenReferralsMap = await getMyreferralTokens(dutchWrapper, tokenreferralAccount, false);
+
+            assert.equal( accountTokeReferralsMap.totalTokensEarned, 30 + 200 + 600);
+            assert.equal(tokenReferralsMap.totalReferrals, totalReferrals);
+            assert.equal(tokenReferralsMap.totalTokensEarned, tokensEarned);
+
+            // console.log('account tokens : ');
+            // console.log(accountTokeReferralsMap);
+
+            // console.log(tokenReferralsMap);
+            // console.log('------------------------------');
+            // console.log("tokensEarned : ", tokensEarned);
+            // console.log('------------------------------');
+
+            referralBidders.push({
+                account : _account,
+                hash : _bidderhash,
+                totalReferrals : totalReferrals
+            })
+        }
+
+        campaignreferrals.push({
+            account :  tokenreferralAccount,
+            hash : _hash,
+            tokensEarned : tokensEarned,
         })
 
-        it('DutchWrapper setup Partners Referal', async () => {
+    })
+
+
+    it('Finalize Auction  & start Trading', async () => {
+
+        for (let i = 50; i < 90; i++) {
             try {
-              await Promise.all(
-                args.map(async(arg) => {
-                    //-- address _addr, uint _percentage, uint _type, uint _tokenAmt, uint _numUsers
-                    await dutchWrapper.setupReferal(
-                      arg._addr,
-                      arg._percentage,
-                      arg._type,
-                      arg._tokenAmt,
-                      arg._numUsers,
-                      {
-                       from: owner
-                    });
-                    const _hash = await dutchWrapper.calculateCampaignHash.call(arg._addr, {
-                       from: owner
-                   });
-
-                    if (arg._type === 1) {//MarketingPartners
-                      marketingPartnersHash.push(_hash);
-                      let marketingPartnersMap = await dutchWrapper.MarketingPartners.call(_hash);
-
-                      assert.equal(marketingPartnersMap[0], _hash, 'Incorrect referal hash set');
-                      assert.equal(marketingPartnersMap[1], arg._addr, 'Incorrect referal address set');
-                      assert.equal(marketingPartnersMap[4].toNumber(), arg._percentage, 'Incorrect referal percentage set');
-                    } else {//Social campaign
-                      socialCampaignsHash.push(_hash);
-                      let socialCampaign = await dutchWrapper.SocialCampaigns.call(_hash);
-
-                      assert.equal(socialCampaign[0], _hash, 'Incorrect referal hash set');
-                      assert.equal(socialCampaign[1], arg._numUsers, 'Incorrect referal address set');
-                      assert.equal(socialCampaign[2].toNumber(), arg._tokenAmt, 'Incorrect referal percentage set');
-                    }
-                })
-              );
-            } catch (e) {
-                assert.notExists(e.message || e, `Expected function to complete:`);
-            }
-          });
-        });
-
-        describe('referralSignup()', function () {
-          const  _addr = referralAccount2;
-
-          it('should successfully referralSignup', async function () {
-            try {
-              const _hash = await dutchWrapper.referralSignup.call({ from : _addr });
-              await dutchWrapper.referralSignup({ from : _addr });
-              let tokenReferral = await dutchWrapper.TokenReferrals(_hash);
-
-              assert.equal(tokenReferral[0], _hash, 'Incorrect address set')
-              assert.equal(tokenReferral[1], _addr, 'Incorrect hash set')
-              tokenReferralsHash.push(_hash);
-            } catch (e) {
-              assert.notExists( e.message || e, 'Exected function to complete')
-            }
-          })
-
-          it('should fail to multiple referralSignup', async function () {
-            try {
-              await dutchWrapper.referralSignup({ from : _addr });
-
-              assert.notExists(true, 'Function should fail');
-            } catch (e) {
-              assert.exists( e.message || e, 'Exected function to complete')
-            }
-          })
-        })
-
-        describe('bidReferral()', function () {
-          it('should fail to bidReferral before stage', async function () {
-          })
-
-          it('DutchWrapper Bid', async function () {
-            const _hash = await dutchWrapper.calculateCampaignHash(secondAccount, { from: owner });
-            // -- bidReferral
-            const bidRefferal = await dutchWrapper.bidReferral(thirdAccount, _hash ,
-                    {from : thirdAccount, value : web3.toWei('1', 'ether') } );
-
-
-            marketingPartnersMap = await dutchWrapper.MarketingPartners.call(_hash);
-            assert.equal(1, marketingPartnersMap[2].toNumber());
-            assert.equal( (marketingPartnersMap[3].toNumber() *  marketingPartnersMap[4].toNumber())/100 , marketingPartnersMap[5].toNumber());
-
-            let tokenReferrals = await dutchWrapper.TokenReferrals.call(_hash);
-            let totalTokensEarned = tokenReferrals[3].toNumber();
-            assert.equal( totalTokensEarned, 500 * 10**18);
-
-            await dutchWrapper.bidReferral(thirdAccount, _hash , {from : thirdAccount, value : web3.toWei('4', 'ether') } );
-            tokenReferrals = await dutchWrapper.TokenReferrals.call(_hash);
-            assert.equal( tokenReferrals[3].toNumber(), totalTokensEarned + 1000 * 10**18 );
-            totalTokensEarned = tokenReferrals[3].toNumber();
-
-            await dutchWrapper.bidReferral(thirdAccount, _hash , {from : thirdAccount, value : web3.toWei('7', 'ether') } );
-            tokenReferrals = await dutchWrapper.TokenReferrals.call(_hash);
-            assert.equal( tokenReferrals[3].toNumber(), totalTokensEarned + 5000 * 10**18 );
-
-            let claimedTokenReferral = await dutchWrapper.claimedTokenReferral();
-            assert.isAbove(claimedTokenReferral, 0);
-
-            let superDAOTokens = await dutchWrapper.SuperDAOTokens(thirdAccount);
-            assert.isAbove(superDAOTokens.toNumber(),0);
-            assert.isAbove( web3.toWei('12', 'ether') / (await promissoryToken.lastPrice()).toNumber(), superDAOTokens.toNumber() );
-        });
-
-        it.skip('Referral Campaing with sign up ', async () => {
-            const  _addr = thirdAccount;
-            const _hash = await dutchWrapper.referralSignup.call({ from : _addr });
-            await dutchWrapper.referralSignup({ from : _addr });
-            let tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
-
-
-            await dutchWrapper.bidReferral(_addr, _hash, { from: _addr, value : web3.toWei(1, 'ether')  });
-            tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
-            assert.equal(tokenReferrals[3].toNumber(), 500 * 10**18);
-
-            await dutchWrapper.bidReferral(_addr, _hash, { from: _addr, value : web3.toWei(1, 'ether')  });
-            tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
-            assert.equal(tokenReferrals[3].toNumber(), 1000 * 10**18);
-
-            await dutchWrapper.bidReferral(_addr, _hash, { from: _addr, value : web3.toWei(1, 'ether')  });
-            tokenReferrals = await dutchWrapper.TokenReferrals(_hash);
-            assert.equal(tokenReferrals[3].toNumber(), 1500 * 10**18);
-
-            assert.equal( tokenReferrals[2].toNumber(), 3);
-            console.log(tokenReferrals)
-
-        });
-
-
-        it.skip('DutchWrapper setup Referrals Referral & Bid', async () => {
-            const  _addr = thirdAccount;
-            const  _percentage = 0;
-            let  _type = 3; // uint constand public Social = 3; // Distinction between promotion groups, social giveaway bonus
-            let _tokenAmt = 20;
-            let _numUsers = 5;
-
-            let mapSocialCampaigns = null;
-            let mapTokenReferrals = null;
-
-            await dutchWrapper.setupReferal(_addr, _percentage, _type, _tokenAmt, _numUsers , { from: owner });
-            const _AccountHash = await dutchWrapper.calculateRefferalsHash(_addr, { from: owner });
-            mapSocialCampaigns = await dutchWrapper.SocialCampaigns.call(_AccountHash);
-
-            assert.equal(_AccountHash, mapSocialCampaigns[0]);
-            assert.equal( _numUsers, mapSocialCampaigns[1].toNumber());
-            assert.equal(_tokenAmt, mapSocialCampaigns[2].toNumber())
-
-            //-- Referral signup
-            const signUprefferals = await dutchWrapper.referalSignup({ from : _addr });
-            const _referralHash = signUprefferals.logs[0].args._Hash
-            console.log('refferal hash :  ',  _referralHash);
-
-            mapTokenReferrals =  await dutchWrapper.TokenReferrals.call(_referralHash);
-            const bidReferral = await dutchWrapper.bidReferral(_addr, _referralHash ,{from : _addr, value : web3.toWei('2', 'ether') } );
-            mapTokenReferrals =  await dutchWrapper.TokenReferrals.call(_referralHash);
-
-            console.log( await getAcutionData(dutchWrapper, KittieFightToken, accounts)  );
-
-
-        });
-      });
-
-    describe('confirmSocial()', function () {
-      it('should successfully confirmSocial', async function () {
-        await Promise.all(socialCampaignsHash.map(async function(hash) {
-          await Promise.all(socialsUsers.slice(0,2).map ( async function (user) {
-            await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
-              from: user.address
-            });
-            const isConfirmed = await dutchWrapper.isConfirmedSocial.call(hash, user.address, user._userName);
-            assert.isTrue(isConfirmed, 'User participation not successfully confirmed');
-          }));
-        }));
-      });
-
-      it('should fail to confirmSocial with different userNames from same address', async function () {
-        try {
-          await Promise.all(socialCampaignsHash.map(async function(hash) {
-            await Promise.all(socialsUsers.slice(2,4).map ( async function (user) {
-              await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
-                from: user.address
-              });
-              assert.notExists(true, 'Transaction should fail');
-            }));
-          }));
-        } catch (e) {
-          assert.exists(e.message || e, 'Transaction should fail with an error');
-          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
+                await dutchWrapper.bid(accounts[i], { from: accounts[i], value: 250*10**18});
+                assert.isNotOk(true, 'Expected function to fail');
+            } catch(e) {
+                assert.exists(e, 'Expected error to exist from throw');
+            };
         }
-      });
+        val = await dutchWrapper.stage();
 
-      it('should fail to duplicate confirmSocial', async function () {
         try {
-          await Promise.all(socialCampaignsHash.map(async function(hash) {
-            await Promise.all(socialsUsers.slice(0,2).map ( async function (user) {
-              await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
-                from: user.address
-              });
-              assert.notExists(true, 'Transaction should fail');
-            }));
-          }));
-        } catch (e) {
-          assert.exists(e.message || e, 'Transaction should fail with an error');
-          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
-        }
-      });
+            await dutchWrapper.bid(accounts[95], { from: accounts[95], value: 10*10**18});
+            assert.isNotOk(true, 'Expected function to fail');
+        } catch(e) {
+            assert.exists(e, 'Expected error to exist from throw');
+        };
 
-      it('should fail to exceed maxParticipators limit on confirmSocial', async function () {
-        try {
-          const user = socialsUsers[2];
-          const hash = socialCampaignsHash[0];
-          await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
-            from: thirdAccount
-          });
+        await increaseTime( 86400 * 55 );
+        await dutchWrapper.updateStage({ from : accounts[0] });
+        await sleep(2000);
 
-          assert.notExists(true, 'Transaction shoould fail');
-        } catch (e) {
-          assert.exists(e.message || e, 'Expect tranasction to fail with error');
-          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
-        }
-      })
+        const state = await getAcutionData(dutchWrapper, kittieFightToken, accounts);
+        assert.equal(state.stage , 4, 'Auction stage should be 4: Auction started' );
+
+        // console.log('---- CONTRACT STATE ----');
+        // console.log('Auction Stage :',  state );
+        // console.log('---- CONTRACT STATE ----');
+
     });
 
-    describe('adminRemoveBatch()', function () {
-      const batchList = [
-        socialsUsers[0].address
-      ];
-      it('should fail to adminRemoveBatch() from non-priviledged account', async function () {
-        try {
-          const hash = socialCampaignsHash[1];
-          await dutchWrapper.adminRemoveBatch(hash, batchList, {
-            from: owner
-          });
-          assert.notExists(true, 'Transaction shoould fail');
-        } catch (e) {
-          assert.exists(e.message || e, 'Expect tranasction to fail with error');
-          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
-        }
-      });
+    it('ClaimtokenBonus for campaign Account 10 : ', async () => {
 
-      it('should fail to adminRemoveBatch() to limit exceeded campaign', async function () {
-        try {
-          const hash = socialCampaignsHash[0];
-          await dutchWrapper.adminRemoveBatch(hash, batchList, {
-            from: secondAccount
-          });
-          assert.notExists(true, 'Transaction shoould fail');
-        } catch (e) {
-          assert.exists(e.message || e, 'Expect tranasction to fail with error');
-          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
-        }
-      });
+        const account10Campaignhash = await dutchWrapper.calculateCampaignHash(accounts[10], { from: owner });
+        const data = await getMyreferralTokens(dutchWrapper, accounts[10], true);
+        assert.equal( (await getMyreferralTokens(dutchWrapper, accounts[10], true)).totalTokensEarned, (100 + 100 + 500 + 1000)  );
+        const claimCampaignTokenBonusStatus = await dutchWrapper.claimCampaignTokenBonus(account10Campaignhash, { from: accounts[10] } );
+        assert.equal( (await kittieFightToken.balanceOf(accounts[10])).toNumber(),  (100 + 100 + 500 + 1000) * 10 ** 18);
 
-      it('should fail to adminRemoveBatch() on MarketingPartners', async function () {
-        try {
-          const hash = marketingPartnersHash[0];
-          await dutchWrapper.adminRemoveBatch(hash, batchList, {
-            from: secondAccount
-          });
-          assert.notExists(true, 'Expect tranasction to fail');
-        } catch (e) {
-          assert.exists(e.message || e, 'Expect tranasction to fail with an error');
-          assert.isFalse((e.message || e) === 'assert.notEists()', 'Expected non-assert failure');
-        }
-      });
-
-      it('should successfully adminRemoveBatch()', async function () {
-        try {
-          const hash = socialCampaignsHash[1];
-          await dutchWrapper.adminRemoveBatch(hash, batchList, {
-            from: secondAccount
-          });
-          await Promise.all(batchList.map(async function(one) {
-            const isDisqualified = await dutchWrapper.checkDisqualified.call(hash, one);
-            assert.isTrue(isDisqualified, 'Address not successfully removed');
-          }));
-        } catch (e) {
-          assert.notExists(e.message || e, 'Expect tranasction to succeed');
-        }
-      });
-
-      it('should fail to confirmSocial() with Disqualified address', async function () {
-        try {
-          const hash = socialCampaignsHash[1];
-          const user = socialsUsers.find(user => user.address === batchList[0]);
-          const isDisqualified = await dutchWrapper.checkDisqualified.call(hash, user.address);
-          assert.isTrue(isDisqualified, 'Address not removed');
-
-          await dutchWrapper.confirmSocial(hash, user._userName, user._retweetOrdiscord, {
-            from: user.address
-          });
-          assert.fail(true, 'Expected transaction should fail');
-        } catch (e) {
-          assert.exists(e.message || e, 'Expected function to fail with error');
-          assert.isFalse((e.message || e) === 'assert.fail()', 'Expected non-assert failure');
-        }
-      });
-
-      describe('claimtokenBonus()', function () {
-
-      });
-
-      describe('transferUnsoldTokens()', function () {
-
-      });
-
-      describe('orderTop20()', function () {
-
-      });
     });
 
+    it('Claim Token Bonus for bidder Account 11  : ', async () => {
+        // accounts[11]  accounts[12]  accounts[13]
+        const data = (await getMyreferralTokens(dutchWrapper, accounts[11], false));
+        await dutchWrapper.claimtokenBonus({ from: accounts[11] } );
+        assert.equal( (await kittieFightToken.balanceOf(accounts[11])).toNumber(), data.totalTokensEarned * 10 ** 18);
+        const rerequest = await dutchWrapper.claimtokenBonus({ from: accounts[11] } );
+        assert.equal((await getMyreferralTokens(dutchWrapper, accounts[11], false)).totalTokensEarned, 0);
+
+    });
+
+    it('Claim token Bonus for bidder Account 12  : ', async () => {
+        const account = accounts[12];
+        const data = (await getMyreferralTokens(dutchWrapper, account, false));
+        await dutchWrapper.claimtokenBonus({ from: account } );
+        assert.equal( (await kittieFightToken.balanceOf(account)).toNumber(), data.totalTokensEarned * 10 ** 18);
+        const rerequest = await dutchWrapper.claimtokenBonus({ from: account } );
+        assert.equal((await getMyreferralTokens(dutchWrapper, account, false)).totalTokensEarned, 0);
+    });
+
+    it('Should claim referral tokens for bidders 14 - 29  : ', async () => {
+
+        for(let i = 0; i < referralBidders.length; i ++ ) {
+            const account = referralBidders[i].account;
+            const data = await getMyreferralTokens(dutchWrapper, account, false);
+            referralBidders[i]["bonusTokens"] = data.totalTokensEarned;
+            await dutchWrapper.claimtokenBonus({ from: account } );
+            assert.equal( (await kittieFightToken.balanceOf(account)).toNumber(), data.totalTokensEarned * 10 ** 18);
+            await dutchWrapper.claimtokenBonus({ from: account } );
+            assert.equal((await getMyreferralTokens(dutchWrapper, account, false)).totalTokensEarned, 0);
+        }
+
+    });
+
+    it('Should claim bid tokens for bidders 14 - 29 :' , async () => {
+
+        for(let i = 0; i < referralBidders.length; i ++ ) {
+
+            const account = referralBidders[i].account;
+            let startBalance = (await kittieFightToken.balanceOf(account)).toNumber();
+            //console.log('Biider Balance before claim ', account, '_hash :',    startBalance);
+            await dutchWrapper.claimTokens(account, { from: account } );
+            let endbalance = (await kittieFightToken.balanceOf(account)).toNumber();
+            assert.isAbove(endbalance, startBalance, 'Token balance should changed ');
+            await dutchWrapper.claimTokens(account, { from: account } );
+            let currentBalance = (await kittieFightToken.balanceOf(account)).toNumber();
+            assert.equal(endbalance, currentBalance, 'No additionoal tokens to claim');
+        }
+    })
+
+
+    it('Shoudl cliam tonens for Accounts 50-90 : ', async () => {
+
+        const bidsByAccount =  await dutchWrapper.bids.call(accounts[10]);
+        console.log('bidsByAccount 10 : ', bidsByAccount)
+
+        for (let i = 50; i < 90; i++ ) {
+
+            const account = accounts[i];
+            let startBalance = (await kittieFightToken.balanceOf(account)).toNumber();
+            assert.equal(startBalance, 0, 'Start balance is 0 ');
+            //console.log('Biider before claim ',  account, startBalance);
+            await dutchWrapper.claimTokens(account, { from: account } );
+            let endbalance = (await kittieFightToken.balanceOf(account)).toNumber();
+
+            // console.log('endbalance :', endbalance)
+            // console.log('------');
+            // assert.isAbove(endbalance, startBalance, 'Token balance should changed ');
+            // await dutchWrapper.claimTokens(account, { from: account } );
+            // let currentBalance = (await kittieFightToken.balanceOf(account)).toNumber();
+            // assert.equal(endbalance, currentBalance, 'No additionoal tokens to claim');
+        }
+    });
+
+
+    it('Should check Softcap === true', async () => {
+
+        const softcapReached = await dutchWrapper.softcapReached();
+        const totalReceived = await dutchWrapper.totalReceived();
+
+        console.log('softcapReached : ', softcapReached);
+        console.log('totalReceived : ', web3.fromWei(totalReceived.toNumber(), 'ether') );
+        assert.equal(softcapReached, true);
+    });
+
+    it('Should print correct getTop20Reffered ', async () => {
+
+        const top20Reffered = await dutchWrapper.getTop20Reffered();
+        const top20Addr = await dutchWrapper.getTop20Addr();
+
+        let top20List = [];
+
+        for(let i=0; i < top20Reffered.length; i++ ){
+            top20List.push({
+                hash : top20Addr[i],
+                number :  top20Reffered[i].toNumber()
+            })
+        }
+
+        console.log('----');
+        console.log(top20List);
+
+        assert.equal(top20List.length, 20);
+        // Account13 hash (Should be a top 1 )
+        let _account13Hash =  await dutchWrapper.calculatPersonalHash.call({ from : accounts[13] });
+        assert.equal( top20List[0].hash, _account13Hash);
+
+    });
+
+
+    it.skip('Shoudl claim bonus tokens for campaign Account', async () => {
+
+        const campaignAccount = campaignreferrals[0].account;
+        const totalTokensEarned = campaignreferrals[0].tokensEarned;
+        const data = await getMyreferralTokens(dutchWrapper, campaignAccount, false);
+        
+        // assert.equal(data.totalTokensEarned, totalTokensEarned);
+        // await dutchWrapper.ClaimtokenBonus(hash, { from: campaignAccount } );
+        // let endbalance = (await kittieFightToken.balanceOf(campaignAccount)).toNumber();
+        // console.log('endbalance : ', endbalance);
+        // assert.equal(totalTokensEarned, endbalance / (10**18) );
+    })
 
 });

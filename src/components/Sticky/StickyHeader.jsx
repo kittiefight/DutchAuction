@@ -7,6 +7,8 @@ import Price from "./Price";
 import Bonus from "./Bonus";
 import "./StickyHeader.css";
 
+import Web3warning from './Web3warning';
+
 import { HashLink as Link } from 'react-router-hash-link';
 
 
@@ -52,6 +54,7 @@ class StickyHeader extends Component {
             <AppConsumer>
                 {(appProps) => (
                     <div className={`${isHidden ? 'top_div_hidden' : 'top_div_active'}`}>
+
                         <div className="d-md-none">
                             <div className="row">
                                 <div className="col-sm">
@@ -79,7 +82,7 @@ class StickyHeader extends Component {
                                         <Clock appProps={appProps} />  
                                 </div>
 
-                                <div className="col-md-1 col-centered">
+                                <div className="col-md-2 col-centered">
                                     <div className="d-flex justify-content-end">
                                         <Bonus />
                                     </div>
@@ -91,24 +94,29 @@ class StickyHeader extends Component {
                                     {/* </div> */}
                                 </div>
 
-                                <div className="col-md-2 stickyButton">
-                                    
-                                    {/* <div className="d-flex justify-content-start"> */}
-                                    {/* <button onClick={this.goToBidSection} className="float-left"> BID </button> */}
-                                    {/* </div> */}
-                                   
+                                <div className="col-md-1 stickyButton">
                                         <Link  to="#section4">
                                             <div className="anchoButton">
                                                 BID
                                             </div>
                                         </Link>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
-            </AppConsumer>
 
+                                <div className="col-md-1 stickyButton">
+                                        <a href='#/marketingadmin'>
+                                            <div className="anchoButton">
+                                                Dashboard
+                                            </div>
+                                        </a>
+                                </div>
+                            </div>    
+                        </div>
+
+                        <Web3warning appProps={appProps}></Web3warning>
+
+                    </div>
+            )}
+            </AppConsumer>
     )}
 }
 

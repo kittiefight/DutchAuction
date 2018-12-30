@@ -9,7 +9,7 @@ module.exports = {
       host: "127.0.0.1",
       port: 8545,
       network_id: "*", // match any network
-      gas: 7990000
+      gas: 7700000
     },
 
     live: {

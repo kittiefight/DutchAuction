@@ -12,6 +12,7 @@ module.exports = (deployer, network, accounts) => {
     const _pWallet = accounts[9];
     const _ceiling = 20 * 10 ** 18; // 500 ETH
     const _priceFactor = 7500  / 10; //
+    const _softCap = 1000 * 10 ** 18; // 1000 ETH 
     const _promissoryAddresses = {
       1: "0x0348B55AbD6E1A99C6EBC972A6A4582Ec0bcEb5c"
     };
@@ -37,19 +38,19 @@ module.exports = (deployer, network, accounts) => {
         }
 
         console.log('-------------------------------');
-        console.log('Token address: ', token.address);
-        console.log('Dutch Wrapper Address : ', dutchWrapper.address);
-        console.log('PromissaryToken Address : ', promissoryToken.address);
+        console.log('REACT_APP_TOKEN_CONTRACT_ADDRESS='+token.address);
+        console.log('REACT_APP_AUCTION_CONTRACT_ADDRESS='+dutchWrapper.address);
+        console.log('REACT_APP_POMISSORYTOKEN_CONTRACT_ADDRESS='+promissoryToken.address);
         console.log('--------------------------------');
 
-        console.log('PromissoryToken price : ', (await promissoryToken.lastPrice()).toNumber() );
+        // console.log('PromissoryToken price : ', (await promissoryToken.lastPrice()).toNumber() );
 
-        // Mint 100  Tokens
+        // Mint 10 million  Tokens for dutchwrapper
         await token.mint(dutchWrapper.address, 10000000 * 10 ** 18);
 
         // // Transfer 100  tokens to DutchAuction
         //await token.transfer(dutchWrapper.address, 5000000 * 10**18 );
-        console.log('Dutch Wrapper Balance : ',  (await token.balanceOf(dutchWrapper.address)).toNumber() );
+        // console.log('Dutch Wrapper Balance : ',  (await token.balanceOf(dutchWrapper.address)).toNumber() );
 
         //Setup  Auction
         await dutchWrapper.setup(token.address);
@@ -59,5 +60,7 @@ module.exports = (deployer, network, accounts) => {
 
         // Setup Finished !
         // Next go to tests ...
+
+
     });
 };

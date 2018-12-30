@@ -1,6 +1,307 @@
 pragma solidity ^0.4.23;
-import "./DutchAuction.sol";
-import "./SafeMath.sol";
+
+library SafeMath {
+
+  function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+    if (a == 0) {
+      return 0;
+    }
+    uint256 c = a * b;
+    assert(c / a == b);
+    return c;
+  }
+
+  function div(uint256 a, uint256 b) internal pure returns (uint256) {
+    // assert(b > 0); // Solidity automatically throws when dividing by 0
+    uint256 c = a / b;
+    // assert(a == b * c + a % b); // There is no case in which this doesn't hold
+    return c;
+  }
+
+  function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+    assert(b <= a);
+    return a - b;
+  }
+
+  function add(uint256 a, uint256 b) internal pure returns (uint256) {
+    uint256 c = a + b;
+    assert(c >= a);
+    return c;
+  }
+}
+
+interface Token {
+    function transfer(address to, uint256 value) external returns (bool success);
+    function transferFrom(address from, address to, uint256 value) external returns (bool success);
+    function approve(address spender, uint256 value) external returns (bool success);
+
+    // This is not an abstract function, because solc won't recognize generated getter functions for public variables as functions.
+    function totalSupply() external constant returns (uint256 supply);
+    function balanceOf(address owner) external constant returns (uint256 balance);
+    function allowance(address owner, address spender) external constant returns (uint256 remaining);
+
+    event Transfer(address indexed from, address indexed to, uint256 value);
+    event Approval(address indexed owner, address indexed spender, uint256 value);
+}
+interface PromissoryToken {
+
+	function claim() payable external;
+	function lastPrice() external returns(uint256);
+}
+
+contract DutchAuction {
+
+    /*
+     *  Events
+     */
+    event BidSubmission(address indexed sender, uint256 amount);
+    event logPayload(bytes _data, uint _lengt);
+
+    /*
+     *  Constants
+     */
+    uint constant public MAX_TOKENS_SOLD = 10000000 * 10**18; // 10M
+    uint constant public WAITING_PERIOD = 45 days;
+
+    /*
+     *  Storage
+     */
+
+
+    address public pWallet;
+    Token public KittieFightToken;
+    address public owner;
+    PromissoryToken public PromissoryTokenIns; 
+    address constant public promissoryAddr = 0x0348B55AbD6E1A99C6EBC972A6A4582Ec0bcEb5c;
+    uint public ceiling;
+    uint public priceFactor;
+    uint public startBlock;
+    uint public endTime;
+    uint public totalReceived;
+    uint public finalPrice;
+    mapping (address => uint) public bids;
+    Stages public stage;
+
+    /*
+     *  Enums
+     */
+    enum Stages {
+        AuctionDeployed,
+        AuctionSetUp,
+        AuctionStarted,
+        AuctionEnded,
+        TradingStarted
+    }
+
+    /*
+     *  Modifiers
+     */
+    modifier atStage(Stages _stage) {
+        require(stage == _stage);
+            // Contract not in expected state
+        _;
+    }
+
+    modifier isOwner() {
+        require(msg.sender == owner);
+            // Only owner is allowed to proceed
+        _;
+    }
+
+    modifier isWallet() {
+         require(msg.sender == address(pWallet));
+            // Only wallet is allowed to proceed
+        _;
+    }
+
+    modifier isValidPayload() {
+        emit logPayload(msg.data, msg.data.length);
+        require(msg.data.length == 4 || msg.data.length == 36, "No valid payload");
+        _;
+    }
+
+    modifier timedTransitions() {
+        if (stage == Stages.AuctionStarted && calcTokenPrice() <= calcStopPrice())
+            finalizeAuction();
+        if (stage == Stages.AuctionEnded && now > endTime + WAITING_PERIOD)
+            stage = Stages.TradingStarted;
+        _;
+    }
+
+    /*
+     *  Public functions
+     */
+    /// @dev Contract constructor function sets owner.
+    /// @param _pWallet KittieFight promissory wallet.
+    /// @param _ceiling Auction ceiling.
+    /// @param _priceFactor Auction price factor.
+    constructor(address _pWallet, uint _ceiling, uint _priceFactor)
+        public
+    {
+        if (_pWallet == 0 || _ceiling == 0 || _priceFactor == 0)
+            // Arguments are null.
+            revert();
+        owner = msg.sender;
+        PromissoryTokenIns = PromissoryToken(promissoryAddr);
+        pWallet = _pWallet;
+        ceiling = _ceiling;
+        priceFactor = _priceFactor;
+        stage = Stages.AuctionDeployed;
+    }
+
+    /// @dev Setup function sets external contracts' addresses.
+    /// @param _kittieToken  token address.
+    function setup(address _kittieToken)
+        public
+        isOwner
+        atStage(Stages.AuctionDeployed)
+    {
+        if (_kittieToken == 0)
+            // Argument is null.
+            revert();
+        KittieFightToken = Token(_kittieToken);
+        // Validate token balance
+        if (KittieFightToken.balanceOf(this) != MAX_TOKENS_SOLD)
+            revert();
+        stage = Stages.AuctionSetUp;
+    }
+
+    /// @dev Starts auction and sets startBlock.
+    function startAuction()
+        public
+        isOwner
+        atStage(Stages.AuctionSetUp)
+    {
+        stage = Stages.AuctionStarted;
+        startBlock = block.number;
+    }
+
+    /// @dev Changes auction ceiling and start price factor before auction is started.
+    /// @param _ceiling Updated auction ceiling.
+    /// @param _priceFactor Updated start price factor.
+    function changeSettings(uint _ceiling, uint _priceFactor)
+        public
+        isWallet
+        atStage(Stages.AuctionSetUp)
+    {
+        ceiling = _ceiling;
+        priceFactor = _priceFactor;
+    }
+
+    /// @dev Calculates current token price.
+    /// @return Returns token price.
+    function calcCurrentTokenPrice()
+        public
+        timedTransitions
+        returns (uint)
+    {
+        if (stage == Stages.AuctionEnded || stage == Stages.TradingStarted)
+            return finalPrice;
+        return calcTokenPrice();
+    }
+
+    /// @dev Returns correct stage, even if a function with timedTransitions modifier has not yet been called yet.
+    /// @return Returns current auction stage.
+    function updateStage()
+        public
+        timedTransitions
+        returns (Stages)
+    {
+        return stage;
+    }
+
+    /// @dev Allows to send a bid to the auction.
+    /// @param receiver Bid will be assigned to this address if set.
+    function bid(address receiver)
+        public
+        payable
+        //isValidPayload
+        timedTransitions
+        atStage(Stages.AuctionStarted)
+        returns (uint amount)
+    {
+        // If a bid is done on behalf of a user via ShapeShift, the receiver address is set.
+        if (receiver == 0)
+            receiver = msg.sender;
+        amount = msg.value;
+        // Prevent that more than 90% of tokens are sold. Only relevant if cap not reached.
+        uint maxWei = (MAX_TOKENS_SOLD / 10**18) * calcTokenPrice() - totalReceived;
+        uint maxWeiBasedOnTotalReceived = ceiling - totalReceived;
+        if (maxWeiBasedOnTotalReceived < maxWei)
+            maxWei = maxWeiBasedOnTotalReceived;
+        // Only invest maximum possible amount.
+        if (amount > maxWei) {
+            amount = maxWei;
+            // Send change back to receiver address. In case of a ShapeShift bid the user receives the change back directly.
+            if (!receiver.send(msg.value - amount))
+                // Sending failed
+                revert();
+        }
+        // Forward funding to ether pWallet
+        if (amount == 0 || !address(pWallet).send(amount))
+            // No amount sent or sending failed
+            revert();
+        bids[receiver] += amount;
+        totalReceived += amount;
+        if (maxWei == amount)
+            // When maxWei is equal to the big amount the auction is ended and finalizeAuction is triggered.
+            finalizeAuction();
+        emit BidSubmission(receiver, amount);
+    }
+
+    /// @dev Claims tokens for bidder after auction.
+    /// @param receiver Tokens will be assigned to this address if set.
+    function claimTokens(address receiver)
+        public
+        isValidPayload
+        timedTransitions
+        atStage(Stages.TradingStarted)
+    {
+        if (receiver == 0)
+            receiver = msg.sender;
+        uint tokenCount = bids[receiver] * 10**18 / finalPrice;
+        bids[receiver] = 0;
+        KittieFightToken.transfer(receiver, tokenCount);
+    }
+
+    /// @dev Calculates stop price.
+    /// @return Returns stop price.
+    function calcStopPrice()
+        view
+        public
+        returns (uint)
+    {
+        return totalReceived * 10**18 / MAX_TOKENS_SOLD + 1;
+    }
+
+    /// @dev Calculates token price.
+    /// @return Returns token price.
+    function calcTokenPrice()
+        view
+        public
+        returns (uint)
+    {
+        return priceFactor * 10**18 / (block.number - startBlock + 7500) + 1;
+    }
+
+    /*
+     *  Private functions
+     */
+    function finalizeAuction()
+        private
+    {
+        stage = Stages.AuctionEnded;
+
+        if (totalReceived == ceiling)
+            finalPrice = calcTokenPrice();
+        else
+            finalPrice = calcStopPrice();
+
+        endTime = now;
+    }
+
+
+}
 
 contract Dutchwrapper is DutchAuction {
 
@@ -20,7 +321,7 @@ contract Dutchwrapper is DutchAuction {
 
     uint constant public Partners = 1; // Distinction between promotion groups, partnership for eth
     uint constant public Referrals = 2; // Distinction between promotion groups, referral campaign for tokens
-
+    
 
     uint constant public ONE = 1; // NUMBER 1
 
@@ -91,16 +392,16 @@ contract Dutchwrapper is DutchAuction {
 
     // check when dutch auction is ended and trading has started
     modifier tradingstarted(){
-        require(stage == Stages.TradingStarted, 'Trading stage not yet active');
+        require(stage == Stages.TradingStarted);
         _;
     }
 
-    // uint constant public MAX_TOKEN_REFERRAL = 1800000 * 10**18; // 1 800,000 : one million and eight hundred  thousand
+    // uint constant public MAX_TOKEN_REFERRAL = 1800000 * 10**18; // 1 800,000 : one million and eight hundred  thousand    
     // uint public claimedTokenReferral = 0; // 800,000 : eigth hundred thousand limit
 
     // safety check for requiring limits at maximum amount allocated for referrals
     modifier ReferalCampaignLimit() {
-        require (claimedTokenReferral < MAX_TOKEN_REFERRAL, 'Maximum token referrals reached');
+        require (claimedTokenReferral < MAX_TOKEN_REFERRAL);
         _;
     }
 
@@ -124,7 +425,7 @@ contract Dutchwrapper is DutchAuction {
     function setupReferal(address _addr, uint _percentage)
         public
         isOwner
-        returns (bool)
+        returns (string successmessage) 
     {
 
             bytes4 tempHash = bytes4(keccak256(abi.encodePacked(_addr, msg.sender)));
@@ -135,14 +436,14 @@ contract Dutchwrapper is DutchAuction {
 
             InternalReferalSignupByhash(tempHash, _addr);
 
-  		      emit SetupReferal(1); // Marketin partners
-            return true;
+    		emit SetupReferal(1); // Marketin partners
+            return "partner signed up";
     }
 
     // generated hash on behalf of partners earning cash and tokensby tokens. referalcampaignlimmit modifier
     //removed because partner signup it will fail if referal tokens are used up
     function InternalReferalSignup(address _addr) internal returns (bytes4 referalhash) {
-
+        
         bytes4 tempHash = bytes4(keccak256(abi.encodePacked(_addr)));
         TokenReferrals[tempHash].addr = msg.sender;
         TokenReferrals[tempHash].hash = tempHash;
@@ -162,7 +463,7 @@ contract Dutchwrapper is DutchAuction {
     // public self generated hash by token earning promoters
     function referralSignup() public ReferalCampaignLimit returns (bytes4 referalhash) {
         bytes4 tempHash = bytes4(keccak256(abi.encodePacked(msg.sender)));
-        require (tempHash != TokenReferrals[tempHash].hash, 'Campaign already exists'); //check prevent overwriting
+        require (tempHash != TokenReferrals[tempHash].hash); //check prevent overwriting
         TokenReferrals[tempHash].addr = msg.sender;
         TokenReferrals[tempHash].hash = tempHash;
         referalhash = tempHash;
@@ -181,7 +482,7 @@ contract Dutchwrapper is DutchAuction {
             bidAmount = ceiling - totalReceived;
         }
 
-        require( bid(_receiver) == bidAmount, 'Wrong amount from bid');
+        require( bid(_receiver) == bidAmount );
 
 		uint amount = msg.value;
 		bidder memory _bidder;
@@ -288,7 +589,7 @@ contract Dutchwrapper is DutchAuction {
         							return Referrals;
         						}
                         }
-
+    
     }
 
 
@@ -303,15 +604,15 @@ contract Dutchwrapper is DutchAuction {
     function claimtokenBonus () public returns(bool success)  {
 
         bytes4 _personalHash = bytes4(keccak256(abi.encodePacked(msg.sender)));
-
-        if ((_personalHash == TokenReferrals[_personalHash].hash)
+        
+        if ((_personalHash == TokenReferrals[_personalHash].hash) 
                 && (TokenReferrals[_personalHash].totalTokensEarned > 0)) {
 
             uint TokensToTransfer1 = TokenReferrals[_personalHash].totalTokensEarned;
             TokenReferrals[_personalHash].totalTokensEarned = 0;
             KittieFightToken.transfer(TokenReferrals[_personalHash].addr , TokensToTransfer1);
             emit ClaimtokenBonus(_personalHash, msg.sender, true);
-
+         
             return true;
 
         } else {
@@ -322,17 +623,17 @@ contract Dutchwrapper is DutchAuction {
 
 
     function claimCampaignTokenBonus(bytes4 _campaignHash) public returns(bool success)  {
-
+        
         bytes4 _marketingCampaignHash = bytes4(keccak256(abi.encodePacked(msg.sender, owner)));
 
-        if ((_marketingCampaignHash == TokenReferrals[_campaignHash].hash)
+        if ((_marketingCampaignHash == TokenReferrals[_campaignHash].hash) 
                 && (TokenReferrals[_campaignHash].totalTokensEarned > 0)) {
 
             uint TokensToTransfer1 = TokenReferrals[_campaignHash].totalTokensEarned;
             TokenReferrals[_campaignHash].totalTokensEarned = 0;
             KittieFightToken.transfer(TokenReferrals[_campaignHash].addr , TokensToTransfer1);
             emit ClaimtokenBonus(_campaignHash, msg.sender, true);
-
+         
             return true;
 
         } else {
@@ -340,7 +641,7 @@ contract Dutchwrapper is DutchAuction {
             return false;
        }
     }
-
+    
 
     /*
      *  Admin transfers all unsold tokens back to token contract
@@ -354,7 +655,7 @@ contract Dutchwrapper is DutchAuction {
         uint soldTokens = totalReceived * 10**18 / finalPrice;
         uint totalSold = (MAX_TOKENS_SOLD + claimedTokenReferral)  - soldTokens;
 
-        require (_unsoldTokens < totalSold , 'Unsold tokens number Overflowed');
+        require (_unsoldTokens < totalSold );
         KittieFightToken.transfer(_addr, _unsoldTokens);
     }
 
@@ -400,7 +701,7 @@ contract Dutchwrapper is DutchAuction {
                     (topReferredNum[j], topAddrHashes[j] ) = (topReferredNum[j - 1],topAddrHashes[j - 1]);
                 }
 
-
+            
             }
             /** update the new max element **/
             (topReferredNum[i], topAddrHashes[i]) = (_value, _hash);
@@ -462,13 +763,11 @@ contract Dutchwrapper is DutchAuction {
     // bolean bonus switcher, only called when
     // tokens bonus availability is exhuated
     // terminate bonus
-    function setBonustoFalse() private returns (bool) {
+    function setBonustoFalse() private returns (string) {
         require (bidderBonus == true,"no more bonuses");
         bidderBonus = false;
-        return true;
+        return "tokens exhausted";
     }
 
-    function checkDisqualified (bytes4 _campaignHash, address _addr) public view returns (bool) {
-      return SocialCampaigns[_campaignHash].disqualified[_addr];
-    }
 }
+

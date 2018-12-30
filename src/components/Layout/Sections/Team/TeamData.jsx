@@ -67,10 +67,17 @@ export default [
       avatar: 'Archil.jpg'
     },
     {
+      name: 'Babayemi Olulana',
+      info: 'Master solidity, contract integration',
+      url: null,
+      avatar: 'https://superdao.io/img/teams/yemi.jpg',
+      isSpecialAvatar : true
+    },
+    {
       name: 'Kenan Majaj',
       info: 'Master character, effects designer, Artist and graphic designer',
-      url: null,
-      avatar: ''
+      url: 'null',
+      avatar: 'https://superdao.io/img/teams/yemi.jpg'
     },
     {
       name: 'Elizaveta Nazarova',
