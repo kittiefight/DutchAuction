@@ -30,7 +30,7 @@ contract RBAC {
   /**
    * @dev constructor. Sets msg.sender as admin by default
    */
-  function RBAC()
+  constructor()
     public
   {
     addRole(msg.sender, ROLE_ADMIN);
