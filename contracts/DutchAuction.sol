@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.5.10;
 
 import "./Interfaces/InterfaceToken.sol";
 import "./Interfaces/PromissoryContract.sol";

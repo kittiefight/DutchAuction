@@ -1,4 +1,4 @@
-pragma solidity ^0.4.23;
+pragma solidity ^0.5.10;
 
 /// @title Abstract promissory contract - with function made available to using contract.
 

@@ -1,4 +1,4 @@
-pragma solidity ^0.4.24;
+pragma solidity ^0.5.10;
 
 import "../../openzeppelin-solidity/token/ERC20/PausableToken.sol";
 import "../../openzeppelin-solidity/token/ERC20/CappedToken.sol";
