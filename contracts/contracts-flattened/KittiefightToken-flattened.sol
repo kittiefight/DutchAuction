@@ -1,4 +1,5 @@
 pragma solidity ^0.4.24;
+
 contract ERC20Basic {
   function totalSupply() public view returns (uint256);
   function balanceOf(address who) public view returns (uint256);
@@ -782,7 +783,7 @@ contract KittiefightToken is ERC865Token, PausableToken, CappedToken {
      * @notice Is the address allowed to transfer
      * @return true if the sender can transfer
      */
-    function isUserAllowedToTransfer(address _user) public constant returns (bool) {
+    function isUserAllowedToTransfer(address _user) public view returns (bool) {
         require(_user != 0x0);
         return transfersWhitelist[_user];
     }

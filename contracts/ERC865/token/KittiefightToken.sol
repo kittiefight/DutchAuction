@@ -49,7 +49,7 @@ contract KittiefightToken is ERC865Token, PausableToken, CappedToken {
      * @notice Is the address allowed to transfer
      * @return true if the sender can transfer
      */
-    function isUserAllowedToTransfer(address _user) public constant returns (bool) {
+    function isUserAllowedToTransfer(address _user) public view returns (bool) {
         require(_user != 0x0);
         return transfersWhitelist[_user];
     }
