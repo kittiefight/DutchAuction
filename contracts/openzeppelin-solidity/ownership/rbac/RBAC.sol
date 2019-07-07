@@ -42,7 +42,7 @@ contract RBAC {
    * @param roleName the name of the role
    * // reverts
    */
-  function checkRole(address addr, string roleName)
+  function checkRole(address addr, string memory roleName)
     view
     public
   {
@@ -55,7 +55,7 @@ contract RBAC {
    * @param roleName the name of the role
    * @return bool
    */
-  function hasRole(address addr, string roleName)
+  function hasRole(address addr, string memory roleName)
     view
     public
     returns (bool)
@@ -68,7 +68,7 @@ contract RBAC {
    * @param addr address
    * @param roleName the name of the role
    */
-  function adminAddRole(address addr, string roleName)
+  function adminAddRole(address addr, string memory roleName)
     onlyAdmin
     public
   {
@@ -80,7 +80,7 @@ contract RBAC {
    * @param addr address
    * @param roleName the name of the role
    */
-  function adminRemoveRole(address addr, string roleName)
+  function adminRemoveRole(address addr, string memory roleName)
     onlyAdmin
     public
   {
@@ -92,7 +92,7 @@ contract RBAC {
    * @param addr address
    * @param roleName the name of the role
    */
-  function addRole(address addr, string roleName)
+  function addRole(address addr, string memory roleName)
     internal
   {
     roles[roleName].add(addr);
@@ -104,7 +104,7 @@ contract RBAC {
    * @param addr address
    * @param roleName the name of the role
    */
-  function removeRole(address addr, string roleName)
+  function removeRole(address addr, string memory roleName)
     internal
   {
     roles[roleName].remove(addr);
@@ -116,7 +116,7 @@ contract RBAC {
    * @param roleName the name of the role
    * // reverts
    */
-  modifier onlyRole(string roleName)
+  modifier onlyRole(string memory roleName)
   {
     checkRole(msg.sender, roleName);
     _;
@@ -140,7 +140,7 @@ contract RBAC {
    * @TODO - when solidity supports dynamic arrays as arguments to modifiers, provide this
    *  see: https://github.com/ethereum/solidity/issues/2467
    */
-  // modifier onlyRoles(string[] roleNames) {
+  // modifier onlyRoles(string[] memory roleNames) {
   //     bool hasAnyRole = false;
   //     for (uint8 i = 0; i < roleNames.length; i++) {
   //         if (hasRole(msg.sender, roleNames[i])) {

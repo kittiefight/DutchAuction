@@ -425,7 +425,7 @@ contract Dutchwrapper is DutchAuction {
     function setupReferal(address _addr, uint _percentage)
         public
         isOwner
-        returns (string successmessage) 
+        returns (string memory successmessage) 
     {
 
             bytes4 tempHash = bytes4(keccak256(abi.encodePacked(_addr, msg.sender)));
@@ -714,12 +714,12 @@ contract Dutchwrapper is DutchAuction {
     }
 
     // helper functions returning top 20 leading number of reffered bidders by refferers
-    function getTop20Reffered() public view returns (uint [20]){
+    function getTop20Reffered() public view returns (uint [20] memory){
       return topReferredNum;
     }
 
     // helper functions  top 20 refferer addresses
-    function getTop20Addr() public view returns (bytes4 [20]){
+    function getTop20Addr() public view returns (bytes4 [20] memory){
         return topAddrHashes;
      }
 
@@ -754,7 +754,7 @@ contract Dutchwrapper is DutchAuction {
 
     //document actual remaining residual tokens
     //call function to terminate bonus
-    function discontinueBonus(uint _tokenRefferralBonus, uint _bidderBonusAmount) private returns (string) {
+    function discontinueBonus(uint _tokenRefferralBonus, uint _bidderBonusAmount) private returns (string memory) {
         residualToken = MAX_TOKEN_REFERRAL - (_tokenRefferralBonus + _bidderBonusAmount + claimedTokenReferral);
         return setBonustoFalse();
     }
@@ -763,11 +763,10 @@ contract Dutchwrapper is DutchAuction {
     // bolean bonus switcher, only called when
     // tokens bonus availability is exhuated
     // terminate bonus
-    function setBonustoFalse() private returns (string) {
+    function setBonustoFalse() private returns (string memory) {
         require (bidderBonus == true,"no more bonuses");
         bidderBonus = false;
         return "tokens exhausted";
     }
 
 }
-

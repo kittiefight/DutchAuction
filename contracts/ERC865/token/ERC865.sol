@@ -14,7 +14,7 @@ import "../../openzeppelin-solidity/token/ERC20/ERC20.sol";
 contract ERC865 is ERC20 {
 
     function transferPreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _to,
         uint256 _value,
         uint256 _fee,
@@ -24,7 +24,7 @@ contract ERC865 is ERC20 {
         returns (bool);
 
     function approvePreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _spender,
         uint256 _value,
         uint256 _fee,
@@ -34,7 +34,7 @@ contract ERC865 is ERC20 {
         returns (bool);
 
     function increaseApprovalPreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _spender,
         uint256 _addedValue,
         uint256 _fee,
@@ -44,7 +44,7 @@ contract ERC865 is ERC20 {
         returns (bool);
 
     function decreaseApprovalPreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _spender,
         uint256 _subtractedValue,
         uint256 _fee,
@@ -54,7 +54,7 @@ contract ERC865 is ERC20 {
         returns (bool);
 
     function transferFromPreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _from,
         address _to,
         uint256 _value,

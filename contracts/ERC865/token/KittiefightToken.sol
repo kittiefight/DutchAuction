@@ -116,7 +116,7 @@ contract KittiefightToken is ERC865Token, PausableToken, CappedToken {
      * @param _nonce uint256 Presigned transaction number.
      */
     function transferPreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _to,
         uint256 _value,
         uint256 _fee,
@@ -143,7 +143,7 @@ contract KittiefightToken is ERC865Token, PausableToken, CappedToken {
      * @param _nonce uint256 Presigned transaction number.
      */
     function approvePreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _spender,
         uint256 _value,
         uint256 _fee,

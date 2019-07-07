@@ -28,7 +28,7 @@ contract ERC865Token is ERC865, StandardToken {
      * @param _nonce uint256 Presigned transaction number.
      */
     function transferPreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _to,
         uint256 _value,
         uint256 _fee,
@@ -65,7 +65,7 @@ contract ERC865Token is ERC865, StandardToken {
      * @param _nonce uint256 Presigned transaction number.
      */
     function approvePreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _spender,
         uint256 _value,
         uint256 _fee,
@@ -101,7 +101,7 @@ contract ERC865Token is ERC865, StandardToken {
      * @param _nonce uint256 Presigned transaction number.
      */
     function increaseApprovalPreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _spender,
         uint256 _addedValue,
         uint256 _fee,
@@ -137,7 +137,7 @@ contract ERC865Token is ERC865, StandardToken {
      * @param _nonce uint256 Presigned transaction number.
      */
     function decreaseApprovalPreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _spender,
         uint256 _subtractedValue,
         uint256 _fee,
@@ -179,7 +179,7 @@ contract ERC865Token is ERC865, StandardToken {
      * @param _nonce uint256 Presigned transaction number.
      */
     function transferFromPreSigned(
-        bytes _signature,
+        bytes memory _signature,
         address _from,
         address _to,
         uint256 _value,
@@ -333,7 +333,7 @@ contract ERC865Token is ERC865, StandardToken {
      * @param hash bytes32 message, the hash is the signed message. What is recovered is the signer address.
      * @param sig bytes signature, the signature is generated using web3.eth.sign()
      */
-    function recover(bytes32 hash, bytes sig) public pure returns (address) {
+    function recover(bytes32 hash, bytes memory sig) public pure returns (address) {
         bytes32 r;
         bytes32 s;
         uint8 v;
