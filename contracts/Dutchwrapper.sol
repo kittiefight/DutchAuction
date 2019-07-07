@@ -18,6 +18,7 @@ contract Dutchwrapper is DutchAuction {
     bool public softcapReached = false;
 
 
+    uint constant public None = 0; // Distinction between promotion groups, discontinued bonuses
     uint constant public Partners = 1; // Distinction between promotion groups, partnership for eth
     uint constant public Referrals = 2; // Distinction between promotion groups, referral campaign for tokens
     
@@ -105,7 +106,7 @@ contract Dutchwrapper is DutchAuction {
     }
 
 
-    constructor  (address _pWallet, uint _ceiling, uint _priceFactor, uint _softCap)
+    constructor  (address payable _pWallet, uint _ceiling, uint _priceFactor, uint _softCap)
         DutchAuction(_pWallet, _ceiling, _priceFactor)  public {
 
             softCap = _softCap;
@@ -171,7 +172,7 @@ contract Dutchwrapper is DutchAuction {
 
 
     // Biding using a referral hash
-    function bidReferral(address _receiver, bytes4 _hash) public payable returns (uint) {
+    function bidReferral(address payable _receiver, bytes4 _hash) public payable returns (uint) {
 
         uint bidAmount = msg.value;
         uint256 promissorytokenLastPrice = PromissoryTokenIns.lastPrice();
@@ -181,7 +182,7 @@ contract Dutchwrapper is DutchAuction {
             bidAmount = ceiling - totalReceived;
         }
 
-        require( bid(_receiver) == bidAmount );
+        require( bid(_receiver) == bidAmount ); //Change will be sent back to _receiver, that's why he should be payable
 
 		uint amount = msg.value;
 		bidder memory _bidder;
@@ -205,7 +206,7 @@ contract Dutchwrapper is DutchAuction {
             if( (msg.value >= 1 ether) && (msg.value <= 3 ether) && (bidderBonus == true)) {
              if(bonusChecker(oneHundred, thirty) == false){
                     discontinueBonus(oneHundred, thirty);
-                    return;
+                    return None;
                     }
               TokenReferrals[_hash].totalReferrals += ONE;
               orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
@@ -218,7 +219,7 @@ contract Dutchwrapper is DutchAuction {
               } else if ((msg.value > 3 ether)&&(msg.value <= 6 ether) && (bidderBonus == true)) {
                    if(bonusChecker(fiveHundred, twoHundred) == false){
                     discontinueBonus(fiveHundred, twoHundred);
-                    return;
+                    return None;
                     }
                   TokenReferrals[_hash].totalReferrals += ONE;
                   orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
@@ -231,7 +232,7 @@ contract Dutchwrapper is DutchAuction {
                   } else if ((msg.value > 6 ether) && (bidderBonus == true)) {
                     if(bonusChecker(oneThousand, sixHundred) == false){
                     discontinueBonus(oneThousand, sixHundred);
-                    return;
+                    return None;
                     }
                     TokenReferrals[_hash].totalReferrals += ONE;
                     orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
@@ -251,7 +252,7 @@ contract Dutchwrapper is DutchAuction {
         			if( (msg.value >= 1 ether) && (msg.value <= 3 ether) && (bidderBonus == true) ) {
         			    if(bonusChecker(oneHundred, thirty) == false){
                             discontinueBonus(oneHundred, thirty);
-                                return;
+                                return None;
                             }
                             TokenReferrals[_hash].totalReferrals += ONE;
                             orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
@@ -264,7 +265,7 @@ contract Dutchwrapper is DutchAuction {
         				} else if ((msg.value > 3 ether)&&(msg.value <= 6 ether) && (bidderBonus == true)) {
         				    if(bonusChecker(fiveHundred, twoHundred) == false){
                                 discontinueBonus(fiveHundred, twoHundred);
-                                return;
+                                return None;
                                 }
                                 TokenReferrals[_hash].totalReferrals += ONE;
                                 orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
@@ -277,7 +278,7 @@ contract Dutchwrapper is DutchAuction {
         						} else if ((msg.value > 6 ether) && (bidderBonus == true)) {
         						    if(bonusChecker(oneThousand, sixHundred) == false){
                                      discontinueBonus(oneThousand, sixHundred);
-                                     return;
+                                     return None;
                                     }
                                     TokenReferrals[_hash].totalReferrals += ONE;
                                     orderTop20(TokenReferrals[_hash].totalReferrals, _hash);

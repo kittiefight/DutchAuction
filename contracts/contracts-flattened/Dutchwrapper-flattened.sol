@@ -49,6 +49,8 @@ interface PromissoryToken {
 	function lastPrice() external returns(uint256);
 }
 
+/// @title Dutch auction contract - from gnosis, see source : https://github.com/maurelian/dutch-auction
+/// improved with latest solidity syntax
 contract DutchAuction {
 
     /*
@@ -68,7 +70,7 @@ contract DutchAuction {
      */
 
 
-    address public pWallet;
+    address payable public pWallet;
     Token public KittieFightToken;
     address public owner;
     PromissoryToken public PromissoryTokenIns; 
@@ -135,10 +137,10 @@ contract DutchAuction {
     /// @param _pWallet KittieFight promissory wallet.
     /// @param _ceiling Auction ceiling.
     /// @param _priceFactor Auction price factor.
-    constructor(address _pWallet, uint _ceiling, uint _priceFactor)
+    constructor(address payable _pWallet, uint _ceiling, uint _priceFactor)
         public
     {
-        if (_pWallet == 0 || _ceiling == 0 || _priceFactor == 0)
+        if (_pWallet == address(0) || _ceiling == 0 || _priceFactor == 0)
             // Arguments are null.
             revert();
         owner = msg.sender;
@@ -156,12 +158,12 @@ contract DutchAuction {
         isOwner
         atStage(Stages.AuctionDeployed)
     {
-        if (_kittieToken == 0)
+        if (_kittieToken == address(0))
             // Argument is null.
             revert();
         KittieFightToken = Token(_kittieToken);
         // Validate token balance
-        if (KittieFightToken.balanceOf(this) != MAX_TOKENS_SOLD)
+        if (KittieFightToken.balanceOf(address(this)) != MAX_TOKENS_SOLD)
             revert();
         stage = Stages.AuctionSetUp;
     }
@@ -212,7 +214,7 @@ contract DutchAuction {
 
     /// @dev Allows to send a bid to the auction.
     /// @param receiver Bid will be assigned to this address if set.
-    function bid(address receiver)
+    function bid(address payable receiver)
         public
         payable
         //isValidPayload
@@ -221,7 +223,7 @@ contract DutchAuction {
         returns (uint amount)
     {
         // If a bid is done on behalf of a user via ShapeShift, the receiver address is set.
-        if (receiver == 0)
+        if (receiver == address(0))
             receiver = msg.sender;
         amount = msg.value;
         // Prevent that more than 90% of tokens are sold. Only relevant if cap not reached.
@@ -257,7 +259,7 @@ contract DutchAuction {
         timedTransitions
         atStage(Stages.TradingStarted)
     {
-        if (receiver == 0)
+        if (receiver == address(0))
             receiver = msg.sender;
         uint tokenCount = bids[receiver] * 10**18 / finalPrice;
         bids[receiver] = 0;
@@ -302,7 +304,6 @@ contract DutchAuction {
 
 
 }
-
 contract Dutchwrapper is DutchAuction {
 
 
@@ -319,6 +320,7 @@ contract Dutchwrapper is DutchAuction {
     bool public softcapReached = false;
 
 
+    uint constant public None = 0; // Distinction between promotion groups, discontinued bonuses
     uint constant public Partners = 1; // Distinction between promotion groups, partnership for eth
     uint constant public Referrals = 2; // Distinction between promotion groups, referral campaign for tokens
     
@@ -406,7 +408,7 @@ contract Dutchwrapper is DutchAuction {
     }
 
 
-    constructor  (address _pWallet, uint _ceiling, uint _priceFactor, uint _softCap)
+    constructor  (address payable _pWallet, uint _ceiling, uint _priceFactor, uint _softCap)
         DutchAuction(_pWallet, _ceiling, _priceFactor)  public {
 
             softCap = _softCap;
@@ -472,7 +474,7 @@ contract Dutchwrapper is DutchAuction {
 
 
     // Biding using a referral hash
-    function bidReferral(address _receiver, bytes4 _hash) public payable returns (uint) {
+    function bidReferral(address payable _receiver, bytes4 _hash) public payable returns (uint) {
 
         uint bidAmount = msg.value;
         uint256 promissorytokenLastPrice = PromissoryTokenIns.lastPrice();
@@ -482,7 +484,7 @@ contract Dutchwrapper is DutchAuction {
             bidAmount = ceiling - totalReceived;
         }
 
-        require( bid(_receiver) == bidAmount );
+        require( bid(_receiver) == bidAmount ); //Change will be sent back to _receiver, that's why he should be payable
 
 		uint amount = msg.value;
 		bidder memory _bidder;
@@ -506,7 +508,7 @@ contract Dutchwrapper is DutchAuction {
             if( (msg.value >= 1 ether) && (msg.value <= 3 ether) && (bidderBonus == true)) {
              if(bonusChecker(oneHundred, thirty) == false){
                     discontinueBonus(oneHundred, thirty);
-                    return;
+                    return None;
                     }
               TokenReferrals[_hash].totalReferrals += ONE;
               orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
@@ -519,7 +521,7 @@ contract Dutchwrapper is DutchAuction {
               } else if ((msg.value > 3 ether)&&(msg.value <= 6 ether) && (bidderBonus == true)) {
                    if(bonusChecker(fiveHundred, twoHundred) == false){
                     discontinueBonus(fiveHundred, twoHundred);
-                    return;
+                    return None;
                     }
                   TokenReferrals[_hash].totalReferrals += ONE;
                   orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
@@ -532,7 +534,7 @@ contract Dutchwrapper is DutchAuction {
                   } else if ((msg.value > 6 ether) && (bidderBonus == true)) {
                     if(bonusChecker(oneThousand, sixHundred) == false){
                     discontinueBonus(oneThousand, sixHundred);
-                    return;
+                    return None;
                     }
                     TokenReferrals[_hash].totalReferrals += ONE;
                     orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
@@ -552,7 +554,7 @@ contract Dutchwrapper is DutchAuction {
         			if( (msg.value >= 1 ether) && (msg.value <= 3 ether) && (bidderBonus == true) ) {
         			    if(bonusChecker(oneHundred, thirty) == false){
                             discontinueBonus(oneHundred, thirty);
-                                return;
+                                return None;
                             }
                             TokenReferrals[_hash].totalReferrals += ONE;
                             orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
@@ -565,7 +567,7 @@ contract Dutchwrapper is DutchAuction {
         				} else if ((msg.value > 3 ether)&&(msg.value <= 6 ether) && (bidderBonus == true)) {
         				    if(bonusChecker(fiveHundred, twoHundred) == false){
                                 discontinueBonus(fiveHundred, twoHundred);
-                                return;
+                                return None;
                                 }
                                 TokenReferrals[_hash].totalReferrals += ONE;
                                 orderTop20(TokenReferrals[_hash].totalReferrals, _hash);
@@ -578,7 +580,7 @@ contract Dutchwrapper is DutchAuction {
         						} else if ((msg.value > 6 ether) && (bidderBonus == true)) {
         						    if(bonusChecker(oneThousand, sixHundred) == false){
                                      discontinueBonus(oneThousand, sixHundred);
-                                     return;
+                                     return None;
                                     }
                                     TokenReferrals[_hash].totalReferrals += ONE;
                                     orderTop20(TokenReferrals[_hash].totalReferrals, _hash);

@@ -25,7 +25,7 @@ contract DutchAuction {
      */
 
 
-    address public pWallet;
+    address payable public pWallet;
     Token public KittieFightToken;
     address public owner;
     PromissoryToken public PromissoryTokenIns; 
@@ -92,10 +92,10 @@ contract DutchAuction {
     /// @param _pWallet KittieFight promissory wallet.
     /// @param _ceiling Auction ceiling.
     /// @param _priceFactor Auction price factor.
-    constructor(address _pWallet, uint _ceiling, uint _priceFactor)
+    constructor(address payable _pWallet, uint _ceiling, uint _priceFactor)
         public
     {
-        if (_pWallet == 0 || _ceiling == 0 || _priceFactor == 0)
+        if (_pWallet == address(0) || _ceiling == 0 || _priceFactor == 0)
             // Arguments are null.
             revert();
         owner = msg.sender;
@@ -113,12 +113,12 @@ contract DutchAuction {
         isOwner
         atStage(Stages.AuctionDeployed)
     {
-        if (_kittieToken == 0)
+        if (_kittieToken == address(0))
             // Argument is null.
             revert();
         KittieFightToken = Token(_kittieToken);
         // Validate token balance
-        if (KittieFightToken.balanceOf(this) != MAX_TOKENS_SOLD)
+        if (KittieFightToken.balanceOf(address(this)) != MAX_TOKENS_SOLD)
             revert();
         stage = Stages.AuctionSetUp;
     }
@@ -169,7 +169,7 @@ contract DutchAuction {
 
     /// @dev Allows to send a bid to the auction.
     /// @param receiver Bid will be assigned to this address if set.
-    function bid(address receiver)
+    function bid(address payable receiver)
         public
         payable
         //isValidPayload
@@ -178,7 +178,7 @@ contract DutchAuction {
         returns (uint amount)
     {
         // If a bid is done on behalf of a user via ShapeShift, the receiver address is set.
-        if (receiver == 0)
+        if (receiver == address(0))
             receiver = msg.sender;
         amount = msg.value;
         // Prevent that more than 90% of tokens are sold. Only relevant if cap not reached.
@@ -214,7 +214,7 @@ contract DutchAuction {
         timedTransitions
         atStage(Stages.TradingStarted)
     {
-        if (receiver == 0)
+        if (receiver == address(0))
             receiver = msg.sender;
         uint tokenCount = bids[receiver] * 10**18 / finalPrice;
         bids[receiver] = 0;
