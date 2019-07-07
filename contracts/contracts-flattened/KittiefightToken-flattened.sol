@@ -775,7 +775,7 @@ contract KittiefightToken is ERC865Token, PausableToken, CappedToken {
     event TransferWhitelistOnly(bool flag);
 
 
-    constructor() CappedToken(amountOfTokenToMint) {
+    constructor() CappedToken(amountOfTokenToMint) public {
         
     }
 
