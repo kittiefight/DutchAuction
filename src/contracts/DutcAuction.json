@@ -16,29 +16,30 @@
       "type": "function"
     }
   ],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.10+commit.5a6ea5b1\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"bid\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/Interfaces/DutchAuction.sol\":\"DutcAuction\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/Interfaces/DutchAuction.sol\":{\"keccak256\":\"0xc9b23e5bc7ca6961b4c239f07968a1f1e488978edcb5883994026bdf4d82fa13\",\"urls\":[\"bzzr://6095bdd4f582d156591305c8474d10fed425818df8f9b0823cf5d27fbd4e2c74\",\"dweb:/ipfs/QmNm6enmtzqbYrE7mYD4mftxNkNnkoVMQsXGQeESRyBTZV\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity ^0.4.23;\n\ninterface DutcAuction {\n\t function bid(address receiver) external;\n}",
-  "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/Interfaces/DutchAuction.sol",
+  "source": "pragma solidity ^0.5.10;\n\ninterface DutcAuction {\n\t function bid(address receiver) external;\n}",
+  "sourcePath": "D:/projects/ethereum/kittiefight/token/DutchAuction/contracts/Interfaces/DutchAuction.sol",
   "ast": {
-    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/Interfaces/DutchAuction.sol",
+    "absolutePath": "/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/Interfaces/DutchAuction.sol",
     "exportedSymbols": {
       "DutcAuction": [
-        3728
+        3855
       ]
     },
-    "id": 3729,
+    "id": 3856,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3722,
+        "id": 3849,
         "literals": [
           "solidity",
           "^",
-          "0.4",
-          ".23"
+          "0.5",
+          ".10"
         ],
         "nodeType": "PragmaDirective",
         "src": "0:24:6"
@@ -49,9 +50,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 3728,
+        "id": 3855,
         "linearizedBaseContracts": [
-          3728
+          3855
         ],
         "name": "DutcAuction",
         "nodeType": "ContractDefinition",
@@ -59,23 +60,22 @@
           {
             "body": null,
             "documentation": null,
-            "id": 3727,
+            "id": 3854,
             "implemented": false,
-            "isConstructor": false,
-            "isDeclaredConst": false,
+            "kind": "function",
             "modifiers": [],
             "name": "bid",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3725,
+              "id": 3852,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3724,
+                  "id": 3851,
                   "name": "receiver",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3727,
+                  "scope": 3854,
                   "src": "65:16:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -84,10 +84,11 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3723,
+                    "id": 3850,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "65:7:6",
+                    "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -99,43 +100,42 @@
               ],
               "src": "64:18:6"
             },
-            "payable": false,
             "returnParameters": {
-              "id": 3726,
+              "id": 3853,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "91:0:6"
             },
-            "scope": 3728,
+            "scope": 3855,
             "src": "52:40:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 3729,
+        "scope": 3856,
         "src": "26:68:6"
       }
     ],
     "src": "0:94:6"
   },
   "legacyAST": {
-    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/Interfaces/DutchAuction.sol",
+    "absolutePath": "/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/Interfaces/DutchAuction.sol",
     "exportedSymbols": {
       "DutcAuction": [
-        3728
+        3855
       ]
     },
-    "id": 3729,
+    "id": 3856,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3722,
+        "id": 3849,
         "literals": [
           "solidity",
           "^",
-          "0.4",
-          ".23"
+          "0.5",
+          ".10"
         ],
         "nodeType": "PragmaDirective",
         "src": "0:24:6"
@@ -146,9 +146,9 @@
         "contractKind": "interface",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 3728,
+        "id": 3855,
         "linearizedBaseContracts": [
-          3728
+          3855
         ],
         "name": "DutcAuction",
         "nodeType": "ContractDefinition",
@@ -156,23 +156,22 @@
           {
             "body": null,
             "documentation": null,
-            "id": 3727,
+            "id": 3854,
             "implemented": false,
-            "isConstructor": false,
-            "isDeclaredConst": false,
+            "kind": "function",
             "modifiers": [],
             "name": "bid",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3725,
+              "id": 3852,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3724,
+                  "id": 3851,
                   "name": "receiver",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3727,
+                  "scope": 3854,
                   "src": "65:16:6",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -181,10 +180,11 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3723,
+                    "id": 3850,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "65:7:6",
+                    "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
@@ -196,21 +196,20 @@
               ],
               "src": "64:18:6"
             },
-            "payable": false,
             "returnParameters": {
-              "id": 3726,
+              "id": 3853,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "91:0:6"
             },
-            "scope": 3728,
+            "scope": 3855,
             "src": "52:40:6",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "external"
           }
         ],
-        "scope": 3729,
+        "scope": 3856,
         "src": "26:68:6"
       }
     ],
@@ -218,9 +217,15 @@
   },
   "compiler": {
     "name": "solc",
-    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+    "version": "0.5.10+commit.5a6ea5b1.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "2.0.1",
-  "updatedAt": "2018-11-16T14:02:09.332Z"
+  "schemaVersion": "3.0.11",
+  "updatedAt": "2019-07-09T14:07:15.483Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
 }

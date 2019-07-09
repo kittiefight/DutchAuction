@@ -116,41 +116,42 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x608060405260008054600160a060020a031916331790556102d0806100256000396000f3006080604052600436106100825763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416634e71e0c881146100875780638da5cb5b1461009e578063be9a6555146100cf578063c4590d3f146100f6578063e30c397814610111578063efbe1c1c14610126578063f2fde38b1461013b575b600080fd5b34801561009357600080fd5b5061009c61015c565b005b3480156100aa57600080fd5b506100b3610208565b60408051600160a060020a039092168252519081900360200190f35b3480156100db57600080fd5b506100e4610217565b60408051918252519081900360200190f35b34801561010257600080fd5b5061009c60043560243561021d565b34801561011d57600080fd5b506100b3610249565b34801561013257600080fd5b506100e4610258565b34801561014757600080fd5b5061009c600160a060020a036004351661025e565b600154600160a060020a0316331461017357600080fd5b600254431115801561018757506003544310155b151561019257600080fd5b60015460008054604051600160a060020a0393841693909116917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600180546000805473ffffffffffffffffffffffffffffffffffffffff19908116600160a060020a038416178255909116909155600255565b600054600160a060020a031681565b60035481565b600054600160a060020a0316331461023457600080fd5b8082111561024157600080fd5b600255600355565b600154600160a060020a031681565b60025481565b600054600160a060020a0316331461027557600080fd5b6001805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a03929092169190911790555600a165627a7a7230582090f4c5b215577d67cd06cb9778c3d73ae53bfb462cee4eb424a9fcd76495bb760029",
-  "deployedBytecode": "0x6080604052600436106100825763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416634e71e0c881146100875780638da5cb5b1461009e578063be9a6555146100cf578063c4590d3f146100f6578063e30c397814610111578063efbe1c1c14610126578063f2fde38b1461013b575b600080fd5b34801561009357600080fd5b5061009c61015c565b005b3480156100aa57600080fd5b506100b3610208565b60408051600160a060020a039092168252519081900360200190f35b3480156100db57600080fd5b506100e4610217565b60408051918252519081900360200190f35b34801561010257600080fd5b5061009c60043560243561021d565b34801561011d57600080fd5b506100b3610249565b34801561013257600080fd5b506100e4610258565b34801561014757600080fd5b5061009c600160a060020a036004351661025e565b600154600160a060020a0316331461017357600080fd5b600254431115801561018757506003544310155b151561019257600080fd5b60015460008054604051600160a060020a0393841693909116917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600180546000805473ffffffffffffffffffffffffffffffffffffffff19908116600160a060020a038416178255909116909155600255565b600054600160a060020a031681565b60035481565b600054600160a060020a0316331461023457600080fd5b8082111561024157600080fd5b600255600355565b600154600160a060020a031681565b60025481565b600054600160a060020a0316331461027557600080fd5b6001805473ffffffffffffffffffffffffffffffffffffffff1916600160a060020a03929092169190911790555600a165627a7a7230582090f4c5b215577d67cd06cb9778c3d73ae53bfb462cee4eb424a9fcd76495bb760029",
-  "sourceMap": "215:850:23:-;;;501:5:29;:18;;-1:-1:-1;;;;;;501:18:29;509:10;501:18;;;215:850:23;;;;;;",
-  "deployedSourceMap": "215:850:23:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;827:235;;8:9:-1;5:2;;;30:1;27;20:12;5:2;827:235:23;;;;;;238:20:29;;8:9:-1;5:2;;;30:1;27;20:12;5:2;238:20:29;;;;;;;;-1:-1:-1;;;;;238:20:29;;;;;;;;;;;;;;281::23;;8:9:-1;5:2;;;30:1;27;20:12;5:2;281:20:23;;;;;;;;;;;;;;;;;;;;537:136;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;537:136:23;;;;;;;253:27:21;;8:9:-1;5:2;;;30:1;27;20:12;5:2;253:27:21;;;;259:18:23;;8:9:-1;5:2;;;30:1;27;20:12;5:2;259:18:23;;;;601:96:21;;8:9:-1;5:2;;;30:1;27;20:12;5:2;-1:-1;601:96:21;-1:-1:-1;;;;;601:96:21;;;;;827:235:23;433:12:21;;-1:-1:-1;;;;;433:12:21;419:10;:26;411:35;;;;;;908:3:23;;892:12;:19;;891:48;;;;;933:5;;917:12;:21;;891:48;883:57;;;;;;;;974:12;;;967:5;;946:41;;-1:-1:-1;;;;;974:12:23;;;;967:5;;;;946:41;;;1001:12;;;;993:20;;-1:-1:-1;;993:20:23;;;-1:-1:-1;;;;;1001:12:23;;993:20;;;1019:25;;;;;;1050:3;:7;827:235::o;238:20:29:-;;;-1:-1:-1;;;;;238:20:29;;:::o;281::23:-;;;;:::o;537:136::-;653:5:29;;-1:-1:-1;;;;;653:5:29;639:10;:19;631:28;;;;;;617:14:23;;;;609:23;;;;;;638:3;:10;654:5;:14;537:136::o;253:27:21:-;;;-1:-1:-1;;;;;253:27:21;;:::o;259:18:23:-;;;;:::o;601:96:21:-;653:5:29;;-1:-1:-1;;;;;653:5:29;639:10;:19;631:28;;;;;;669:12:21;:23;;-1:-1:-1;;669:23:21;-1:-1:-1;;;;;669:23:21;;;;;;;;;;601:96::o",
-  "source": "pragma solidity ^0.4.18;\n\nimport \"./Claimable.sol\";\n\n\n/**\n * @title DelayedClaimable\n * @dev Extension for the Claimable contract, where the ownership needs to be claimed before/after\n * a certain block number.\n */\ncontract DelayedClaimable is Claimable {\n\n  uint256 public end;\n  uint256 public start;\n\n  /**\n   * @dev Used to specify the time period during which a pending\n   * owner can claim ownership.\n   * @param _start The earliest time ownership can be claimed.\n   * @param _end The latest time ownership can be claimed.\n   */\n  function setLimits(uint256 _start, uint256 _end) onlyOwner public {\n    require(_start <= _end);\n    end = _end;\n    start = _start;\n  }\n\n  /**\n   * @dev Allows the pendingOwner address to finalize the transfer, as long as it is called within\n   * the specified start and end time.\n   */\n  function claimOwnership() onlyPendingOwner public {\n    require((block.number <= end) && (block.number >= start));\n    OwnershipTransferred(owner, pendingOwner);\n    owner = pendingOwner;\n    pendingOwner = address(0);\n    end = 0;\n  }\n\n}\n",
-  "sourcePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/openzeppelin-solidity/ownership/DelayedClaimable.sol",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.10+commit.5a6ea5b1\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[],\"name\":\"claimOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"start\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"_start\",\"type\":\"uint256\"},{\"name\":\"_end\",\"type\":\"uint256\"}],\"name\":\"setLimits\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"pendingOwner\",\"outputs\":[{\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"end\",\"outputs\":[{\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"}],\"devdoc\":{\"details\":\"Extension for the Claimable contract, where the ownership needs to be claimed before/after a certain block number.\",\"methods\":{\"claimOwnership()\":{\"details\":\"Allows the pendingOwner address to finalize the transfer, as long as it is called within the specified start and end time.\"},\"setLimits(uint256,uint256)\":{\"details\":\"Used to specify the time period during which a pending owner can claim ownership.\",\"params\":{\"_end\":\"The latest time ownership can be claimed.\",\"_start\":\"The earliest time ownership can be claimed.\"}},\"transferOwnership(address)\":{\"details\":\"Allows the current owner to set the pendingOwner address.\",\"params\":{\"newOwner\":\"The address to transfer ownership to.\"}}},\"title\":\"DelayedClaimable\"},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/openzeppelin-solidity/ownership/DelayedClaimable.sol\":\"DelayedClaimable\"},\"evmVersion\":\"petersburg\",\"libraries\":{},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/openzeppelin-solidity/ownership/Claimable.sol\":{\"keccak256\":\"0x198b635a56cb8d27a806e609a6a93b2ed74fc4c7ee95d2101d54a92ade5fa718\",\"urls\":[\"bzzr://2db77fb936c3ef8887e2eb57fda4a327c7b397128fcd6a2c8dd50af8ac605b93\",\"dweb:/ipfs/QmXEQAovNYbPdneAyjov3dXC5jsfpxRTafTmkq22PSWMvz\"]},\"/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/openzeppelin-solidity/ownership/DelayedClaimable.sol\":{\"keccak256\":\"0x1c01083dbf6d924abb6e8c4dec7c69acaea30dd3f0c82f180f710fd3f8992cd2\",\"urls\":[\"bzzr://23369b2b8ad1ccb6aaee3bccf48d0781ced74807c2e8b74db14e00f135bae568\",\"dweb:/ipfs/QmdBLQPZxW1pDzwafX8fAnh4zkoNzGQAJWpf9x48Z4duz7\"]},\"/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/openzeppelin-solidity/ownership/Ownable.sol\":{\"keccak256\":\"0x451fdd4ecdc32705d9a22aca5c5b053f0fbb078471786b1a373d8f4ed420b219\",\"urls\":[\"bzzr://dd16a1f2abc8f3fa3b425dfa859534141a4d7953ddccbb978b454718e629393e\",\"dweb:/ipfs/QmNyNSxT9BhGXhbC9nFJWzCnbWWttnDEZrrCUJb4puT95D\"]}},\"version\":1}",
+  "bytecode": "0x6080604052600080546001600160a01b03191633179055610284806100256000396000f3fe608060405234801561001057600080fd5b506004361061007d5760003560e01c8063c4590d3f1161005b578063c4590d3f146100ca578063e30c3978146100ed578063efbe1c1c146100f5578063f2fde38b146100fd5761007d565b80634e71e0c8146100825780638da5cb5b1461008c578063be9a6555146100b0575b600080fd5b61008a610123565b005b6100946101c0565b604080516001600160a01b039092168252519081900360200190f35b6100b86101cf565b60408051918252519081900360200190f35b61008a600480360360408110156100e057600080fd5b50803590602001356101d5565b610094610201565b6100b8610210565b61008a6004803603602081101561011357600080fd5b50356001600160a01b0316610216565b6001546001600160a01b0316331461013a57600080fd5b600254431115801561014e57506003544310155b61015757600080fd5b600154600080546040516001600160a01b0393841693909116917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a360018054600080546001600160a01b03199081166001600160a01b038416178255909116909155600255565b6000546001600160a01b031681565b60035481565b6000546001600160a01b031633146101ec57600080fd5b808211156101f957600080fd5b600255600355565b6001546001600160a01b031681565b60025481565b6000546001600160a01b0316331461022d57600080fd5b600180546001600160a01b0319166001600160a01b039290921691909117905556fea265627a7a723058201b2365ecea10c9e87a2fbf0b2756dadaaf8cdf3b1a40103b5fcdbf7048e4e0b864736f6c634300050a0032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061007d5760003560e01c8063c4590d3f1161005b578063c4590d3f146100ca578063e30c3978146100ed578063efbe1c1c146100f5578063f2fde38b146100fd5761007d565b80634e71e0c8146100825780638da5cb5b1461008c578063be9a6555146100b0575b600080fd5b61008a610123565b005b6100946101c0565b604080516001600160a01b039092168252519081900360200190f35b6100b86101cf565b60408051918252519081900360200190f35b61008a600480360360408110156100e057600080fd5b50803590602001356101d5565b610094610201565b6100b8610210565b61008a6004803603602081101561011357600080fd5b50356001600160a01b0316610216565b6001546001600160a01b0316331461013a57600080fd5b600254431115801561014e57506003544310155b61015757600080fd5b600154600080546040516001600160a01b0393841693909116917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a360018054600080546001600160a01b03199081166001600160a01b038416178255909116909155600255565b6000546001600160a01b031681565b60035481565b6000546001600160a01b031633146101ec57600080fd5b808211156101f957600080fd5b600255600355565b6001546001600160a01b031681565b60025481565b6000546001600160a01b0316331461022d57600080fd5b600180546001600160a01b0319166001600160a01b039290921691909117905556fea265627a7a723058201b2365ecea10c9e87a2fbf0b2756dadaaf8cdf3b1a40103b5fcdbf7048e4e0b864736f6c634300050a0032",
+  "sourceMap": "215:855:21:-;;;496:5:27;:18;;-1:-1:-1;;;;;;496:18:27;504:10;496:18;;;215:855:21;;;;;;",
+  "deployedSourceMap": "215:855:21:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;215:855:21;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;827:240;;;:::i;:::-;;238:20:27;;;:::i;:::-;;;;-1:-1:-1;;;;;238:20:27;;;;;;;;;;;;;;281::21;;;:::i;:::-;;;;;;;;;;;;;;;;537:136;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;537:136:21;;;;;;;:::i;253:27:19:-;;;:::i;259:18:21:-;;;:::i;601:96:19:-;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;-1:-1;601:96:19;-1:-1:-1;;;;;601:96:19;;:::i;827:240:21:-;433:12:19;;-1:-1:-1;;;;;433:12:19;419:10;:26;411:35;;;;;;908:3:21;;892:12;:19;;891:48;;;;;933:5;;917:12;:21;;891:48;883:57;;;;;;979:12;;;972:5;;951:41;;-1:-1:-1;;;;;979:12:21;;;;972:5;;;;951:41;;;1006:12;;;;998:20;;-1:-1:-1;;;;;;998:20:21;;;-1:-1:-1;;;;;1006:12:21;;998:20;;;1024:25;;;;;;1055:3;:7;827:240::o;238:20:27:-;;;-1:-1:-1;;;;;238:20:27;;:::o;281::21:-;;;;:::o;537:136::-;648:5:27;;-1:-1:-1;;;;;648:5:27;634:10;:19;626:28;;;;;;627:4:21;617:6;:14;;609:23;;;;;;638:3;:10;654:5;:14;537:136::o;253:27:19:-;;;-1:-1:-1;;;;;253:27:19;;:::o;259:18:21:-;;;;:::o;601:96:19:-;648:5:27;;-1:-1:-1;;;;;648:5:27;634:10;:19;626:28;;;;;;669:12:19;:23;;-1:-1:-1;;;;;;669:23:19;-1:-1:-1;;;;;669:23:19;;;;;;;;;;601:96::o",
+  "source": "pragma solidity ^0.5.10;\n\nimport \"./Claimable.sol\";\n\n\n/**\n * @title DelayedClaimable\n * @dev Extension for the Claimable contract, where the ownership needs to be claimed before/after\n * a certain block number.\n */\ncontract DelayedClaimable is Claimable {\n\n  uint256 public end;\n  uint256 public start;\n\n  /**\n   * @dev Used to specify the time period during which a pending\n   * owner can claim ownership.\n   * @param _start The earliest time ownership can be claimed.\n   * @param _end The latest time ownership can be claimed.\n   */\n  function setLimits(uint256 _start, uint256 _end) onlyOwner public {\n    require(_start <= _end);\n    end = _end;\n    start = _start;\n  }\n\n  /**\n   * @dev Allows the pendingOwner address to finalize the transfer, as long as it is called within\n   * the specified start and end time.\n   */\n  function claimOwnership() onlyPendingOwner public {\n    require((block.number <= end) && (block.number >= start));\n    emit OwnershipTransferred(owner, pendingOwner);\n    owner = pendingOwner;\n    pendingOwner = address(0);\n    end = 0;\n  }\n\n}\n",
+  "sourcePath": "D:/projects/ethereum/kittiefight/token/DutchAuction/contracts/openzeppelin-solidity/ownership/DelayedClaimable.sol",
   "ast": {
-    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/openzeppelin-solidity/ownership/DelayedClaimable.sol",
+    "absolutePath": "/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/openzeppelin-solidity/ownership/DelayedClaimable.sol",
     "exportedSymbols": {
       "DelayedClaimable": [
-        8899
+        4652
       ]
     },
-    "id": 8900,
+    "id": 4653,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8828,
+        "id": 4581,
         "literals": [
           "solidity",
           "^",
-          "0.4",
-          ".18"
+          "0.5",
+          ".10"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:23"
+        "src": "0:24:21"
       },
       {
-        "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/openzeppelin-solidity/ownership/Claimable.sol",
+        "absolutePath": "/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/openzeppelin-solidity/ownership/Claimable.sol",
         "file": "./Claimable.sol",
-        "id": 8829,
+        "id": 4582,
         "nodeType": "ImportDirective",
-        "scope": 8900,
-        "sourceUnit": 8807,
-        "src": "26:25:23",
+        "scope": 4653,
+        "sourceUnit": 4560,
+        "src": "26:25:21",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -160,44 +161,44 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 8830,
+              "id": 4583,
               "name": "Claimable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 8806,
-              "src": "244:9:23",
+              "referencedDeclaration": 4559,
+              "src": "244:9:21",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Claimable_$8806",
+                "typeIdentifier": "t_contract$_Claimable_$4559",
                 "typeString": "contract Claimable"
               }
             },
-            "id": 8831,
+            "id": 4584,
             "nodeType": "InheritanceSpecifier",
-            "src": "244:9:23"
+            "src": "244:9:21"
           }
         ],
         "contractDependencies": [
-          8806,
-          9249
+          4559,
+          5010
         ],
         "contractKind": "contract",
         "documentation": "@title DelayedClaimable\n@dev Extension for the Claimable contract, where the ownership needs to be claimed before/after\na certain block number.",
         "fullyImplemented": true,
-        "id": 8899,
+        "id": 4652,
         "linearizedBaseContracts": [
-          8899,
-          8806,
-          9249
+          4652,
+          4559,
+          5010
         ],
         "name": "DelayedClaimable",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 8833,
+            "id": 4586,
             "name": "end",
             "nodeType": "VariableDeclaration",
-            "scope": 8899,
-            "src": "259:18:23",
+            "scope": 4652,
+            "src": "259:18:21",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -205,10 +206,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 8832,
+              "id": 4585,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "259:7:23",
+              "src": "259:7:21",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -219,11 +220,11 @@
           },
           {
             "constant": false,
-            "id": 8835,
+            "id": 4588,
             "name": "start",
             "nodeType": "VariableDeclaration",
-            "scope": 8899,
-            "src": "281:20:23",
+            "scope": 4652,
+            "src": "281:20:21",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -231,10 +232,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 8834,
+              "id": 4587,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "281:7:23",
+              "src": "281:7:21",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -245,9 +246,9 @@
           },
           {
             "body": {
-              "id": 8858,
+              "id": 4611,
               "nodeType": "Block",
-              "src": "603:70:23",
+              "src": "603:70:21",
               "statements": [
                 {
                   "expression": {
@@ -259,19 +260,19 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 8847,
+                        "id": 4600,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "argumentTypes": null,
-                          "id": 8845,
+                          "id": 4598,
                           "name": "_start",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 8837,
-                          "src": "617:6:23",
+                          "referencedDeclaration": 4590,
+                          "src": "617:6:21",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -281,18 +282,18 @@
                         "operator": "<=",
                         "rightExpression": {
                           "argumentTypes": null,
-                          "id": 8846,
+                          "id": 4599,
                           "name": "_end",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 8839,
-                          "src": "627:4:23",
+                          "referencedDeclaration": 4592,
+                          "src": "627:4:21",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           }
                         },
-                        "src": "617:14:23",
+                        "src": "617:14:21",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -306,21 +307,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 8844,
+                      "id": 4597,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        10645,
-                        10646
+                        6426,
+                        6427
                       ],
-                      "referencedDeclaration": 10645,
-                      "src": "609:7:23",
+                      "referencedDeclaration": 6426,
+                      "src": "609:7:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 8848,
+                    "id": 4601,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -328,32 +329,32 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "609:23:23",
+                    "src": "609:23:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8849,
+                  "id": 4602,
                   "nodeType": "ExpressionStatement",
-                  "src": "609:23:23"
+                  "src": "609:23:21"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8852,
+                    "id": 4605,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8850,
+                      "id": 4603,
                       "name": "end",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8833,
-                      "src": "638:3:23",
+                      "referencedDeclaration": 4586,
+                      "src": "638:3:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -363,43 +364,43 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8851,
+                      "id": 4604,
                       "name": "_end",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8839,
-                      "src": "644:4:23",
+                      "referencedDeclaration": 4592,
+                      "src": "644:4:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       }
                     },
-                    "src": "638:10:23",
+                    "src": "638:10:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "id": 8853,
+                  "id": 4606,
                   "nodeType": "ExpressionStatement",
-                  "src": "638:10:23"
+                  "src": "638:10:21"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8856,
+                    "id": 4609,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8854,
+                      "id": 4607,
                       "name": "start",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8835,
-                      "src": "654:5:23",
+                      "referencedDeclaration": 4588,
+                      "src": "654:5:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -409,68 +410,67 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8855,
+                      "id": 4608,
                       "name": "_start",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8837,
-                      "src": "662:6:23",
+                      "referencedDeclaration": 4590,
+                      "src": "662:6:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       }
                     },
-                    "src": "654:14:23",
+                    "src": "654:14:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "id": 8857,
+                  "id": 4610,
                   "nodeType": "ExpressionStatement",
-                  "src": "654:14:23"
+                  "src": "654:14:21"
                 }
               ]
             },
             "documentation": "@dev Used to specify the time period during which a pending\nowner can claim ownership.\n@param _start The earliest time ownership can be claimed.\n@param _end The latest time ownership can be claimed.",
-            "id": 8859,
+            "id": 4612,
             "implemented": true,
-            "isConstructor": false,
-            "isDeclaredConst": false,
+            "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 8842,
+                "id": 4595,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 8841,
+                  "id": 4594,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 9223,
-                  "src": "586:9:23",
+                  "referencedDeclaration": 4984,
+                  "src": "586:9:21",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
                     "typeString": "modifier ()"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "586:9:23"
+                "src": "586:9:21"
               }
             ],
             "name": "setLimits",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8840,
+              "id": 4593,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8837,
+                  "id": 4590,
                   "name": "_start",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8859,
-                  "src": "556:14:23",
+                  "scope": 4612,
+                  "src": "556:14:21",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -478,10 +478,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8836,
+                    "id": 4589,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "556:7:23",
+                    "src": "556:7:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -492,11 +492,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 8839,
+                  "id": 4592,
                   "name": "_end",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8859,
-                  "src": "572:12:23",
+                  "scope": 4612,
+                  "src": "572:12:21",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -504,10 +504,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8838,
+                    "id": 4591,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "572:7:23",
+                    "src": "572:7:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -517,26 +517,25 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "555:30:23"
+              "src": "555:30:21"
             },
-            "payable": false,
             "returnParameters": {
-              "id": 8843,
+              "id": 4596,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "603:0:23"
+              "src": "603:0:21"
             },
-            "scope": 8899,
-            "src": "537:136:23",
+            "scope": 4652,
+            "src": "537:136:21",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 8897,
+              "id": 4650,
               "nodeType": "Block",
-              "src": "877:185:23",
+              "src": "877:190:21",
               "statements": [
                 {
                   "expression": {
@@ -548,7 +547,7 @@
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
                         },
-                        "id": 8875,
+                        "id": 4628,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -562,7 +561,7 @@
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
                               },
-                              "id": 8868,
+                              "id": 4621,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -571,18 +570,18 @@
                                 "argumentTypes": null,
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8865,
+                                  "id": 4618,
                                   "name": "block",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 10632,
-                                  "src": "892:5:23",
+                                  "referencedDeclaration": 6413,
+                                  "src": "892:5:21",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_magic_block",
                                     "typeString": "block"
                                   }
                                 },
-                                "id": 8866,
+                                "id": 4619,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
@@ -590,7 +589,7 @@
                                 "memberName": "number",
                                 "nodeType": "MemberAccess",
                                 "referencedDeclaration": null,
-                                "src": "892:12:23",
+                                "src": "892:12:21",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_uint256",
                                   "typeString": "uint256"
@@ -600,32 +599,32 @@
                               "operator": "<=",
                               "rightExpression": {
                                 "argumentTypes": null,
-                                "id": 8867,
+                                "id": 4620,
                                 "name": "end",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 8833,
-                                "src": "908:3:23",
+                                "referencedDeclaration": 4586,
+                                "src": "908:3:21",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_uint256",
                                   "typeString": "uint256"
                                 }
                               },
-                              "src": "892:19:23",
+                              "src": "892:19:21",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_bool",
                                 "typeString": "bool"
                               }
                             }
                           ],
-                          "id": 8869,
+                          "id": 4622,
                           "isConstant": false,
                           "isInlineArray": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "nodeType": "TupleExpression",
-                          "src": "891:21:23",
+                          "src": "891:21:21",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
                             "typeString": "bool"
@@ -642,7 +641,7 @@
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
                               },
-                              "id": 8873,
+                              "id": 4626,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -651,18 +650,18 @@
                                 "argumentTypes": null,
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8870,
+                                  "id": 4623,
                                   "name": "block",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 10632,
-                                  "src": "917:5:23",
+                                  "referencedDeclaration": 6413,
+                                  "src": "917:5:21",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_magic_block",
                                     "typeString": "block"
                                   }
                                 },
-                                "id": 8871,
+                                "id": 4624,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
@@ -670,7 +669,7 @@
                                 "memberName": "number",
                                 "nodeType": "MemberAccess",
                                 "referencedDeclaration": null,
-                                "src": "917:12:23",
+                                "src": "917:12:21",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_uint256",
                                   "typeString": "uint256"
@@ -680,38 +679,38 @@
                               "operator": ">=",
                               "rightExpression": {
                                 "argumentTypes": null,
-                                "id": 8872,
+                                "id": 4625,
                                 "name": "start",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 8835,
-                                "src": "933:5:23",
+                                "referencedDeclaration": 4588,
+                                "src": "933:5:21",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_uint256",
                                   "typeString": "uint256"
                                 }
                               },
-                              "src": "917:21:23",
+                              "src": "917:21:21",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_bool",
                                 "typeString": "bool"
                               }
                             }
                           ],
-                          "id": 8874,
+                          "id": 4627,
                           "isConstant": false,
                           "isInlineArray": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "nodeType": "TupleExpression",
-                          "src": "916:23:23",
+                          "src": "916:23:21",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
                             "typeString": "bool"
                           }
                         },
-                        "src": "891:48:23",
+                        "src": "891:48:21",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -725,21 +724,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 8864,
+                      "id": 4617,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        10645,
-                        10646
+                        6426,
+                        6427
                       ],
-                      "referencedDeclaration": 10645,
-                      "src": "883:7:23",
+                      "referencedDeclaration": 6426,
+                      "src": "883:7:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 8876,
+                    "id": 4629,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -747,28 +746,28 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "883:57:23",
+                    "src": "883:57:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8877,
+                  "id": 4630,
                   "nodeType": "ExpressionStatement",
-                  "src": "883:57:23"
+                  "src": "883:57:21"
                 },
                 {
-                  "expression": {
+                  "eventCall": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 8879,
+                        "id": 4632,
                         "name": "owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 9197,
-                        "src": "967:5:23",
+                        "referencedDeclaration": 4958,
+                        "src": "972:5:21",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -776,12 +775,12 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 8880,
+                        "id": 4633,
                         "name": "pendingOwner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8761,
-                        "src": "974:12:23",
+                        "referencedDeclaration": 4514,
+                        "src": "979:12:21",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -799,18 +798,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 8878,
+                      "id": 4631,
                       "name": "OwnershipTransferred",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 9203,
-                      "src": "946:20:23",
+                      "referencedDeclaration": 4964,
+                      "src": "951:20:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
                         "typeString": "function (address,address)"
                       }
                     },
-                    "id": 8881,
+                    "id": 4634,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -818,32 +817,32 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "946:41:23",
+                    "src": "951:41:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8882,
-                  "nodeType": "ExpressionStatement",
-                  "src": "946:41:23"
+                  "id": 4635,
+                  "nodeType": "EmitStatement",
+                  "src": "946:46:21"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8885,
+                    "id": 4638,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8883,
+                      "id": 4636,
                       "name": "owner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 9197,
-                      "src": "993:5:23",
+                      "referencedDeclaration": 4958,
+                      "src": "998:5:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -853,43 +852,43 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8884,
+                      "id": 4637,
                       "name": "pendingOwner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8761,
-                      "src": "1001:12:23",
+                      "referencedDeclaration": 4514,
+                      "src": "1006:12:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-                    "src": "993:20:23",
+                    "src": "998:20:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 8886,
+                  "id": 4639,
                   "nodeType": "ExpressionStatement",
-                  "src": "993:20:23"
+                  "src": "998:20:21"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8891,
+                    "id": 4644,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8887,
+                      "id": 4640,
                       "name": "pendingOwner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8761,
-                      "src": "1019:12:23",
+                      "referencedDeclaration": 4514,
+                      "src": "1024:12:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -903,14 +902,14 @@
                         {
                           "argumentTypes": null,
                           "hexValue": "30",
-                          "id": 8889,
+                          "id": 4642,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
                           "kind": "number",
                           "lValueRequested": false,
                           "nodeType": "Literal",
-                          "src": "1042:1:23",
+                          "src": "1047:1:21",
                           "subdenomination": null,
                           "typeDescriptions": {
                             "typeIdentifier": "t_rational_0_by_1",
@@ -926,20 +925,20 @@
                             "typeString": "int_const 0"
                           }
                         ],
-                        "id": 8888,
+                        "id": 4641,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "lValueRequested": false,
                         "nodeType": "ElementaryTypeNameExpression",
-                        "src": "1034:7:23",
+                        "src": "1039:7:21",
                         "typeDescriptions": {
                           "typeIdentifier": "t_type$_t_address_$",
                           "typeString": "type(address)"
                         },
                         "typeName": "address"
                       },
-                      "id": 8890,
+                      "id": 4643,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -947,38 +946,38 @@
                       "lValueRequested": false,
                       "names": [],
                       "nodeType": "FunctionCall",
-                      "src": "1034:10:23",
+                      "src": "1039:10:21",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_address",
-                        "typeString": "address"
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
                       }
                     },
-                    "src": "1019:25:23",
+                    "src": "1024:25:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 8892,
+                  "id": 4645,
                   "nodeType": "ExpressionStatement",
-                  "src": "1019:25:23"
+                  "src": "1024:25:21"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8895,
+                    "id": 4648,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8893,
+                      "id": 4646,
                       "name": "end",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8833,
-                      "src": "1050:3:23",
+                      "referencedDeclaration": 4586,
+                      "src": "1055:3:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -989,14 +988,14 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "30",
-                      "id": 8894,
+                      "id": 4647,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "1056:1:23",
+                      "src": "1061:1:21",
                       "subdenomination": null,
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_0_by_1",
@@ -1004,101 +1003,99 @@
                       },
                       "value": "0"
                     },
-                    "src": "1050:7:23",
+                    "src": "1055:7:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "id": 8896,
+                  "id": 4649,
                   "nodeType": "ExpressionStatement",
-                  "src": "1050:7:23"
+                  "src": "1055:7:21"
                 }
               ]
             },
             "documentation": "@dev Allows the pendingOwner address to finalize the transfer, as long as it is called within\nthe specified start and end time.",
-            "id": 8898,
+            "id": 4651,
             "implemented": true,
-            "isConstructor": false,
-            "isDeclaredConst": false,
+            "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 8862,
+                "id": 4615,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 8861,
+                  "id": 4614,
                   "name": "onlyPendingOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 8772,
-                  "src": "853:16:23",
+                  "referencedDeclaration": 4525,
+                  "src": "853:16:21",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
                     "typeString": "modifier ()"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "853:16:23"
+                "src": "853:16:21"
               }
             ],
             "name": "claimOwnership",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8860,
+              "id": 4613,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "850:2:23"
+              "src": "850:2:21"
             },
-            "payable": false,
             "returnParameters": {
-              "id": 8863,
+              "id": 4616,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "877:0:23"
+              "src": "877:0:21"
             },
-            "scope": 8899,
-            "src": "827:235:23",
+            "scope": 4652,
+            "src": "827:240:21",
             "stateMutability": "nonpayable",
-            "superFunction": 8805,
+            "superFunction": 4558,
             "visibility": "public"
           }
         ],
-        "scope": 8900,
-        "src": "215:850:23"
+        "scope": 4653,
+        "src": "215:855:21"
       }
     ],
-    "src": "0:1066:23"
+    "src": "0:1071:21"
   },
   "legacyAST": {
-    "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/openzeppelin-solidity/ownership/DelayedClaimable.sol",
+    "absolutePath": "/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/openzeppelin-solidity/ownership/DelayedClaimable.sol",
     "exportedSymbols": {
       "DelayedClaimable": [
-        8899
+        4652
       ]
     },
-    "id": 8900,
+    "id": 4653,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 8828,
+        "id": 4581,
         "literals": [
           "solidity",
           "^",
-          "0.4",
-          ".18"
+          "0.5",
+          ".10"
         ],
         "nodeType": "PragmaDirective",
-        "src": "0:24:23"
+        "src": "0:24:21"
       },
       {
-        "absolutePath": "/Users/achiko/Documents/elva/projects/kittiefight/DutchAuction/contracts/openzeppelin-solidity/ownership/Claimable.sol",
+        "absolutePath": "/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/openzeppelin-solidity/ownership/Claimable.sol",
         "file": "./Claimable.sol",
-        "id": 8829,
+        "id": 4582,
         "nodeType": "ImportDirective",
-        "scope": 8900,
-        "sourceUnit": 8807,
-        "src": "26:25:23",
+        "scope": 4653,
+        "sourceUnit": 4560,
+        "src": "26:25:21",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -1108,44 +1105,44 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 8830,
+              "id": 4583,
               "name": "Claimable",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 8806,
-              "src": "244:9:23",
+              "referencedDeclaration": 4559,
+              "src": "244:9:21",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Claimable_$8806",
+                "typeIdentifier": "t_contract$_Claimable_$4559",
                 "typeString": "contract Claimable"
               }
             },
-            "id": 8831,
+            "id": 4584,
             "nodeType": "InheritanceSpecifier",
-            "src": "244:9:23"
+            "src": "244:9:21"
           }
         ],
         "contractDependencies": [
-          8806,
-          9249
+          4559,
+          5010
         ],
         "contractKind": "contract",
         "documentation": "@title DelayedClaimable\n@dev Extension for the Claimable contract, where the ownership needs to be claimed before/after\na certain block number.",
         "fullyImplemented": true,
-        "id": 8899,
+        "id": 4652,
         "linearizedBaseContracts": [
-          8899,
-          8806,
-          9249
+          4652,
+          4559,
+          5010
         ],
         "name": "DelayedClaimable",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 8833,
+            "id": 4586,
             "name": "end",
             "nodeType": "VariableDeclaration",
-            "scope": 8899,
-            "src": "259:18:23",
+            "scope": 4652,
+            "src": "259:18:21",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1153,10 +1150,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 8832,
+              "id": 4585,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "259:7:23",
+              "src": "259:7:21",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -1167,11 +1164,11 @@
           },
           {
             "constant": false,
-            "id": 8835,
+            "id": 4588,
             "name": "start",
             "nodeType": "VariableDeclaration",
-            "scope": 8899,
-            "src": "281:20:23",
+            "scope": 4652,
+            "src": "281:20:21",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
@@ -1179,10 +1176,10 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 8834,
+              "id": 4587,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
-              "src": "281:7:23",
+              "src": "281:7:21",
               "typeDescriptions": {
                 "typeIdentifier": "t_uint256",
                 "typeString": "uint256"
@@ -1193,9 +1190,9 @@
           },
           {
             "body": {
-              "id": 8858,
+              "id": 4611,
               "nodeType": "Block",
-              "src": "603:70:23",
+              "src": "603:70:21",
               "statements": [
                 {
                   "expression": {
@@ -1207,19 +1204,19 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 8847,
+                        "id": 4600,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
                         "lValueRequested": false,
                         "leftExpression": {
                           "argumentTypes": null,
-                          "id": 8845,
+                          "id": 4598,
                           "name": "_start",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 8837,
-                          "src": "617:6:23",
+                          "referencedDeclaration": 4590,
+                          "src": "617:6:21",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
@@ -1229,18 +1226,18 @@
                         "operator": "<=",
                         "rightExpression": {
                           "argumentTypes": null,
-                          "id": 8846,
+                          "id": 4599,
                           "name": "_end",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 8839,
-                          "src": "627:4:23",
+                          "referencedDeclaration": 4592,
+                          "src": "627:4:21",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           }
                         },
-                        "src": "617:14:23",
+                        "src": "617:14:21",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -1254,21 +1251,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 8844,
+                      "id": 4597,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        10645,
-                        10646
+                        6426,
+                        6427
                       ],
-                      "referencedDeclaration": 10645,
-                      "src": "609:7:23",
+                      "referencedDeclaration": 6426,
+                      "src": "609:7:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 8848,
+                    "id": 4601,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1276,32 +1273,32 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "609:23:23",
+                    "src": "609:23:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8849,
+                  "id": 4602,
                   "nodeType": "ExpressionStatement",
-                  "src": "609:23:23"
+                  "src": "609:23:21"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8852,
+                    "id": 4605,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8850,
+                      "id": 4603,
                       "name": "end",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8833,
-                      "src": "638:3:23",
+                      "referencedDeclaration": 4586,
+                      "src": "638:3:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -1311,43 +1308,43 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8851,
+                      "id": 4604,
                       "name": "_end",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8839,
-                      "src": "644:4:23",
+                      "referencedDeclaration": 4592,
+                      "src": "644:4:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       }
                     },
-                    "src": "638:10:23",
+                    "src": "638:10:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "id": 8853,
+                  "id": 4606,
                   "nodeType": "ExpressionStatement",
-                  "src": "638:10:23"
+                  "src": "638:10:21"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8856,
+                    "id": 4609,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8854,
+                      "id": 4607,
                       "name": "start",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8835,
-                      "src": "654:5:23",
+                      "referencedDeclaration": 4588,
+                      "src": "654:5:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -1357,68 +1354,67 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8855,
+                      "id": 4608,
                       "name": "_start",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8837,
-                      "src": "662:6:23",
+                      "referencedDeclaration": 4590,
+                      "src": "662:6:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       }
                     },
-                    "src": "654:14:23",
+                    "src": "654:14:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "id": 8857,
+                  "id": 4610,
                   "nodeType": "ExpressionStatement",
-                  "src": "654:14:23"
+                  "src": "654:14:21"
                 }
               ]
             },
             "documentation": "@dev Used to specify the time period during which a pending\nowner can claim ownership.\n@param _start The earliest time ownership can be claimed.\n@param _end The latest time ownership can be claimed.",
-            "id": 8859,
+            "id": 4612,
             "implemented": true,
-            "isConstructor": false,
-            "isDeclaredConst": false,
+            "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 8842,
+                "id": 4595,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 8841,
+                  "id": 4594,
                   "name": "onlyOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 9223,
-                  "src": "586:9:23",
+                  "referencedDeclaration": 4984,
+                  "src": "586:9:21",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
                     "typeString": "modifier ()"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "586:9:23"
+                "src": "586:9:21"
               }
             ],
             "name": "setLimits",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8840,
+              "id": 4593,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 8837,
+                  "id": 4590,
                   "name": "_start",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8859,
-                  "src": "556:14:23",
+                  "scope": 4612,
+                  "src": "556:14:21",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1426,10 +1422,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8836,
+                    "id": 4589,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "556:7:23",
+                    "src": "556:7:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1440,11 +1436,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 8839,
+                  "id": 4592,
                   "name": "_end",
                   "nodeType": "VariableDeclaration",
-                  "scope": 8859,
-                  "src": "572:12:23",
+                  "scope": 4612,
+                  "src": "572:12:21",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1452,10 +1448,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 8838,
+                    "id": 4591,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
-                    "src": "572:7:23",
+                    "src": "572:7:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1465,26 +1461,25 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "555:30:23"
+              "src": "555:30:21"
             },
-            "payable": false,
             "returnParameters": {
-              "id": 8843,
+              "id": 4596,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "603:0:23"
+              "src": "603:0:21"
             },
-            "scope": 8899,
-            "src": "537:136:23",
+            "scope": 4652,
+            "src": "537:136:21",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           },
           {
             "body": {
-              "id": 8897,
+              "id": 4650,
               "nodeType": "Block",
-              "src": "877:185:23",
+              "src": "877:190:21",
               "statements": [
                 {
                   "expression": {
@@ -1496,7 +1491,7 @@
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
                         },
-                        "id": 8875,
+                        "id": 4628,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1510,7 +1505,7 @@
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
                               },
-                              "id": 8868,
+                              "id": 4621,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -1519,18 +1514,18 @@
                                 "argumentTypes": null,
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8865,
+                                  "id": 4618,
                                   "name": "block",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 10632,
-                                  "src": "892:5:23",
+                                  "referencedDeclaration": 6413,
+                                  "src": "892:5:21",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_magic_block",
                                     "typeString": "block"
                                   }
                                 },
-                                "id": 8866,
+                                "id": 4619,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
@@ -1538,7 +1533,7 @@
                                 "memberName": "number",
                                 "nodeType": "MemberAccess",
                                 "referencedDeclaration": null,
-                                "src": "892:12:23",
+                                "src": "892:12:21",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_uint256",
                                   "typeString": "uint256"
@@ -1548,32 +1543,32 @@
                               "operator": "<=",
                               "rightExpression": {
                                 "argumentTypes": null,
-                                "id": 8867,
+                                "id": 4620,
                                 "name": "end",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 8833,
-                                "src": "908:3:23",
+                                "referencedDeclaration": 4586,
+                                "src": "908:3:21",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_uint256",
                                   "typeString": "uint256"
                                 }
                               },
-                              "src": "892:19:23",
+                              "src": "892:19:21",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_bool",
                                 "typeString": "bool"
                               }
                             }
                           ],
-                          "id": 8869,
+                          "id": 4622,
                           "isConstant": false,
                           "isInlineArray": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "nodeType": "TupleExpression",
-                          "src": "891:21:23",
+                          "src": "891:21:21",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
                             "typeString": "bool"
@@ -1590,7 +1585,7 @@
                                 "typeIdentifier": "t_uint256",
                                 "typeString": "uint256"
                               },
-                              "id": 8873,
+                              "id": 4626,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -1599,18 +1594,18 @@
                                 "argumentTypes": null,
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 8870,
+                                  "id": 4623,
                                   "name": "block",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 10632,
-                                  "src": "917:5:23",
+                                  "referencedDeclaration": 6413,
+                                  "src": "917:5:21",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_magic_block",
                                     "typeString": "block"
                                   }
                                 },
-                                "id": 8871,
+                                "id": 4624,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
@@ -1618,7 +1613,7 @@
                                 "memberName": "number",
                                 "nodeType": "MemberAccess",
                                 "referencedDeclaration": null,
-                                "src": "917:12:23",
+                                "src": "917:12:21",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_uint256",
                                   "typeString": "uint256"
@@ -1628,38 +1623,38 @@
                               "operator": ">=",
                               "rightExpression": {
                                 "argumentTypes": null,
-                                "id": 8872,
+                                "id": 4625,
                                 "name": "start",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 8835,
-                                "src": "933:5:23",
+                                "referencedDeclaration": 4588,
+                                "src": "933:5:21",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_uint256",
                                   "typeString": "uint256"
                                 }
                               },
-                              "src": "917:21:23",
+                              "src": "917:21:21",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_bool",
                                 "typeString": "bool"
                               }
                             }
                           ],
-                          "id": 8874,
+                          "id": 4627,
                           "isConstant": false,
                           "isInlineArray": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "nodeType": "TupleExpression",
-                          "src": "916:23:23",
+                          "src": "916:23:21",
                           "typeDescriptions": {
                             "typeIdentifier": "t_bool",
                             "typeString": "bool"
                           }
                         },
-                        "src": "891:48:23",
+                        "src": "891:48:21",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bool",
                           "typeString": "bool"
@@ -1673,21 +1668,21 @@
                           "typeString": "bool"
                         }
                       ],
-                      "id": 8864,
+                      "id": 4617,
                       "name": "require",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [
-                        10645,
-                        10646
+                        6426,
+                        6427
                       ],
-                      "referencedDeclaration": 10645,
-                      "src": "883:7:23",
+                      "referencedDeclaration": 6426,
+                      "src": "883:7:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_require_pure$_t_bool_$returns$__$",
                         "typeString": "function (bool) pure"
                       }
                     },
-                    "id": 8876,
+                    "id": 4629,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1695,28 +1690,28 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "883:57:23",
+                    "src": "883:57:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8877,
+                  "id": 4630,
                   "nodeType": "ExpressionStatement",
-                  "src": "883:57:23"
+                  "src": "883:57:21"
                 },
                 {
-                  "expression": {
+                  "eventCall": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 8879,
+                        "id": 4632,
                         "name": "owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 9197,
-                        "src": "967:5:23",
+                        "referencedDeclaration": 4958,
+                        "src": "972:5:21",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -1724,12 +1719,12 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 8880,
+                        "id": 4633,
                         "name": "pendingOwner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 8761,
-                        "src": "974:12:23",
+                        "referencedDeclaration": 4514,
+                        "src": "979:12:21",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -1747,18 +1742,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 8878,
+                      "id": 4631,
                       "name": "OwnershipTransferred",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 9203,
-                      "src": "946:20:23",
+                      "referencedDeclaration": 4964,
+                      "src": "951:20:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_address_$_t_address_$returns$__$",
                         "typeString": "function (address,address)"
                       }
                     },
-                    "id": 8881,
+                    "id": 4634,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1766,32 +1761,32 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "946:41:23",
+                    "src": "951:41:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 8882,
-                  "nodeType": "ExpressionStatement",
-                  "src": "946:41:23"
+                  "id": 4635,
+                  "nodeType": "EmitStatement",
+                  "src": "946:46:21"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8885,
+                    "id": 4638,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8883,
+                      "id": 4636,
                       "name": "owner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 9197,
-                      "src": "993:5:23",
+                      "referencedDeclaration": 4958,
+                      "src": "998:5:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -1801,43 +1796,43 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 8884,
+                      "id": 4637,
                       "name": "pendingOwner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8761,
-                      "src": "1001:12:23",
+                      "referencedDeclaration": 4514,
+                      "src": "1006:12:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
                       }
                     },
-                    "src": "993:20:23",
+                    "src": "998:20:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 8886,
+                  "id": 4639,
                   "nodeType": "ExpressionStatement",
-                  "src": "993:20:23"
+                  "src": "998:20:21"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8891,
+                    "id": 4644,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8887,
+                      "id": 4640,
                       "name": "pendingOwner",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8761,
-                      "src": "1019:12:23",
+                      "referencedDeclaration": 4514,
+                      "src": "1024:12:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_address",
                         "typeString": "address"
@@ -1851,14 +1846,14 @@
                         {
                           "argumentTypes": null,
                           "hexValue": "30",
-                          "id": 8889,
+                          "id": 4642,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
                           "kind": "number",
                           "lValueRequested": false,
                           "nodeType": "Literal",
-                          "src": "1042:1:23",
+                          "src": "1047:1:21",
                           "subdenomination": null,
                           "typeDescriptions": {
                             "typeIdentifier": "t_rational_0_by_1",
@@ -1874,20 +1869,20 @@
                             "typeString": "int_const 0"
                           }
                         ],
-                        "id": 8888,
+                        "id": 4641,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "lValueRequested": false,
                         "nodeType": "ElementaryTypeNameExpression",
-                        "src": "1034:7:23",
+                        "src": "1039:7:21",
                         "typeDescriptions": {
                           "typeIdentifier": "t_type$_t_address_$",
                           "typeString": "type(address)"
                         },
                         "typeName": "address"
                       },
-                      "id": 8890,
+                      "id": 4643,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1895,38 +1890,38 @@
                       "lValueRequested": false,
                       "names": [],
                       "nodeType": "FunctionCall",
-                      "src": "1034:10:23",
+                      "src": "1039:10:21",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_address",
-                        "typeString": "address"
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
                       }
                     },
-                    "src": "1019:25:23",
+                    "src": "1024:25:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
                       "typeString": "address"
                     }
                   },
-                  "id": 8892,
+                  "id": 4645,
                   "nodeType": "ExpressionStatement",
-                  "src": "1019:25:23"
+                  "src": "1024:25:21"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 8895,
+                    "id": 4648,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 8893,
+                      "id": 4646,
                       "name": "end",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 8833,
-                      "src": "1050:3:23",
+                      "referencedDeclaration": 4586,
+                      "src": "1055:3:21",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
@@ -1937,14 +1932,14 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "30",
-                      "id": 8894,
+                      "id": 4647,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
                       "kind": "number",
                       "lValueRequested": false,
                       "nodeType": "Literal",
-                      "src": "1056:1:23",
+                      "src": "1061:1:21",
                       "subdenomination": null,
                       "typeDescriptions": {
                         "typeIdentifier": "t_rational_0_by_1",
@@ -1952,77 +1947,100 @@
                       },
                       "value": "0"
                     },
-                    "src": "1050:7:23",
+                    "src": "1055:7:21",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "id": 8896,
+                  "id": 4649,
                   "nodeType": "ExpressionStatement",
-                  "src": "1050:7:23"
+                  "src": "1055:7:21"
                 }
               ]
             },
             "documentation": "@dev Allows the pendingOwner address to finalize the transfer, as long as it is called within\nthe specified start and end time.",
-            "id": 8898,
+            "id": 4651,
             "implemented": true,
-            "isConstructor": false,
-            "isDeclaredConst": false,
+            "kind": "function",
             "modifiers": [
               {
                 "arguments": null,
-                "id": 8862,
+                "id": 4615,
                 "modifierName": {
                   "argumentTypes": null,
-                  "id": 8861,
+                  "id": 4614,
                   "name": "onlyPendingOwner",
                   "nodeType": "Identifier",
                   "overloadedDeclarations": [],
-                  "referencedDeclaration": 8772,
-                  "src": "853:16:23",
+                  "referencedDeclaration": 4525,
+                  "src": "853:16:21",
                   "typeDescriptions": {
                     "typeIdentifier": "t_modifier$__$",
                     "typeString": "modifier ()"
                   }
                 },
                 "nodeType": "ModifierInvocation",
-                "src": "853:16:23"
+                "src": "853:16:21"
               }
             ],
             "name": "claimOwnership",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 8860,
+              "id": 4613,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "850:2:23"
+              "src": "850:2:21"
             },
-            "payable": false,
             "returnParameters": {
-              "id": 8863,
+              "id": 4616,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "877:0:23"
+              "src": "877:0:21"
             },
-            "scope": 8899,
-            "src": "827:235:23",
+            "scope": 4652,
+            "src": "827:240:21",
             "stateMutability": "nonpayable",
-            "superFunction": 8805,
+            "superFunction": 4558,
             "visibility": "public"
           }
         ],
-        "scope": 8900,
-        "src": "215:850:23"
+        "scope": 4653,
+        "src": "215:855:21"
       }
     ],
-    "src": "0:1066:23"
+    "src": "0:1071:21"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.4.24+commit.e67f0147.Emscripten.clang"
+    "version": "0.5.10+commit.5a6ea5b1.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "2.0.1",
-  "updatedAt": "2018-11-16T14:02:09.362Z"
+  "schemaVersion": "3.0.11",
+  "updatedAt": "2019-07-09T14:07:15.537Z",
+  "devdoc": {
+    "details": "Extension for the Claimable contract, where the ownership needs to be claimed before/after a certain block number.",
+    "methods": {
+      "claimOwnership()": {
+        "details": "Allows the pendingOwner address to finalize the transfer, as long as it is called within the specified start and end time."
+      },
+      "setLimits(uint256,uint256)": {
+        "details": "Used to specify the time period during which a pending owner can claim ownership.",
+        "params": {
+          "_end": "The latest time ownership can be claimed.",
+          "_start": "The earliest time ownership can be claimed."
+        }
+      },
+      "transferOwnership(address)": {
+        "details": "Allows the current owner to set the pendingOwner address.",
+        "params": {
+          "newOwner": "The address to transfer ownership to."
+        }
+      }
+    },
+    "title": "DelayedClaimable"
+  },
+  "userdoc": {
+    "methods": {}
+  }
 }
