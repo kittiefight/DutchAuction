@@ -373,7 +373,7 @@ contract Dutchwrapper is DutchAuction {
         _hash = bytes4(keccak256(abi.encodePacked(msg.sender)));
     }
 
-    function calculatPersonalHashByAddress(address _addr) public view returns (bytes4 _hash) {
+    function calculatPersonalHashByAddress(address _addr) public pure returns (bytes4 _hash) {
         _hash = bytes4(keccak256(abi.encodePacked(_addr)));
     }
 
@@ -443,7 +443,7 @@ contract Dutchwrapper is DutchAuction {
             TokenReferrals[newBidderHash].totalTokensEarned = _amountEarned;
             return true;
         }
-        return false;
+        //return false; //Will never reach here, Commented out to remove compilation warning
     }
 
      // check if both bidder bonus and refferer bonus is avalable
