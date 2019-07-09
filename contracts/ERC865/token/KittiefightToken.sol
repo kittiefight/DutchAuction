@@ -50,7 +50,7 @@ contract KittiefightToken is ERC865Token, PausableToken, CappedToken {
      * @return true if the sender can transfer
      */
     function isUserAllowedToTransfer(address _user) public view returns (bool) {
-        require(_user != 0x0);
+        require(_user != address(0));
         return transfersWhitelist[_user];
     }
 
@@ -60,7 +60,7 @@ contract KittiefightToken is ERC865Token, PausableToken, CappedToken {
     function setWhitelistedOnly(bool _isWhitelistOnly) onlyOwner public {
         if (isTransferWhitelistOnly != _isWhitelistOnly) {
             isTransferWhitelistOnly = _isWhitelistOnly;
-            TransferWhitelistOnly(_isWhitelistOnly);
+            emit TransferWhitelistOnly(_isWhitelistOnly);
         }
     }
 
@@ -70,7 +70,7 @@ contract KittiefightToken is ERC865Token, PausableToken, CappedToken {
     function whitelistUserForTransfers(address _user) onlyOwner public {
         require(!isUserAllowedToTransfer(_user));
         transfersWhitelist[_user] = true;
-        UserAllowedToTransfer(_user);
+        emit UserAllowedToTransfer(_user);
     }
 
     /**
@@ -79,7 +79,7 @@ contract KittiefightToken is ERC865Token, PausableToken, CappedToken {
     function blacklistUserForTransfers(address _user) onlyOwner public {
         require(isUserAllowedToTransfer(_user));
         transfersWhitelist[_user] = false;
-        UserAllowedToTransfer(_user);
+        emit UserAllowedToTransfer(_user);
     }
 
     /**

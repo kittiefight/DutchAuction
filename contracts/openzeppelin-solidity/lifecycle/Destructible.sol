@@ -16,10 +16,10 @@ contract Destructible is Ownable {
    * @dev Transfers the current balance to the owner and terminates the contract.
    */
   function destroy() onlyOwner public {
-    selfdestruct(owner);
+    selfdestruct(address(uint160(owner)));
   }
 
-  function destroyAndSend(address _recipient) onlyOwner public {
+  function destroyAndSend(address payable _recipient) onlyOwner public {
     selfdestruct(_recipient);
   }
 }

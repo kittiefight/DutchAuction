@@ -33,7 +33,7 @@ contract TokenTimelock {
   function release() public {
     require(now >= releaseTime);
 
-    uint256 amount = token.balanceOf(this);
+    uint256 amount = token.balanceOf(address(this));
     require(amount > 0);
 
     token.safeTransfer(beneficiary, amount);

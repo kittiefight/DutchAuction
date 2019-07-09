@@ -26,11 +26,11 @@ contract TokenDestructible is Ownable {
     // Transfer tokens to owner
     for (uint256 i = 0; i < tokens.length; i++) {
       ERC20Basic token = ERC20Basic(tokens[i]);
-      uint256 balance = token.balanceOf(this);
-      token.transfer(owner, balance);
+      uint256 balance = token.balanceOf(address(this));
+      token.transfer(address(owner), balance);
     }
 
     // Transfer Eth to owner and terminate contract
-    selfdestruct(owner);
+    selfdestruct(address(uint160(owner)));
   }
 }

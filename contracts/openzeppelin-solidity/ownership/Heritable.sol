@@ -46,7 +46,7 @@ contract Heritable is Ownable {
   function setHeir(address newHeir) public onlyOwner {
     require(newHeir != owner);
     heartbeat();
-    HeirChanged(owner, newHeir);
+    emit HeirChanged(owner, newHeir);
     heir = newHeir;
   }
 
@@ -55,7 +55,7 @@ contract Heritable is Ownable {
    */
   function removeHeir() public onlyOwner {
     heartbeat();
-    heir = 0;
+    heir = address(0);
   }
 
   /**
@@ -64,7 +64,7 @@ contract Heritable is Ownable {
    */
   function proclaimDeath() public onlyHeir {
     require(ownerLives());
-    OwnerProclaimedDead(owner, heir, timeOfDeath);
+    emit OwnerProclaimedDead(owner, heir, timeOfDeath);
     timeOfDeath = now;
   }
 
@@ -72,7 +72,7 @@ contract Heritable is Ownable {
    * @dev Owner can send a heartbeat if they were mistakenly pronounced dead.
    */
   function heartbeat() public onlyOwner {
-    OwnerHeartbeated(owner);
+    emit OwnerHeartbeated(owner);
     timeOfDeath = 0;
   }
 
@@ -82,8 +82,8 @@ contract Heritable is Ownable {
   function claimHeirOwnership() public onlyHeir {
     require(!ownerLives());
     require(now >= timeOfDeath + heartbeatTimeout);
-    OwnershipTransferred(owner, heir);
-    HeirOwnershipClaimed(owner, heir);
+    emit OwnershipTransferred(owner, heir);
+    emit HeirOwnershipClaimed(owner, heir);
     owner = heir;
     timeOfDeath = 0;
   }
