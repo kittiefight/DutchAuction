@@ -1977,7 +1977,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-09T15:01:50.543Z",
+  "updatedAt": "2019-07-10T17:06:18.607Z",
   "devdoc": {
     "details": "TokenTimelock is a token holder contract that will allow a beneficiary to extract the tokens after a given release time",
     "methods": {},

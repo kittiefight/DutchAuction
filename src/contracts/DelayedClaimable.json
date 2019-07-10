@@ -2017,7 +2017,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-09T15:01:50.534Z",
+  "updatedAt": "2019-07-10T17:06:18.587Z",
   "devdoc": {
     "details": "Extension for the Claimable contract, where the ownership needs to be claimed before/after a certain block number.",
     "methods": {

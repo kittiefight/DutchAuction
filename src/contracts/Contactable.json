@@ -540,7 +540,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-09T15:01:50.533Z",
+  "updatedAt": "2019-07-10T17:06:18.586Z",
   "devdoc": {
     "details": "Basic version of a contactable contract, allowing the owner to provide a string with their contact information.",
     "methods": {

@@ -402,7 +402,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-09T15:01:50.538Z",
+  "updatedAt": "2019-07-10T17:06:18.597Z",
   "devdoc": {
     "author": "Remco Bloemen <remco@2π.com>",
     "details": "Solves a class of errors where a contract accidentally becomes owner of Ether, Tokens or Owned contracts. See respective base contracts for details.",

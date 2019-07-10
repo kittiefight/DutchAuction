@@ -2703,7 +2703,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-09T15:01:50.522Z",
+  "updatedAt": "2019-07-10T18:27:32.701Z",
   "devdoc": {
     "details": "Simple ERC20 Token example, with mintable token creationIssue: * https://github.com/OpenZeppelin/zeppelin-solidity/issues/120 Based on code by TokenMarketNet: https://github.com/TokenMarketNet/ico/blob/master/contracts/MintableToken.sol",
     "methods": {

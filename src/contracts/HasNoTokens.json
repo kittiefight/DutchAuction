@@ -658,7 +658,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-09T15:01:50.536Z",
+  "updatedAt": "2019-07-10T18:27:32.690Z",
   "devdoc": {
     "author": "Remco Bloemen <remco@2π.com>",
     "details": "This blocks incoming ERC223 tokens to prevent accidental loss of tokens. Should tokens (any ERC20Basic compatible) end up in the contract, it allows the owner to reclaim the tokens.",

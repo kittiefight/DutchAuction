@@ -4038,7 +4038,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-09T15:01:50.539Z",
+  "updatedAt": "2019-07-10T17:06:18.599Z",
   "devdoc": {
     "author": "Matt Condon (@Shrugs)",
     "details": "Stores and provides setters and getters for roles and addresses.     Supports unlimited numbers of roles and addresses.     See //contracts/mocks/RBACMock.sol for an example of usage. This RBAC method uses strings to key roles. It may be beneficial for you to write your own implementation of this interface using Enums or similar. It's also recommended that you define constants in the contract, like ROLE_ADMIN below, to avoid typos.",

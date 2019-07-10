@@ -1694,7 +1694,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-09T15:01:50.540Z",
+  "updatedAt": "2019-07-10T18:27:32.693Z",
   "devdoc": {
     "author": "Francisco Giordano (@frangio)",
     "details": "Library for managing addresses assigned to a Role.     See RBAC.sol for example usage.",

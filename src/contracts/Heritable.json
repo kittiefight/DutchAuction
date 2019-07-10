@@ -5067,7 +5067,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-09T15:01:50.537Z",
+  "updatedAt": "2019-07-10T17:06:18.595Z",
   "devdoc": {
     "details": "The Heritable contract provides ownership transfer capabilities, in the case that the current owner stops \"heartbeating\". Only the heir can pronounce the owner's death.",
     "methods": {
