@@ -1,3 +1,4 @@
+    
 const BigNumber = web3.BigNumber
 
 const should = require('chai')
