@@ -142,7 +142,7 @@ contract('DutchWrapper',  accounts  => {
         kittieFightToken = await KittieFightToken.deployed();
         dutchWrapper = await DutchWrapper.deployed();
         promissoryToken = await PromissoryToken.deployed();
-        await dutchWrapper.setPromissoryTokenInstance(promissoryToken.address);
+        //await dutchWrapper.setPromissoryTokenInstance(promissoryToken.address);
         accounts_num = accounts.length;
     })
 
