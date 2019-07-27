@@ -33,14 +33,14 @@
     "absolutePath": "/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/PromissoryToken.sol",
     "exportedSymbols": {
       "PromissoryToken": [
-        4000
+        3959
       ]
     },
-    "id": 4001,
+    "id": 3960,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3992,
+        "id": 3951,
         "literals": [
           "solidity",
           "^",
@@ -56,19 +56,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 4000,
+        "id": 3959,
         "linearizedBaseContracts": [
-          4000
+          3959
         ],
         "name": "PromissoryToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 3995,
+            "id": 3954,
             "name": "lastPrice",
             "nodeType": "VariableDeclaration",
-            "scope": 4000,
+            "scope": 3959,
             "src": "56:50:10",
             "stateVariable": true,
             "storageLocation": "default",
@@ -77,7 +77,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3993,
+              "id": 3952,
               "name": "uint",
               "nodeType": "ElementaryTypeName",
               "src": "56:4:10",
@@ -89,7 +89,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "3436353631373539363030303030303030",
-              "id": 3994,
+              "id": 3953,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -108,38 +108,38 @@
           },
           {
             "body": {
-              "id": 3998,
+              "id": 3957,
               "nodeType": "Block",
               "src": "132:5:10",
               "statements": []
             },
             "documentation": null,
-            "id": 3999,
+            "id": 3958,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3996,
+              "id": 3955,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "122:2:10"
             },
             "returnParameters": {
-              "id": 3997,
+              "id": 3956,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "132:0:10"
             },
-            "scope": 4000,
+            "scope": 3959,
             "src": "111:26:10",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 4001,
+        "scope": 3960,
         "src": "26:113:10"
       }
     ],
@@ -149,14 +149,14 @@
     "absolutePath": "/D/projects/ethereum/kittiefight/token/DutchAuction/contracts/PromissoryToken.sol",
     "exportedSymbols": {
       "PromissoryToken": [
-        4000
+        3959
       ]
     },
-    "id": 4001,
+    "id": 3960,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3992,
+        "id": 3951,
         "literals": [
           "solidity",
           "^",
@@ -172,19 +172,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 4000,
+        "id": 3959,
         "linearizedBaseContracts": [
-          4000
+          3959
         ],
         "name": "PromissoryToken",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": true,
-            "id": 3995,
+            "id": 3954,
             "name": "lastPrice",
             "nodeType": "VariableDeclaration",
-            "scope": 4000,
+            "scope": 3959,
             "src": "56:50:10",
             "stateVariable": true,
             "storageLocation": "default",
@@ -193,7 +193,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 3993,
+              "id": 3952,
               "name": "uint",
               "nodeType": "ElementaryTypeName",
               "src": "56:4:10",
@@ -205,7 +205,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "3436353631373539363030303030303030",
-              "id": 3994,
+              "id": 3953,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -224,38 +224,38 @@
           },
           {
             "body": {
-              "id": 3998,
+              "id": 3957,
               "nodeType": "Block",
               "src": "132:5:10",
               "statements": []
             },
             "documentation": null,
-            "id": 3999,
+            "id": 3958,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3996,
+              "id": 3955,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "122:2:10"
             },
             "returnParameters": {
-              "id": 3997,
+              "id": 3956,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "132:0:10"
             },
-            "scope": 4000,
+            "scope": 3959,
             "src": "111:26:10",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 4001,
+        "scope": 3960,
         "src": "26:113:10"
       }
     ],
@@ -267,7 +267,7 @@
   },
   "networks": {},
   "schemaVersion": "3.0.11",
-  "updatedAt": "2019-07-10T18:27:32.676Z",
+  "updatedAt": "2019-07-27T02:38:41.206Z",
   "devdoc": {
     "methods": {}
   },
