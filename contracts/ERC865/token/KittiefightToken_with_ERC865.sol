@@ -2,6 +2,7 @@ pragma solidity ^0.5.10;
 
 import "../../openzeppelin-solidity/token/ERC20/PausableToken.sol";
 import "../../openzeppelin-solidity/token/ERC20/CappedToken.sol";
+import "./ERC865Token.sol";
 
 /**
  * @title Kittiefight Token
@@ -15,7 +16,7 @@ import "../../openzeppelin-solidity/token/ERC20/CappedToken.sol";
  *
  */
 
-contract KittiefightToken is PausableToken, CappedToken {
+contract KittiefightToken_with_ERC865 is ERC865Token, PausableToken, CappedToken {
 
     /* Set the token name for display */
     string public constant symbol = "KTY";
@@ -106,4 +107,57 @@ contract KittiefightToken is PausableToken, CappedToken {
         return super.transferFrom(_from, _to, _value);
     }
 
+    /**
+     * @notice Submit a presigned transfer
+     * @param _signature bytes The signature, issued by the owner.
+     * @param _to address The address which you want to transfer to.
+     * @param _value uint256 The amount of tokens to be transferred.
+     * @param _fee uint256 The amount of tokens paid to msg.sender, by the owner.
+     * @param _nonce uint256 Presigned transaction number.
+     */
+    function transferPreSigned(
+        bytes memory _signature,
+        address _to,
+        uint256 _value,
+        uint256 _fee,
+        uint256 _nonce
+    )
+        whenNotPaused
+        public
+        returns (bool)
+    {
+        if (isTransferWhitelistOnly) {
+            bytes32 hashedTx = super.transferPreSignedHashing(address(this), _to, _value, _fee, _nonce);
+            address from = recover(hashedTx, _signature);
+            require(isUserAllowedToTransfer(from));
+        }
+        return super.transferPreSigned(_signature, _to, _value, _fee, _nonce);
+    }
+
+    /**
+     * @notice Submit a presigned approval
+     * @param _signature bytes The signature, issued by the owner.
+     * @param _spender address The address which will spend the funds.
+     * @param _value uint256 The amount of tokens to allow.
+     * @param _fee uint256 The amount of tokens paid to msg.sender, by the owner.
+     * @param _nonce uint256 Presigned transaction number.
+     */
+    function approvePreSigned(
+        bytes memory _signature,
+        address _spender,
+        uint256 _value,
+        uint256 _fee,
+        uint256 _nonce
+    )
+        whenNotPaused
+        public
+        returns (bool)
+    {
+        if (isTransferWhitelistOnly) {
+            bytes32 hashedTx = super.approvePreSignedHashing(address(this), _spender, _value, _fee, _nonce);
+            address from = recover(hashedTx, _signature);
+            require(isUserAllowedToTransfer(from));
+        }
+        return super.approvePreSigned(_signature, _spender, _value, _fee, _nonce);
+    }
 }
