@@ -172,60 +172,6 @@ contract BasicToken is ERC20Basic {
 
 }
 
-contract ERC865 is ERC20 {
-
-    function transferPreSigned(
-        bytes memory _signature,
-        address _to,
-        uint256 _value,
-        uint256 _fee,
-        uint256 _nonce
-    )
-        public
-        returns (bool);
-
-    function approvePreSigned(
-        bytes memory _signature,
-        address _spender,
-        uint256 _value,
-        uint256 _fee,
-        uint256 _nonce
-    )
-        public
-        returns (bool);
-
-    function increaseApprovalPreSigned(
-        bytes memory _signature,
-        address _spender,
-        uint256 _addedValue,
-        uint256 _fee,
-        uint256 _nonce
-    )
-        public
-        returns (bool);
-
-    function decreaseApprovalPreSigned(
-        bytes memory _signature,
-        address _spender,
-        uint256 _subtractedValue,
-        uint256 _fee,
-        uint256 _nonce
-    )
-        public
-        returns (bool);
-
-    function transferFromPreSigned(
-        bytes memory _signature,
-        address _from,
-        address _to,
-        uint256 _value,
-        uint256 _fee,
-        uint256 _nonce
-    )
-        public
-        returns (bool);
-}
-
 contract StandardToken is ERC20, BasicToken {
 
   mapping (address => mapping (address => uint256)) internal allowed;
