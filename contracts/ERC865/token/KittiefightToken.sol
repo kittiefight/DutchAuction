@@ -17,10 +17,10 @@ import "../../openzeppelin-solidity/token/ERC20/CappedToken.sol";
 
 contract KittiefightToken is PausableToken, CappedToken {
 
-    /* Set the token name for display */
+    /* Set the token symbol for display */
     string public constant symbol = "KTY";
 
-    /* Set the token symbol for display */
+    /* Set the token name for display */
     string public constant name = "Kittiefight";
 
     /* Set the number of decimals for display */
@@ -35,7 +35,7 @@ contract KittiefightToken is PausableToken, CappedToken {
     /* Mapping of whitelisted users */
     mapping (address => bool) transfersWhitelist;
 
-    event UserAllowedToTransfer(address user);
+    event UserTransferWhitelistStatusChange(address user, bool whitelisted);
 
     event TransferWhitelistOnly(bool flag);
 
@@ -69,7 +69,7 @@ contract KittiefightToken is PausableToken, CappedToken {
     function whitelistUserForTransfers(address _user) onlyOwner public {
         require(!isUserAllowedToTransfer(_user));
         transfersWhitelist[_user] = true;
-        emit UserAllowedToTransfer(_user);
+        emit UserTransferWhitelistStatusChange(_user, true);
     }
 
     /**
@@ -78,7 +78,7 @@ contract KittiefightToken is PausableToken, CappedToken {
     function blacklistUserForTransfers(address _user) onlyOwner public {
         require(isUserAllowedToTransfer(_user));
         transfersWhitelist[_user] = false;
-        emit UserAllowedToTransfer(_user);
+        emit UserTransferWhitelistStatusChange(_user, false);
     }
 
     /**
