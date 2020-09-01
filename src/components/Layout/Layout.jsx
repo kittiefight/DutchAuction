@@ -27,9 +27,9 @@ class Layout extends Component {
 
     render() {
 
-        if(!this.state.statesLoaded) {
-            return  ( <Loading /> )
-        }
+        // if(!this.state.statesLoaded) {
+        //     return  ( <Loading /> )
+        // }
 
         return (
         
